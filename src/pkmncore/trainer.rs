@@ -5,8 +5,8 @@ use super::pokemon::PokemonData;
 #[allow(dead_code)]
 #[derive(PartialEq)]
 pub struct OTInformation {
-    pub id: i32,
-    pub sid: i32,
+    pub id: u16,
+    pub sid: u16,
     pub lang: Language,
     pub gender: Gender,
     pub name: &'static str,

@@ -72,6 +72,7 @@ pub struct PokemonData {
     pub friendship: i8,
     pub pokeball: Pokeball,
     pub pokerus: bool,
+    pub shiny: bool,
     pub marking: Option<Marking>,
     pub condition: Option<StatusCondition>,
     pub helditem: Option<Item>,

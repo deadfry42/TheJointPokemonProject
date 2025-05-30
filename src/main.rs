@@ -1,6 +1,4 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
-mod pkmncore;
-
 use pkmncore::{
     constants::{
         abilities::Ability,
@@ -12,8 +10,14 @@ use pkmncore::{
     },
     moves::MoveData,
     pokemon::{EVs, IVs, PokemonData},
+    rng::*,
     trainer::OTInformation,
 };
+
+use utils::hex::*;
+
+mod pkmncore;
+mod utils;
 
 #[allow(dead_code)]
 const GAME_VERSION: &'static str = "v0.0-beta";
@@ -27,8 +31,8 @@ fn main() {
     let wooper = PokemonData {
         nickname: Some("Sigma"),
         ot: OTInformation {
-            id: 69420,
-            sid: 96420,
+            id: generate_trainer_id(),
+            sid: generate_trainer_id(),
             lang: Language::English,
             gender: Gender::Female,
             name: "Sigma",
@@ -60,10 +64,11 @@ fn main() {
             None,
             None,
         ],
+        shiny: false,
         mettime: 1000,
         exp: 69420,
         ability: Ability::Chlorophyll,
-        pid: 1,
+        pid: generate_personality(),
         isegg: false,
         friendship: 100,
         pokeball: Pokeball::Masterball,
@@ -73,7 +78,7 @@ fn main() {
         helditem: Some(Item::LuckyEgg),
     };
 
-    println!("{}", wooper.mettime);
+    println!("{}", decimal_to_hex(wooper.pid));
     println!("{}", LevellingCurve::Erratic.levels_to_min_exp(7));
     println!("{}", LevellingCurve::Erratic.exp_to_levels(637));
 }
