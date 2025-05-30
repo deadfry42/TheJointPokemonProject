@@ -1,6 +1,7 @@
 use crate::pkmncore::pokemon::*;
 
 use super::abilities::Ability;
+use super::items::Item;
 use super::levels::*;
 use super::typing::*;
 
@@ -22,6 +23,7 @@ impl PokemonType for Pokemon {
         match self {
             Pokemon::Bulbasaur => PokemonBase {
                 name: "Bulbasaur",
+                pkmn: Pokemon::Bulbasaur,
                 pokedex: PokedexInfo {
                     index: 1,
                     height: 0.7,
@@ -65,6 +67,7 @@ impl PokemonType for Pokemon {
             },
             Pokemon::Ivysaur => PokemonBase {
                 name: "Ivysaur",
+                pkmn: Pokemon::Ivysaur,
                 pokedex: PokedexInfo {
                     index: 2,
                     height: 1.0,
@@ -108,6 +111,7 @@ impl PokemonType for Pokemon {
             },
             Pokemon::Venusaur => PokemonBase {
                 name: "Venusaur",
+                pkmn: Pokemon::Venusaur,
                 pokedex: PokedexInfo {
                     index: 3,
                     height: 2.0,
@@ -151,6 +155,7 @@ impl PokemonType for Pokemon {
             },
             Pokemon::Wooper => PokemonBase {
                 name: "Wooper",
+                pkmn: Pokemon::Wooper,
                 pokedex: PokedexInfo {
                     index: 194,
                     height: 0.4,
@@ -192,6 +197,83 @@ impl PokemonType for Pokemon {
                 gender_ratio: Some(0.5),
                 base_exp: 42,
             },
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub trait EvolutionByLevel {
+    fn get_evolution(&self) -> Option<Pokemon>;
+    fn get_evolution_level(&self) -> Option<i8>;
+}
+
+#[allow(dead_code)]
+pub trait EvolutionByItem {
+    fn get_evolution(&self) -> Option<Pokemon>;
+    fn get_evolution_item(&self) -> Option<Item>;
+}
+
+#[allow(dead_code)]
+pub trait EvolutionByTrade {
+    fn get_evolution(&self) -> Option<Pokemon>;
+}
+
+#[allow(dead_code)]
+pub trait EvolutionByTradeWithItem {
+    fn get_evolution(&self) -> Option<Pokemon>;
+    fn get_evolution_item(&self) -> Option<Item>;
+}
+
+impl EvolutionByLevel for Pokemon {
+    fn get_evolution(&self) -> Option<Pokemon> {
+        match self {
+            Pokemon::Bulbasaur => Some(Pokemon::Ivysaur),
+            Pokemon::Ivysaur => Some(Pokemon::Venusaur),
+            _ => None,
+        }
+    }
+
+    fn get_evolution_level(&self) -> Option<i8> {
+        match self {
+            Pokemon::Bulbasaur => Some(16),
+            Pokemon::Ivysaur => Some(32),
+            _ => None,
+        }
+    }
+}
+
+impl EvolutionByItem for Pokemon {
+    fn get_evolution(&self) -> Option<Pokemon> {
+        match self {
+            _ => None,
+        }
+    }
+
+    fn get_evolution_item(&self) -> Option<Item> {
+        match self {
+            _ => None,
+        }
+    }
+}
+
+impl EvolutionByTrade for Pokemon {
+    fn get_evolution(&self) -> Option<Pokemon> {
+        match self {
+            _ => None,
+        }
+    }
+}
+
+impl EvolutionByTradeWithItem for Pokemon {
+    fn get_evolution(&self) -> Option<Pokemon> {
+        match self {
+            _ => None,
+        }
+    }
+
+    fn get_evolution_item(&self) -> Option<Item> {
+        match self {
+            _ => None,
         }
     }
 }

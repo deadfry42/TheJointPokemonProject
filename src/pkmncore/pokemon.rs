@@ -1,10 +1,11 @@
 use super::{constants::items::Item, trainer::*};
-use crate::pkmncore::constants::{abilities::*, enums::*, levels::*, typing::*};
+use crate::pkmncore::constants::{abilities::*, enums::*, levels::*, pokemon::*, typing::*};
 
 #[allow(dead_code)]
 pub struct PokemonBase {
     pub name: &'static str,
     pub types: TypeSet,
+    pub pkmn: Pokemon,
     pub pokedex: PokedexInfo,
     pub base_stats: BaseStats,
     pub catch_rate: i16,
@@ -80,6 +81,14 @@ pub struct PokemonData {
 impl PokemonData {
     pub fn award_xp(&mut self, xp: u32) {
         self.exp += xp;
+    }
+
+    pub fn get_level(&self) -> i8 {
+        self.base.levelling_curve.exp_to_levels(self.exp)
+    }
+
+    pub fn is_holding(&self, i: Item) -> bool {
+        self.helditem.as_ref().unwrap().eq(&i)
     }
 }
 

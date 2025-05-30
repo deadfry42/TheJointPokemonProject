@@ -13,6 +13,8 @@ use pkmncore::{
     trainer::OTInformation,
 };
 
+const GAME_VERSION: &'static str = "v0.0-beta";
+
 fn main() {
     println!(
         "Hello, world from {}! I was compiled on {}.",
@@ -20,7 +22,7 @@ fn main() {
     );
 
     let wooper = PokemonData {
-        nickname: None,
+        nickname: Some("Sigma"),
         ot: OTInformation {
             id: 69420,
             sid: 96420,
@@ -60,5 +62,5 @@ fn main() {
 
     println!("{}", wooper.mettime);
     println!("{}", LevellingCurve::Erratic.levels_to_min_exp(7));
-    println!("{}", LevellingCurve::Erratic.exp_to_levels(636));
+    println!("{}", LevellingCurve::Erratic.exp_to_levels(637));
 }

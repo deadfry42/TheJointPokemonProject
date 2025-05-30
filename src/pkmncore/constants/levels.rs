@@ -2,7 +2,10 @@ use std::fmt::{self};
 
 use crate::pkmncore::battle::{Battle, BattlePokemon, BattleSideMember};
 
-use super::items::Item;
+use super::{
+    items::Item,
+    pokemon::{EvolutionByLevel, Pokemon},
+};
 
 pub trait LevellingCurveCalc {
     fn levels_to_min_exp(&self, levels: i8) -> u32;
@@ -124,24 +127,24 @@ pub fn calculate_battle_xp_gain(
 ) -> u32 {
     // gen 7 onwards xp formula
     let s: f32 = 1.0; // 1 when participated in battle, 2 if exp. share is enabled but didnt participate
-    // let t: f32 = 1.0;
     let t: f32 = if recipient_trainer.trainer.info.eq(&recipient.data.ot) {
         1.0_f32
     } else {
         1.5_f32
-    }; // 1.5 if recipient doesn't have the same ot
-    let e: f32 = if recipient
-        .data
-        .helditem
-        .as_ref()
-        .unwrap()
-        .eq(&Item::LuckyEgg)
-    {
+    };
+    let e: f32 = if recipient.data.is_holding(Item::LuckyEgg) {
         1.5_f32
     } else {
         1.0_32
-    }; // holding lucky egg
-    let v: f32 = 1.0; // 4915/4096 if past evolution level
+    };
+    let v: f32 = if Pokemon::get_evolution_level(&recipient.data.base.pkmn)
+        .unwrap()
+        .lt(&recipient.data.get_level())
+    {
+        4915_f32 / 4096_f32
+    } else {
+        1_f32
+    };
     let f: f32 = 1.0; // 4915/4096 if atleast 2 hearts of affection
     let p: f32 = 1.0; // pass power equivalent, leave as 1 for now
     let victim_base_exp = victim.data.base.base_exp;

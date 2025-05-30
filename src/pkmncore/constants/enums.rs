@@ -8,15 +8,6 @@ pub enum Language {
 }
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
-pub enum EvolutionMethods {
-    LevelUp,
-    ItemUse,
-    TradeEvolution,
-    TradeEvolutionWithHand,
-}
-
-#[allow(dead_code)]
 pub enum StatusCondition {
     Poison,
     BadlyPoison,

@@ -4,7 +4,7 @@ use std::fmt::{self};
 #[derive(PartialEq)]
 pub enum Item {
     LuckyEgg,
-    ConnectionWire,
+    ConnectionWire, // link cable
 }
 
 impl fmt::Display for Item {
