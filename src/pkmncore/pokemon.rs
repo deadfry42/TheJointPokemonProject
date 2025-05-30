@@ -101,25 +101,253 @@ impl fmt::Display for Gender {
 }
 
 #[allow(dead_code)]
+pub trait Typing {
+    fn get_type_multiplier(&self, opposing_type: Type) -> f64;
+}
+
+#[allow(dead_code)]
 pub enum Type {
     Normal,
-    Water,
     Fire,
+    Water,
+    Electric,
     Grass,
-    Psychic,
-    Ground,
-    Rock,
-    Bug,
-    Steel,
-    Dark,
     Ice,
-    Dragon,
-    Fairy,
-    Flying,
-    Ghost,
     Fighting,
     Poison,
-    Electric,
+    Ground,
+    Flying,
+    Psychic,
+    Bug,
+    Rock,
+    Ghost,
+    Dragon,
+    Dark,
+    Steel,
+    Fairy,
+}
+
+impl Typing for Type {
+    fn get_type_multiplier(&self, opposing_type: Type) -> f64 {
+        match self {
+            Type::Normal => match opposing_type {
+                Type::Rock => 0.5,
+                Type::Ghost => 0.0,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Fire => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Water => 0.5,
+                Type::Grass => 2.0,
+                Type::Ice => 2.0,
+                Type::Bug => 2.0,
+                Type::Rock => 0.5,
+                Type::Dragon => 0.5,
+                Type::Steel => 2.0,
+                _ => 1.0,
+            },
+            Type::Water => match opposing_type {
+                Type::Fire => 2.0,
+                Type::Water => 0.5,
+                Type::Grass => 0.5,
+                Type::Ground => 2.0,
+                Type::Rock => 2.0,
+                Type::Dragon => 0.5,
+                _ => 1.0,
+            },
+            Type::Electric => match opposing_type {
+                Type::Water => 2.0,
+                Type::Electric => 0.5,
+                Type::Grass => 0.5,
+                Type::Ground => 0.0,
+                Type::Flying => 2.0,
+                Type::Dragon => 0.5,
+                _ => 1.0,
+            },
+            Type::Grass => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Water => 2.0,
+                Type::Grass => 0.5,
+                Type::Poison => 0.5,
+                Type::Ground => 2.0,
+                Type::Flying => 0.5,
+                Type::Bug => 0.5,
+                Type::Rock => 2.0,
+                Type::Dragon => 0.5,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Ice => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Water => 0.5,
+                Type::Grass => 2.0,
+                Type::Ice => 0.5,
+                Type::Ground => 2.0,
+                Type::Flying => 2.0,
+                Type::Dragon => 2.0,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Fighting => match opposing_type {
+                Type::Normal => 2.0,
+                Type::Ice => 2.0,
+                Type::Poison => 0.5,
+                Type::Flying => 0.5,
+                Type::Psychic => 0.5,
+                Type::Bug => 0.5,
+                Type::Rock => 2.0,
+                Type::Ghost => 0.0,
+                Type::Dark => 2.0,
+                Type::Steel => 2.0,
+                Type::Fairy => 0.5,
+                _ => 1.0,
+            },
+            Type::Poison => match opposing_type {
+                Type::Grass => 2.0,
+                Type::Poison => 0.5,
+                Type::Ground => 0.5,
+                Type::Rock => 0.5,
+                Type::Ghost => 0.5,
+                Type::Steel => 0.0,
+                Type::Fairy => 2.0,
+                _ => 1.0,
+            },
+            Type::Ground => match opposing_type {
+                Type::Fire => 2.0,
+                Type::Electric => 2.0,
+                Type::Grass => 0.5,
+                Type::Poison => 2.0,
+                Type::Flying => 0.0,
+                Type::Bug => 0.5,
+                Type::Rock => 2.0,
+                Type::Steel => 2.0,
+                _ => 1.0,
+            },
+            Type::Flying => match opposing_type {
+                Type::Electric => 0.5,
+                Type::Grass => 2.0,
+                Type::Fighting => 2.0,
+                Type::Bug => 2.0,
+                Type::Rock => 0.5,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Psychic => match opposing_type {
+                Type::Fighting => 2.0,
+                Type::Poison => 2.0,
+                Type::Psychic => 0.5,
+                Type::Dark => 0.0,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Bug => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Grass => 2.0,
+                Type::Fighting => 0.5,
+                Type::Poison => 0.5,
+                Type::Flying => 0.5,
+                Type::Psychic => 2.0,
+                Type::Ghost => 0.5,
+                Type::Dark => 2.0,
+                Type::Steel => 0.5,
+                Type::Fairy => 0.5,
+                _ => 1.0,
+            },
+            Type::Rock => match opposing_type {
+                Type::Fire => 2.0,
+                Type::Ice => 2.0,
+                Type::Fighting => 0.5,
+                Type::Ground => 0.5,
+                Type::Flying => 2.0,
+                Type::Bug => 2.0,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+            Type::Ghost => match opposing_type {
+                Type::Normal => 0.0,
+                Type::Psychic => 2.0,
+                Type::Ghost => 2.0,
+                Type::Dark => 0.5,
+                _ => 1.0,
+            },
+            Type::Dragon => match opposing_type {
+                Type::Dragon => 2.0,
+                Type::Steel => 0.5,
+                Type::Fairy => 0.0,
+                _ => 1.0,
+            },
+            Type::Dark => match opposing_type {
+                Type::Fighting => 0.5,
+                Type::Psychic => 2.0,
+                Type::Ghost => 2.0,
+                Type::Dark => 0.5,
+                Type::Fairy => 0.5,
+                _ => 1.0,
+            },
+            Type::Steel => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Water => 0.5,
+                Type::Electric => 0.5,
+                Type::Ice => 2.0,
+                Type::Rock => 2.0,
+                Type::Steel => 0.5,
+                Type::Fairy => 2.0,
+                _ => 1.0,
+            },
+            Type::Fairy => match opposing_type {
+                Type::Fire => 0.5,
+                Type::Fighting => 2.0,
+                Type::Poison => 0.5,
+                Type::Dragon => 2.0,
+                Type::Dark => 2.0,
+                Type::Steel => 0.5,
+                _ => 1.0,
+            },
+        }
+    }
+}
+
+impl fmt::Display for Type {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Type::Normal => write!(f, "Normal"),
+            Type::Water => write!(f, "Water"),
+            Type::Fire => write!(f, "Fire"),
+            Type::Grass => write!(f, "Grass"),
+            Type::Psychic => write!(f, "Psychic"),
+            Type::Ground => write!(f, "Ground"),
+            Type::Rock => write!(f, "Rock"),
+            Type::Bug => write!(f, "Bug"),
+            Type::Steel => write!(f, "Steel"),
+            Type::Dark => write!(f, "Dark"),
+            Type::Ice => write!(f, "Ice"),
+            Type::Dragon => write!(f, "Dragon"),
+            Type::Fairy => write!(f, "Fairy"),
+            Type::Flying => write!(f, "Flying"),
+            Type::Ghost => write!(f, "Ghost"),
+            Type::Fighting => write!(f, "Fighting"),
+            Type::Poison => write!(f, "Poison"),
+            Type::Electric => write!(f, "Electric"),
+        }
+    }
+}
+
+#[allow(dead_code)]
+pub enum EggGroup {
+    Mineral,
+    Amorphous,
+    Grass,
+    Water1,
+    Water2,
+    Water3,
+    Bug,
+    Dragon,
+    Flying,
+    Field,
+    HumanLike,
+    Fairy,
+    Monster,
 }
 
 impl fmt::Display for EggGroup {
@@ -140,23 +368,6 @@ impl fmt::Display for EggGroup {
             EggGroup::Monster => write!(f, "Monster"),
         }
     }
-}
-
-#[allow(dead_code)]
-pub enum EggGroup {
-    Mineral,
-    Amorphous,
-    Grass,
-    Water1,
-    Water2,
-    Water3,
-    Bug,
-    Dragon,
-    Flying,
-    Field,
-    HumanLike,
-    Fairy,
-    Monster,
 }
 
 #[allow(dead_code)]
