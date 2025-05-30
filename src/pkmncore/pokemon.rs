@@ -1,4 +1,4 @@
-use super::trainer::*;
+use super::{constants::items::Item, trainer::*};
 use crate::pkmncore::constants::{abilities::*, enums::*, levels::*, typing::*};
 
 #[allow(dead_code)]
@@ -70,6 +70,7 @@ pub struct PokemonData {
     pub pokerus: bool,
     pub marking: Option<Marking>,
     pub condition: Option<StatusCondition>,
+    pub helditem: Option<Item>,
     // TODO:
     // metlocation: Location
     // helditem: Item

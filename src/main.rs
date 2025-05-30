@@ -5,6 +5,7 @@ use pkmncore::{
     constants::{
         abilities::Ability,
         enums::{Gender, Language, Pokeball},
+        items::Item,
         levels::*,
         pokemon::*,
     },
@@ -54,6 +55,7 @@ fn main() {
         pokerus: true,
         marking: None,
         condition: None,
+        helditem: Some(Item::LuckyEgg),
     };
 
     println!("{}", wooper.mettime);
