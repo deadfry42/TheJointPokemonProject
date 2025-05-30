@@ -7,8 +7,10 @@ use pkmncore::{
         enums::{Gender, Language, Pokeball},
         items::Item,
         levels::*,
+        moves::{Move, MoveType},
         pokemon::*,
     },
+    moves::MoveData,
     pokemon::{EVs, IVs, PokemonData},
     trainer::OTInformation,
 };
@@ -47,6 +49,16 @@ fn main() {
             spatk: 0,
             spdef: 0,
         },
+        moves: [
+            Some(MoveData {
+                base: Move::Tackle.get_base(),
+                pp: 0,
+                pp_ups_used: 0,
+            }),
+            None,
+            None,
+            None,
+        ],
         mettime: 1000,
         exp: 69420,
         ability: Ability::Chlorophyll,

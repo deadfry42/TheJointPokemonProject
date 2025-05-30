@@ -1,5 +1,8 @@
-use super::{constants::items::Item, trainer::*};
-use crate::pkmncore::constants::{abilities::*, enums::*, levels::*, pokemon::*, typing::*};
+use super::{
+    constants::{abilities::*, enums::*, items::*, levels::*, moves::*, pokemon::*, typing::*},
+    moves::MoveData,
+    trainer::*,
+};
 
 #[allow(dead_code)]
 pub struct PokemonBase {
@@ -72,10 +75,9 @@ pub struct PokemonData {
     pub marking: Option<Marking>,
     pub condition: Option<StatusCondition>,
     pub helditem: Option<Item>,
+    pub moves: [Option<MoveData>; 4],
     // TODO:
     // metlocation: Location
-    // helditem: Item
-    //
 }
 
 impl PokemonData {
