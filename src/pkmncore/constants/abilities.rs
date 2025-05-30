@@ -1,7 +1,7 @@
 use std::fmt::{self};
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone)]
 pub enum Ability {
     Damp,
     WaterAbsorb,

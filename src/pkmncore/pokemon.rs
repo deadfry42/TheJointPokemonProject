@@ -1,5 +1,5 @@
 use super::{
-    constants::{abilities::*, enums::*, items::*, levels::*, pokemon::*, typing::*},
+    constants::{abilities::*, enums::*, items::*, levels::*, natures::*, pokemon::*, typing::*},
     moves::MoveData,
     trainer::*,
 };
@@ -11,10 +11,10 @@ pub struct PokemonBase {
     pub pkmn: Pokemon,
     pub pokedex: PokedexInfo,
     pub base_stats: BaseStats,
-    pub catch_rate: i16,
-    pub base_friendship: i16,
+    pub catch_rate: u8,
+    pub base_friendship: u8,
     pub gender_ratio: Option<f32>,
-    pub egg_cycles: i16,
+    pub egg_cycles: u8,
     pub abilities: AbilitySet,
     pub levelling_curve: LevellingCurve,
     pub base_exp: u32,
@@ -60,7 +60,7 @@ impl PokemonBase {
 #[allow(dead_code)]
 pub struct PokemonData {
     pub nickname: Option<&'static str>,
-    pub ot: OTInformation,
+    pub ot: Option<OTInformation>,
     pub base: PokemonBase,
     pub evs: EVs,
     pub ivs: IVs,
@@ -69,13 +69,14 @@ pub struct PokemonData {
     pub mettime: i64,
     pub pid: u32,
     pub isegg: bool,
-    pub friendship: i8,
-    pub pokeball: Pokeball,
+    pub friendship: u8,
+    pub pokeball: Option<Pokeball>,
     pub pokerus: bool,
     pub shiny: bool,
     pub marking: Option<Marking>,
     pub condition: Option<StatusCondition>,
     pub helditem: Option<Item>,
+    pub nature: Nature,
     pub moves: [Option<MoveData>; 4],
     // TODO:
     // metlocation: Location

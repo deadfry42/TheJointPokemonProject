@@ -8,6 +8,17 @@ pub enum Language {
 }
 
 #[allow(dead_code)]
+#[derive(PartialEq)]
+pub enum Stat {
+    Health,
+    Speed,
+    Attack,
+    Defense,
+    SpecialDefence,
+    SpecialAttack,
+}
+
+#[allow(dead_code)]
 pub enum StatusCondition {
     Poison,
     BadlyPoison,
