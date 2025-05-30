@@ -1,5 +1,5 @@
 use super::{
-    constants::{abilities::*, enums::*, items::*, levels::*, moves::*, pokemon::*, typing::*},
+    constants::{abilities::*, enums::*, items::*, levels::*, pokemon::*, typing::*},
     moves::MoveData,
     trainer::*,
 };

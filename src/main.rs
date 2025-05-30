@@ -15,6 +15,7 @@ use pkmncore::{
     trainer::OTInformation,
 };
 
+#[allow(dead_code)]
 const GAME_VERSION: &'static str = "v0.0-beta";
 
 fn main() {
