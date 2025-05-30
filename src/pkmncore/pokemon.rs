@@ -1,4 +1,5 @@
-use crate::pkmncore::constants::{abilities::*, enums::*, typing::*};
+use super::trainer::*;
+use crate::pkmncore::constants::{abilities::*, enums::*, levels::*, typing::*};
 
 #[allow(dead_code)]
 pub struct PokemonBase {
@@ -12,7 +13,7 @@ pub struct PokemonBase {
     pub egg_cycles: i16,
     pub abilities: AbilitySet,
     pub levelling_curve: LevellingCurve,
-    pub base_exp: i16,
+    pub base_exp: u32,
     pub ev_yield: EVs,
 }
 
@@ -53,35 +54,32 @@ impl PokemonBase {
 }
 
 #[allow(dead_code)]
-pub struct OTInformation {
-    id: i32,
-    sid: i32,
-    lang: Language,
-    gender: Gender,
-    name: &'static str,
-}
-
-#[allow(dead_code)]
 pub struct PokemonData {
-    nickname: &'static str,
-    ot: OTInformation,
-    base: PokemonBase,
-    evs: EVs,
-    ivs: IVs,
-    exp: i32,
-    ability: Ability,
-    mettime: i64,
-    pid: i32,
-    isegg: bool,
-    friendship: i8,
-    pokeball: Pokeball,
-    pokerus: bool,
-    marking: Marking,
-    condition: StatusCondition,
+    pub nickname: Option<&'static str>,
+    pub ot: OTInformation,
+    pub base: PokemonBase,
+    pub evs: EVs,
+    pub ivs: IVs,
+    pub exp: u32,
+    pub ability: Ability,
+    pub mettime: i64,
+    pub pid: u32,
+    pub isegg: bool,
+    pub friendship: i8,
+    pub pokeball: Pokeball,
+    pub pokerus: bool,
+    pub marking: Option<Marking>,
+    pub condition: Option<StatusCondition>,
     // TODO:
     // metlocation: Location
     // helditem: Item
     //
+}
+
+impl PokemonData {
+    pub fn award_xp(&mut self, xp: u32) {
+        self.exp += xp;
+    }
 }
 
 #[allow(dead_code)]
