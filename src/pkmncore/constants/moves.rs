@@ -11,7 +11,7 @@ pub trait MoveType {
 }
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Move {
     Tackle,
     Growl,

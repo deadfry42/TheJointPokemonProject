@@ -1,7 +1,7 @@
 use std::fmt::{self};
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Item {
     LuckyEgg,
     ConnectionWire, // link cable

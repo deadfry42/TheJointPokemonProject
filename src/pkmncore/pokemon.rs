@@ -1,5 +1,8 @@
 use super::{
-    constants::{abilities::*, enums::*, items::*, levels::*, natures::*, pokemon::*, typing::*},
+    constants::{
+        abilities::*, enums::*, items::*, levels::*, location::GameLocation, natures::*,
+        pokemon::*, typing::*,
+    },
     moves::MoveData,
     trainer::*,
 };
@@ -19,6 +22,7 @@ pub struct PokemonBase {
     pub levelling_curve: LevellingCurve,
     pub base_exp: u32,
     pub ev_yield: EVs,
+    pub held_items: Option<Vec<PokemonHeldItem>>,
 }
 
 #[allow(dead_code)]
@@ -58,19 +62,26 @@ impl PokemonBase {
 }
 
 #[allow(dead_code)]
+pub struct PokemonHeldItem {
+    pub item: Item,
+    pub chance: f64,
+}
+
+#[allow(dead_code)]
 pub struct PokemonData {
     pub nickname: Option<&'static str>,
-    pub ot: Option<OTInformation>,
+    pub ot: OTInformation,
     pub base: PokemonBase,
     pub evs: EVs,
     pub ivs: IVs,
     pub exp: u32,
     pub ability: Ability,
     pub mettime: i64,
+    pub metlocation: GameLocation,
     pub pid: u32,
     pub isegg: bool,
     pub friendship: u8,
-    pub pokeball: Option<Pokeball>,
+    pub pokeball: Pokeball,
     pub pokerus: bool,
     pub shiny: bool,
     pub marking: Option<Marking>,
@@ -113,6 +124,7 @@ pub struct TypeSet {
 }
 
 #[allow(dead_code)]
+#[derive(Clone, Copy)]
 pub struct EVs {
     pub health: Option<i16>,
     pub speed: Option<i16>,

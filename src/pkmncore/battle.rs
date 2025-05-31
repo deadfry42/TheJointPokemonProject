@@ -2,6 +2,7 @@ use super::constants::abilities::Ability;
 use super::constants::enums::{BattleConditions, StatusCondition};
 use super::constants::items::*;
 use super::constants::natures::Nature;
+use super::moves::*;
 use super::trainer::*;
 use super::{constants::levels::*, pokemon::*};
 
@@ -59,14 +60,17 @@ pub struct BattlePokemon {
     pub battle_condition: Vec<BattleConditions>,
     pub friendship: u8,
     pub nature: Nature,
+    pub moves: [Option<MoveData>; 4],
 }
 
 #[allow(dead_code)]
 impl BattlePokemon {
+    // turn pokemon data into battle data
     pub fn from_data(data: PokemonData) -> BattlePokemon {
         BattlePokemon {
+            moves: data.moves,
             nickname: data.nickname,
-            ot: data.ot,
+            ot: Some(data.ot),
             atk_stage: 0,
             def_stage: 0,
             spatk_stage: 0,
@@ -83,11 +87,22 @@ impl BattlePokemon {
             ivs: data.ivs,
             pokerus: data.pokerus,
             condition: data.condition,
-            battle_condition: vec![],
             friendship: data.friendship,
             nature: data.nature,
             base: data.base,
+            battle_condition: vec![],
         }
+    }
+
+    // update pokemon data after battle
+    pub fn update_data(&self, data: &mut PokemonData) {
+        data.exp = self.exp;
+        data.evs = self.evs;
+        data.pokerus = self.pokerus;
+        data.helditem = self.helditem;
+        data.friendship = self.friendship;
+        data.condition = self.condition;
+        data.moves = self.moves;
     }
 
     pub fn award_xp(&mut self, xp: u32) {

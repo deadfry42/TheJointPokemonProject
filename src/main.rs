@@ -1,14 +1,14 @@
-use chrono::TimeZone;
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use pkmncore::{
     constants::{
-        enums::{Gender, Language, Pokeball, StatusCondition},
+        enums::{Gender, Language, StatusCondition},
         items::Item,
         levels::*,
+        moves::MoveType,
         pokemon::*,
     },
     rng::*,
-    trainer::OTInformation,
+    trainer::*,
 };
 use utils::hex;
 
@@ -24,17 +24,21 @@ fn main() {
         CURRENT_PLATFORM, COMPILED_ON
     );
 
-    let wooper = generate_wild_pokemon(
-        Pokemon::Wooper,
-        69,
-        &OTInformation {
-            id: generate_trainer_id(),
-            sid: generate_trainer_id(),
-            lang: Language::English,
-            gender: Gender::Male,
-            name: "Sigma",
+    let plr = Player {
+        trainer: Trainer {
+            info: OTInformation {
+                sid: generate_trainer_id(),
+                id: generate_trainer_id(),
+                lang: Language::English,
+                gender: Gender::Male,
+                name: "Yes",
+            },
         },
-    );
+        money: 0,
+        party: [None, None, None, None, None, None],
+    };
+
+    let wooper = generate_wild_pokemon(Pokemon::Wooper, 69, &plr);
 
     println!(
         "lvl {} ({} exp)",
@@ -46,15 +50,15 @@ fn main() {
         hex::decimal_to_hex(wooper.pid),
         hex::decimal_to_binary(wooper.pid)
     );
-    println!(
-        "mettime: {:?} ({})",
-        chrono::Utc.timestamp_opt(wooper.mettime, 0).unwrap(),
-        wooper.mettime
-    );
-    println!(
-        "pokeball: {}",
-        wooper.pokeball.unwrap_or(Pokeball::Pokeball)
-    );
+    // println!(
+    //     "mettime: {:?} ({})",
+    //     chrono::Utc.timestamp_opt(wooper.mettime, 0).unwrap(),
+    //     wooper.mettime
+    // );
+    // println!(
+    //     "pokeball: {}",
+    //     wooper.pokeball.unwrap_or(Pokeball::Pokeball)
+    // );
     println!(
         "helditem: {}",
         wooper.helditem.unwrap_or(Item::ConnectionWire)
@@ -73,9 +77,9 @@ fn main() {
         if item.1.is_some() {
             println!(
                 "   {} : {}/{}",
-                item.1.as_ref().unwrap().base.name,
+                item.1.as_ref().unwrap().base.get_base().name,
                 item.1.as_ref().unwrap().pp,
-                item.1.as_ref().unwrap().base.move_pp
+                item.1.as_ref().unwrap().base.get_base().move_pp
             );
         } else {
             println!("   -");

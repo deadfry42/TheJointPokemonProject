@@ -1,5 +1,6 @@
 use super::constants::{
     enums::{MoveCategory, MoveRange},
+    moves::*,
     typing::*,
 };
 
@@ -16,8 +17,9 @@ pub struct MoveBase {
 }
 
 #[allow(dead_code)]
+#[derive(Clone, Copy)]
 pub struct MoveData {
-    pub base: MoveBase,
+    pub base: Move,
     pub pp: i8,
     pub pp_ups_used: i8,
 }

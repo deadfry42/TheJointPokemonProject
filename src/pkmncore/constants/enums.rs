@@ -40,6 +40,7 @@ impl fmt::Display for Stat {
 }
 
 #[allow(dead_code)]
+#[derive(Clone, Copy)]
 pub enum StatusCondition {
     Poison,
     BadlyPoison,
