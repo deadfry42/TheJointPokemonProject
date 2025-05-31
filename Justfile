@@ -102,13 +102,13 @@ cr_macos_aarch64:
 # build windows in the recommended way (cross.rs)
 [group('recommended crosscompilation options')]
 [macos]
+[openbsd]
 windows: (cr_windows)
 
 # build windows in the recommended way (cargo)
 [group('recommended crosscompilation options')]
 [linux]
-[openbsd]
-windows: (cc_windows)
+windows: (cc_windows) # TODO : Replace w/ cross.rs when bug is fixed
 
 # build linux in the recommended way (cross.rs)
 [group('recommended crosscompilation options')]
