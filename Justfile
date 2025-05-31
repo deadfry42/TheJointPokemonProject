@@ -1,3 +1,6 @@
+# notes:
+# cross.rs compilation is done with podman
+
 # list just recipes
 default:
     just --list
@@ -39,7 +42,7 @@ cc_cleanMacos_aarch64: (build-x86_64-linux)
 # recipe to build x86_64 windows (gnu) with cargo
 build-x86_64-windows:
     rustup target add x86_64-pc-windows-gnu
-    cargo build --target x86_64-pc-windows-gnu
+    cargo build --release --target x86_64-pc-windows-gnu
 
 # recipe to clean up after x86_64 windows (gnu) with cargo
 cleanup-x86_64-windows:
@@ -49,7 +52,7 @@ cleanup-x86_64-windows:
 # recipe to build x86_64 linux (gnu) with cargo
 build-x86_64-linux:
     rustup target add x86_64-unknown-linux-gnu
-    cargo build --target x86_64-unknown-linux-gnu
+    cargo build --release --target x86_64-unknown-linux-gnu
 
 # recipe to clean up after x86_64 linux (gnu) with cargo
 cleanup-x86_64-linux:
@@ -59,7 +62,7 @@ cleanup-x86_64-linux:
 # recipe to build aarch64 macos with cargo
 build-aarch64-macos:
     rustup target add aarch64-apple-darwin
-    cargo build --target aarch64-apple-darwin
+    cargo build --release --target aarch64-apple-darwin
 
 # recipe to clean up after aarch64 macos with cargo
 cleanup-aarch64-macos:
@@ -87,39 +90,35 @@ install_cross:
 # build windows via cross.rs
 [group('cross.rs options')]
 cr_windows:
-    cross build --release --target x86_64-pc-windows-gnu
+    CROSS_CONTAINER_ENGINE=podman cross build -r --target=x86_64-pc-windows-gnu
 
-# build linux via cross.rs
+# build linux x86_64 via cross.rs
 [group('cross.rs options')]
 cr_linux:
-    cross build --release --target x86_64-unknown-linux-gnu
+    CROSS_CONTAINER_ENGINE=podman cross build -r --target=x86_64-unknown-linux-gnu
 
-# build macos via cross.rs
+# build linux aarch64 via cross.rs
+[group('cross.rs options')]
+cr_linux_aarch64:
+    CROSS_CONTAINER_ENGINE=podman cross build -r --target=aarch64-unknown-linux-gnu
+
+# build macos aarch64 via cross.rs
 [group('cross.rs options')]
 cr_macos_aarch64:
-    cross build --release --target aarch64-apple-darwin
+    CROSS_CONTAINER_ENGINE=podman cross build -r --target=aarch64-apple-darwin
 
 # build windows in the recommended way (cross.rs)
 [group('recommended crosscompilation options')]
-[macos]
-[openbsd]
 windows: (cr_windows)
-
-# build windows in the recommended way (cargo)
-[group('recommended crosscompilation options')]
-[linux]
-windows: (cc_windows) # TODO : Replace w/ cross.rs when bug is fixed
 
 # build linux in the recommended way (cross.rs)
 [group('recommended crosscompilation options')]
-[macos]
-[openbsd]
-[windows]
 linux: (cr_linux)
+
+# build linux aarch64 in the recommended way (cross.rs)
+[group('recommended crosscompilation options')]
+linux_aarch64: (cr_linux_aarch64)
 
 # build macos aarch64 in the recommended way (cross.rs)
 [group('recommended crosscompilation options')]
-[linux]
-[openbsd]
-[windows]
 macos_aarch64: (cr_macos_aarch64)
