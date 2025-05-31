@@ -130,20 +130,20 @@ pub fn calculate_battle_xp_gain(
     let t: f32 = if recipient_trainer
         .trainer
         .info
-        .eq(recipient.data.ot.as_ref().unwrap())
+        .eq(recipient.ot.as_ref().unwrap())
     {
         1.0_f32
     } else {
         1.5_f32
     };
-    let e: f32 = if recipient.data.is_holding(Item::LuckyEgg) {
+    let e: f32 = if recipient.is_holding(Item::LuckyEgg) {
         1.5_f32
     } else {
         1.0_32
     };
-    let v: f32 = if Pokemon::get_evolution_level(&recipient.data.base.pkmn)
+    let v: f32 = if Pokemon::get_evolution_level(&recipient.base.pkmn)
         .unwrap()
-        .lt(&recipient.data.get_level())
+        .lt(&recipient.get_level())
     {
         4915_f32 / 4096_f32
     } else {
@@ -151,18 +151,10 @@ pub fn calculate_battle_xp_gain(
     };
     let f: f32 = 1.0; // 4915/4096 if atleast 2 hearts of affection
     let p: f32 = 1.0; // pass power equivalent, leave as 1 for now
-    let victim_base_exp = victim.data.base.base_exp;
-    let victim_level = victim
-        .data
-        .base
-        .levelling_curve
-        .exp_to_levels(victim.data.exp) as u32;
+    let victim_base_exp = victim.base.base_exp;
+    let victim_level = victim.base.levelling_curve.exp_to_levels(victim.exp) as u32;
 
-    let recipient_level = recipient
-        .data
-        .base
-        .levelling_curve
-        .exp_to_levels(recipient.data.exp) as u32;
+    let recipient_level = recipient.base.levelling_curve.exp_to_levels(recipient.exp) as u32;
 
     let basewinningxp: f32 = ((victim_base_exp * victim_level) / 5_u32) as f32
         * (1.0 / s)

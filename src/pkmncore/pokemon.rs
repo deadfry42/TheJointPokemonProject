@@ -82,6 +82,7 @@ pub struct PokemonData {
     // metlocation: Location
 }
 
+#[allow(dead_code)]
 impl PokemonData {
     pub fn award_xp(&mut self, xp: u32) {
         self.exp += xp;

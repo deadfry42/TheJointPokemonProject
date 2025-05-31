@@ -4,3 +4,4 @@ image = ""
 
 [target.aarch64-pc-windows-msvc]
 image = "ghcr.io/cross-rs/aarch64-pc-windows-msvc-cross:local"
+runner = "qemu-user"

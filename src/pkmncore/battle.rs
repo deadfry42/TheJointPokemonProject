@@ -1,5 +1,9 @@
+use super::constants::abilities::Ability;
+use super::constants::enums::{BattleConditions, StatusCondition};
+use super::constants::items::*;
+use super::constants::natures::Nature;
 use super::trainer::*;
-use super::{constants::levels::*, pokemon::PokemonData};
+use super::{constants::levels::*, pokemon::*};
 
 #[allow(dead_code)]
 pub struct Battle {
@@ -22,7 +26,7 @@ impl Battle {
         mut recipient: BattlePokemon,
         mut victim: BattlePokemon,
     ) {
-        recipient.data.award_xp(calculate_battle_xp_gain(
+        recipient.award_xp(calculate_battle_xp_gain(
             self,
             &recipient_trainer,
             &recipient,
@@ -33,7 +37,70 @@ impl Battle {
 
 #[allow(dead_code)]
 pub struct BattlePokemon {
-    pub data: PokemonData,
+    pub nickname: Option<&'static str>,
+    pub ot: Option<OTInformation>,
+    pub atk_stage: i8,
+    pub def_stage: i8,
+    pub spatk_stage: i8,
+    pub spdef_stage: i8,
+    pub speed_stage: i8,
+    pub evasion_stage: i8,
+    pub accuracy_modifier: f32,
+    pub pid: u32,
+    pub ability: Ability,
+    pub shiny: bool,
+    pub exp: u32,
+    pub helditem: Option<Item>,
+    pub evs: EVs,
+    pub ivs: IVs,
+    pub base: PokemonBase,
+    pub pokerus: bool,
+    pub condition: Option<StatusCondition>,
+    pub battle_condition: Vec<BattleConditions>,
+    pub friendship: u8,
+    pub nature: Nature,
+}
+
+#[allow(dead_code)]
+impl BattlePokemon {
+    pub fn from_data(data: PokemonData) -> BattlePokemon {
+        BattlePokemon {
+            nickname: data.nickname,
+            ot: data.ot,
+            atk_stage: 0,
+            def_stage: 0,
+            spatk_stage: 0,
+            spdef_stage: 0,
+            speed_stage: 0,
+            evasion_stage: 0,
+            accuracy_modifier: 1_f32,
+            pid: data.pid,
+            ability: data.ability,
+            shiny: data.shiny,
+            exp: data.exp,
+            helditem: data.helditem,
+            evs: data.evs,
+            ivs: data.ivs,
+            pokerus: data.pokerus,
+            condition: data.condition,
+            battle_condition: vec![],
+            friendship: data.friendship,
+            nature: data.nature,
+            base: data.base,
+        }
+    }
+
+    pub fn award_xp(&mut self, xp: u32) {
+        self.exp += xp;
+    }
+
+    pub fn get_level(&self) -> i8 {
+        self.base.levelling_curve.exp_to_levels(self.exp)
+    }
+
+    pub fn is_holding(&self, i: Item) -> bool {
+        self.helditem.as_ref().unwrap().eq(&i)
+    }
 }
 
 #[allow(dead_code)]

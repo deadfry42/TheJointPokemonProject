@@ -1,4 +1,7 @@
-use super::typing::*;
+use super::{
+    enums::{MoveCategory, MoveRange},
+    typing::*,
+};
 use crate::pkmncore::moves::*;
 use std::fmt::{self};
 
@@ -11,6 +14,7 @@ pub trait MoveType {
 #[derive(PartialEq)]
 pub enum Move {
     Tackle,
+    Growl,
 }
 
 impl MoveType for Move {
@@ -18,11 +22,23 @@ impl MoveType for Move {
         match self {
             Move::Tackle => MoveBase {
                 name: "Tackle",
-                desc: "A tackle. Jesus christ",
+                desc: "A physical attack in which the user charges and slams into the target with its whole body.",
+                move_category: MoveCategory::Physical,
+                move_range: MoveRange::Normal,
                 move_type: Type::Normal,
-                move_power: 40,
-                move_accuracy: 1_f32,
+                move_power: Some(40),
+                move_accuracy: Some(1_f32),
                 move_pp: 35,
+            },
+            Move::Growl => MoveBase {
+                name: "Growl",
+                desc: "The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats.",
+                move_category: MoveCategory::Status,
+                move_range: MoveRange::ManyOthers,
+                move_type: Type::Normal,
+                move_power: None,
+                move_accuracy: Some(1_f32),
+                move_pp: 40,
             },
         }
     }
@@ -32,6 +48,7 @@ impl fmt::Display for Move {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
             Move::Tackle => write!(f, "Tackle"),
+            Move::Growl => write!(f, "Growl"),
         }
     }
 }

@@ -1,12 +1,17 @@
-use super::constants::typing::*;
+use super::constants::{
+    enums::{MoveCategory, MoveRange},
+    typing::*,
+};
 
 #[allow(dead_code)]
 pub struct MoveBase {
     pub name: &'static str,
     pub desc: &'static str,
     pub move_type: Type,
-    pub move_power: i8,
-    pub move_accuracy: f32,
+    pub move_range: MoveRange,
+    pub move_category: MoveCategory,
+    pub move_power: Option<i8>,
+    pub move_accuracy: Option<f32>,
     pub move_pp: i8,
 }
 
