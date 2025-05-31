@@ -1,11 +1,13 @@
 use super::constants::abilities::Ability;
 use super::constants::levels::LevellingCurveCalc;
 use super::constants::moves::{Move, MoveType};
-use super::constants::natures::Nature;
+use super::constants::natures::*;
 use super::constants::pokemon::{Pokemon, PokemonType};
 use super::moves::MoveData;
 use super::{pokemon::*, trainer::OTInformation};
 use rand::{Rng, RngCore};
+
+use chrono;
 
 pub fn generate_personality() -> u32 {
     rand::rng().next_u32()
@@ -20,36 +22,7 @@ pub fn generate_iv() -> i8 {
 }
 
 pub fn determine_nature(personality: &u32) -> Nature {
-    let nature_index: i8 = (personality % 25) as i8;
-
-    match nature_index {
-        0 => Nature::Hardy,
-        1 => Nature::Lonely,
-        2 => Nature::Brave,
-        3 => Nature::Adamant,
-        4 => Nature::Naughty,
-        5 => Nature::Bold,
-        6 => Nature::Docile,
-        7 => Nature::Relaxed,
-        8 => Nature::Impish,
-        9 => Nature::Lax,
-        10 => Nature::Timid,
-        11 => Nature::Hasty,
-        12 => Nature::Serious,
-        13 => Nature::Jolly,
-        14 => Nature::Naive,
-        15 => Nature::Modest,
-        16 => Nature::Mild,
-        17 => Nature::Quiet,
-        18 => Nature::Bashful,
-        19 => Nature::Rash,
-        20 => Nature::Calm,
-        21 => Nature::Gentle,
-        22 => Nature::Sassy,
-        23 => Nature::Careful,
-        24 => Nature::Quirky,
-        _ => Nature::Hardy,
-    }
+    Nature::index_nature((personality % 25) as i8)
 }
 
 #[allow(dead_code)]
@@ -100,14 +73,14 @@ pub fn generate_wild_pokemon(pkmn: Pokemon, lvl: i8, ot: &OTInformation) -> Poke
         pokeball: None,
         marking: None,
         condition: None,
-        mettime: 0,     // TODO
-        helditem: None, // TODO
-        pokerus: false, // TODO
+        mettime: chrono::Utc::now().timestamp(), // TODO
+        helditem: None,                          // TODO
+        pokerus: false,                          // TODO
         moves: [
             // TODO
             Some(MoveData {
                 base: Move::Tackle.get_base(),
-                pp: 0,
+                pp: Move::Tackle.get_base().move_pp,
                 pp_ups_used: 0,
             }),
             None,
