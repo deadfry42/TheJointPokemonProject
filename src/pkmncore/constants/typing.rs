@@ -2,7 +2,7 @@ use std::fmt::{self};
 
 #[allow(dead_code)]
 pub trait Typing {
-    fn get_type_multiplier(&self, opposing_type: Type) -> f64;
+    fn get_type_multiplier(&self, opposing_type: &Type) -> f64;
 }
 
 #[allow(dead_code)]
@@ -28,7 +28,7 @@ pub enum Type {
 }
 
 impl Typing for Type {
-    fn get_type_multiplier(&self, opposing_type: Type) -> f64 {
+    fn get_type_multiplier(&self, opposing_type: &Type) -> f64 {
         match self {
             Type::Normal => match opposing_type {
                 Type::Rock => 0.5,

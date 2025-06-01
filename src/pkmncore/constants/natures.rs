@@ -2,7 +2,7 @@ use super::enums::Stat;
 use std::fmt::{self};
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Nature {
     Hardy,
     Lonely,

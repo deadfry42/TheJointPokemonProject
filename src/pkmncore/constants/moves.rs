@@ -2,12 +2,20 @@ use super::{
     enums::{MoveCategory, MoveRange},
     typing::*,
 };
+use crate::pkmncore::battle::*;
 use crate::pkmncore::moves::*;
 use std::fmt::{self};
 
 #[allow(dead_code)]
 pub trait MoveType {
     fn get_base(&self) -> MoveBase;
+    fn use_move(
+        &self,
+        type_multiplier: f64,
+        battle: &mut Battle,
+        user: &mut BattlePokemon,
+        targets: Vec<&mut BattlePokemon>,
+    );
 }
 
 #[allow(dead_code)]
@@ -40,6 +48,19 @@ impl MoveType for Move {
                 move_accuracy: Some(1_f32),
                 move_pp: 40,
             },
+        }
+    }
+
+    fn use_move(
+        &self,
+        type_multiplier: f64,
+        battle: &mut Battle,
+        user: &mut BattlePokemon,
+        targets: Vec<&mut BattlePokemon>,
+    ) {
+        match self {
+            Move::Tackle => {}
+            Move::Growl => {}
         }
     }
 }

@@ -1,7 +1,7 @@
 use std::fmt::{self};
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Language {
     // język
     English,
@@ -143,7 +143,7 @@ impl fmt::Display for Marking {
     }
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub enum Gender {
     Male,
     Female,

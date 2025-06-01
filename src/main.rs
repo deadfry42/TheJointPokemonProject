@@ -42,7 +42,11 @@ fn main() {
 
     println!(
         "lvl {} ({} exp)",
-        wooper.base.levelling_curve.exp_to_levels(wooper.exp),
+        wooper
+            .base
+            .get_base()
+            .levelling_curve
+            .exp_to_levels(wooper.exp),
         wooper.exp,
     );
     println!(

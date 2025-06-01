@@ -135,6 +135,7 @@ pub struct EVs {
 }
 
 #[allow(dead_code)]
+#[derive(Clone, Copy)]
 pub struct IVs {
     pub health: i8,
     pub speed: i8,

@@ -3,7 +3,7 @@ use crate::pkmncore::constants::enums::*;
 use super::pokemon::PokemonData;
 
 #[allow(dead_code)]
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub struct OTInformation {
     pub id: u16,
     pub sid: u16,

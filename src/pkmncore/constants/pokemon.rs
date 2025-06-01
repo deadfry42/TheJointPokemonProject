@@ -11,6 +11,7 @@ pub trait PokemonType {
 }
 
 #[allow(dead_code)]
+#[derive(Clone, Copy)]
 pub enum Pokemon {
     Bulbasaur,
     Ivysaur,

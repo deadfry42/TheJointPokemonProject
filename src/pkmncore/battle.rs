@@ -1,7 +1,10 @@
 use super::constants::abilities::Ability;
-use super::constants::enums::{BattleConditions, StatusCondition};
+use super::constants::enums::{BattleConditions, MoveRange, StatusCondition};
 use super::constants::items::*;
+use super::constants::moves::MoveType;
 use super::constants::natures::Nature;
+use super::constants::pokemon::{Pokemon, PokemonType};
+use super::constants::typing::Typing;
 use super::moves::*;
 use super::trainer::*;
 use super::{constants::levels::*, pokemon::*};
@@ -12,26 +15,66 @@ pub struct Battle {
     // for double battles
     pub team_a: BattleSide,
     pub team_b: BattleSide,
+    pub is_wild: bool,
 }
 
 #[allow(dead_code)]
-#[allow(unused_mut)]
 impl Battle {
     fn is_single_battle(&self) -> bool {
         self.team_a.get_member_count() == 1 && self.team_b.get_member_count() == 1
     }
 
+    fn use_move(&mut self, user: &mut BattlePokemon, move_used: &mut MoveData) {
+        move_used.pp -= 1;
+
+        let mut targets: Vec<&mut BattlePokemon> = vec![];
+
+        match move_used.base.get_base().move_range {
+            MoveRange::Normal => {
+                targets.push(user) // TODO: FIX THIS, TEST IMPL
+            }
+            _ => {
+                // unimpl
+            }
+        }
+
+        if targets.len() < 1 {
+            return;
+        } // TODO: make a move result enum or something
+        // "But there was no target.."
+
+        for target in targets.iter() {
+            let effective_modifier: f64 =
+                move_used
+                    .base
+                    .get_base()
+                    .move_type
+                    .get_type_multiplier(&target.base.get_base().types.type1)
+                    * if target.base.get_base().types.type2.is_some() {
+                        move_used.base.get_base().move_type.get_type_multiplier(
+                            target.base.get_base().types.type2.as_ref().unwrap(),
+                        )
+                    } else {
+                        1.0
+                    };
+
+            // move_used
+            //     .base
+            //     .use_move(effective_modifier, self, user, targets);
+        }
+    }
+
     fn knockout_pokemon(
         &self,
-        recipient_trainer: BattleSideMember,
-        mut recipient: BattlePokemon,
-        mut victim: BattlePokemon,
+        recipient_trainer: &BattleSideMember,
+        recipient: &mut BattlePokemon,
+        victim: &mut BattlePokemon,
     ) {
         recipient.award_xp(calculate_battle_xp_gain(
             self,
-            &recipient_trainer,
-            &recipient,
-            &victim,
+            recipient_trainer,
+            recipient,
+            victim,
         ));
     }
 }
@@ -54,7 +97,7 @@ pub struct BattlePokemon {
     pub helditem: Option<Item>,
     pub evs: EVs,
     pub ivs: IVs,
-    pub base: PokemonBase,
+    pub base: Pokemon,
     pub pokerus: bool,
     pub condition: Option<StatusCondition>,
     pub battle_condition: Vec<BattleConditions>,
@@ -66,7 +109,7 @@ pub struct BattlePokemon {
 #[allow(dead_code)]
 impl BattlePokemon {
     // turn pokemon data into battle data
-    pub fn from_data(data: PokemonData) -> BattlePokemon {
+    pub fn from_data(data: &PokemonData) -> BattlePokemon {
         BattlePokemon {
             moves: data.moves,
             nickname: data.nickname,
@@ -89,7 +132,7 @@ impl BattlePokemon {
             condition: data.condition,
             friendship: data.friendship,
             nature: data.nature,
-            base: data.base,
+            base: data.base.pkmn,
             battle_condition: vec![],
         }
     }
@@ -110,7 +153,7 @@ impl BattlePokemon {
     }
 
     pub fn get_level(&self) -> i8 {
-        self.base.levelling_curve.exp_to_levels(self.exp)
+        self.base.get_base().levelling_curve.exp_to_levels(self.exp)
     }
 
     pub fn is_holding(&self, i: Item) -> bool {

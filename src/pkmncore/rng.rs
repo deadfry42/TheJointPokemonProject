@@ -88,7 +88,7 @@ pub fn generate_wild_pokemon(pkmn: Pokemon, lvl: i8, plr: &Player) -> BattlePoke
         evasion_stage: 0,
         accuracy_modifier: 1_f32,
         pid: personality,
-        base: pkmn.get_base(),
+        base: pkmn.get_base().pkmn,
         battle_condition: vec![],
         ability: determine_ability(&personality, &pkmn.get_base()),
         shiny: determine_shininess(&personality, &plr.trainer.info),

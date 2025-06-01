@@ -4,7 +4,7 @@ use crate::pkmncore::battle::{Battle, BattlePokemon, BattleSideMember};
 
 use super::{
     items::Item,
-    pokemon::{EvolutionByLevel, Pokemon},
+    pokemon::{EvolutionByLevel, Pokemon, PokemonType},
 };
 
 pub trait LevellingCurveCalc {
@@ -141,7 +141,7 @@ pub fn calculate_battle_xp_gain(
     } else {
         1.0_32
     };
-    let v: f32 = if Pokemon::get_evolution_level(&recipient.base.pkmn)
+    let v: f32 = if Pokemon::get_evolution_level(&recipient.base.get_base().pkmn)
         .unwrap()
         .lt(&recipient.get_level())
     {
@@ -151,10 +151,18 @@ pub fn calculate_battle_xp_gain(
     };
     let f: f32 = 1.0; // 4915/4096 if atleast 2 hearts of affection
     let p: f32 = 1.0; // pass power equivalent, leave as 1 for now
-    let victim_base_exp = victim.base.base_exp;
-    let victim_level = victim.base.levelling_curve.exp_to_levels(victim.exp) as u32;
+    let victim_base_exp = victim.base.get_base().base_exp;
+    let victim_level = victim
+        .base
+        .get_base()
+        .levelling_curve
+        .exp_to_levels(victim.exp) as u32;
 
-    let recipient_level = recipient.base.levelling_curve.exp_to_levels(recipient.exp) as u32;
+    let recipient_level = recipient
+        .base
+        .get_base()
+        .levelling_curve
+        .exp_to_levels(recipient.exp) as u32;
 
     let basewinningxp: f32 = ((victim_base_exp * victim_level) / 5_u32) as f32
         * (1.0 / s)
