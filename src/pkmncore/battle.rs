@@ -1,10 +1,11 @@
+use crate::pkmncore::constants::moves::MoveType;
+use crate::pkmncore::constants::priority::MovePriority;
+
 use super::constants::abilities::Ability;
-use super::constants::enums::{BattleConditions, MoveRange, StatusCondition};
+use super::constants::enums::{BattleConditions, StatusCondition};
 use super::constants::items::*;
-use super::constants::moves::MoveType;
 use super::constants::natures::Nature;
 use super::constants::pokemon::{Pokemon, PokemonType};
-use super::constants::typing::Typing;
 use super::moves::*;
 use super::trainer::*;
 use super::{constants::levels::*, pokemon::*};
@@ -24,46 +25,6 @@ impl Battle {
         self.team_a.get_member_count() == 1 && self.team_b.get_member_count() == 1
     }
 
-    fn use_move(&mut self, user: &mut BattlePokemon, move_used: &mut MoveData) {
-        move_used.pp -= 1;
-
-        let mut targets: Vec<&mut BattlePokemon> = vec![];
-
-        match move_used.base.get_base().move_range {
-            MoveRange::Normal => {
-                targets.push(user) // TODO: FIX THIS, TEST IMPL
-            }
-            _ => {
-                // unimpl
-            }
-        }
-
-        if targets.len() < 1 {
-            return;
-        } // TODO: make a move result enum or something
-        // "But there was no target.."
-
-        for target in targets.iter() {
-            let effective_modifier: f64 =
-                move_used
-                    .base
-                    .get_base()
-                    .move_type
-                    .get_type_multiplier(&target.base.get_base().types.type1)
-                    * if target.base.get_base().types.type2.is_some() {
-                        move_used.base.get_base().move_type.get_type_multiplier(
-                            target.base.get_base().types.type2.as_ref().unwrap(),
-                        )
-                    } else {
-                        1.0
-                    };
-
-            // move_used
-            //     .base
-            //     .use_move(effective_modifier, self, user, targets);
-        }
-    }
-
     fn knockout_pokemon(
         &self,
         recipient_trainer: &BattleSideMember,
@@ -76,6 +37,12 @@ impl Battle {
             recipient,
             victim,
         ));
+    }
+
+    fn play_turn(&self, turn: BattleTurn) {
+        for event in turn.events {
+            let priority: MovePriority = event.get_priority();
+        }
     }
 }
 
@@ -177,4 +144,43 @@ impl BattleSide {
 pub struct BattleSideMember {
     pub team: [Option<BattlePokemon>; 6],
     pub trainer: Trainer,
+}
+
+#[allow(dead_code)]
+pub struct BattleTurn {
+    pub events: Vec<Box<dyn BattleEvent>>,
+}
+
+#[allow(dead_code)]
+pub trait BattleEvent {
+    fn get_priority(&self) -> MovePriority;
+}
+
+pub struct UseMoveEvent {
+    pub move_data: MoveData,
+}
+
+impl BattleEvent for UseMoveEvent {
+    fn get_priority(&self) -> MovePriority {
+        self.move_data.base.get_base().move_priority
+    }
+}
+
+#[allow(dead_code)]
+pub struct UseItemEvent {
+    pub item: Item,
+}
+
+impl BattleEvent for UseItemEvent {
+    fn get_priority(&self) -> MovePriority {
+        MovePriority::Item
+    }
+}
+
+pub struct SwitchPokemonEvent {}
+
+impl BattleEvent for SwitchPokemonEvent {
+    fn get_priority(&self) -> MovePriority {
+        MovePriority::Switching
+    }
 }

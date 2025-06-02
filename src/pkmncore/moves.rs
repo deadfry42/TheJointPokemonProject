@@ -1,6 +1,7 @@
 use super::constants::{
     enums::{MoveCategory, MoveRange},
     moves::*,
+    priority::*,
     typing::*,
 };
 
@@ -13,6 +14,7 @@ pub struct MoveBase {
     pub move_category: MoveCategory,
     pub move_power: Option<i8>,
     pub move_accuracy: Option<f32>,
+    pub move_priority: MovePriority,
     pub move_pp: i8,
 }
 

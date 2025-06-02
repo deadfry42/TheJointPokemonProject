@@ -1,5 +1,7 @@
 use super::{
     enums::{MoveCategory, MoveRange},
+    pokemon::*,
+    priority::*,
     typing::*,
 };
 use crate::pkmncore::battle::*;
@@ -9,13 +11,7 @@ use std::fmt::{self};
 #[allow(dead_code)]
 pub trait MoveType {
     fn get_base(&self) -> MoveBase;
-    fn use_move(
-        &self,
-        type_multiplier: f64,
-        battle: &mut Battle,
-        user: &mut BattlePokemon,
-        targets: Vec<&mut BattlePokemon>,
-    );
+    fn use_move(&self, move_used: &mut MoveData, battle: &mut Battle, user: &mut BattlePokemon);
 }
 
 #[allow(dead_code)]
@@ -36,6 +32,7 @@ impl MoveType for Move {
                 move_type: Type::Normal,
                 move_power: Some(40),
                 move_accuracy: Some(1_f32),
+                move_priority: MovePriority::Neutral,
                 move_pp: 35,
             },
             Move::Growl => MoveBase {
@@ -46,30 +43,50 @@ impl MoveType for Move {
                 move_type: Type::Normal,
                 move_power: None,
                 move_accuracy: Some(1_f32),
+                move_priority: MovePriority::Neutral,
                 move_pp: 40,
             },
         }
     }
 
-    fn use_move(
-        &self,
-        type_multiplier: f64,
-        battle: &mut Battle,
-        user: &mut BattlePokemon,
-        targets: Vec<&mut BattlePokemon>,
-    ) {
-        match self {
-            Move::Tackle => {}
-            Move::Growl => {}
-        }
-    }
-}
+    fn use_move(&self, move_used: &mut MoveData, battle: &mut Battle, user: &mut BattlePokemon) {
+        move_used.pp -= 1;
 
-impl fmt::Display for Move {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            Move::Tackle => write!(f, "Tackle"),
-            Move::Growl => write!(f, "Growl"),
+        let mut targets: Vec<&mut BattlePokemon> = vec![];
+
+        match move_used.base.get_base().move_range {
+            MoveRange::Normal => {
+                targets.push(user) // TODO: FIX THIS, TEST IMPL
+            }
+            _ => {
+                // unimpl
+            }
+        }
+
+        if targets.len() < 1 {
+            return;
+        } // TODO: make a move result enum or something
+        // "But there was no target.."
+
+        for target in targets.iter() {
+            let effective_modifier: f64 =
+                move_used
+                    .base
+                    .get_base()
+                    .move_type
+                    .get_type_multiplier(&target.base.get_base().types.type1)
+                    * if target.base.get_base().types.type2.is_some() {
+                        move_used.base.get_base().move_type.get_type_multiplier(
+                            target.base.get_base().types.type2.as_ref().unwrap(),
+                        )
+                    } else {
+                        1.0
+                    };
+
+            match self {
+                Move::Tackle => {}
+                Move::Growl => {}
+            }
         }
     }
 }
