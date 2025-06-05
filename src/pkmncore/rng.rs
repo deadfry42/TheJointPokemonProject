@@ -1,4 +1,4 @@
-use super::battle::BattlePokemon;
+use super::battle::pokemon::*;
 use super::constants::abilities::Ability;
 use super::constants::items::*;
 use super::constants::levels::LevellingCurveCalc;

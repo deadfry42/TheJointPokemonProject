@@ -6,5 +6,4 @@ pub mod location;
 pub mod moves;
 pub mod natures;
 pub mod pokemon;
-pub mod priority;
 pub mod typing;

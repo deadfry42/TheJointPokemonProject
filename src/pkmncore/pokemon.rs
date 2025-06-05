@@ -75,6 +75,7 @@ pub struct PokemonData {
     pub evs: EVs,
     pub ivs: IVs,
     pub exp: u32,
+    pub health: u32,
     pub ability: Ability,
     pub mettime: i64,
     pub metlocation: GameLocation,

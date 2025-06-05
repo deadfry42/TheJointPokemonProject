@@ -1,3 +1,4 @@
+use crate::pkmncore::boxes::pc::*;
 use crate::pkmncore::constants::enums::*;
 
 use super::pokemon::PokemonData;
@@ -22,6 +23,7 @@ impl OTInformation {
 #[allow(dead_code)]
 pub struct Player {
     pub trainer: Trainer,
+    pub pc: PC,
     pub party: [Option<PokemonData>; 6],
     pub money: i64,
 }

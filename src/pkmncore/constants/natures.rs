@@ -35,6 +35,7 @@ pub enum Nature {
 pub trait NatureData {
     fn get_increased_stat(&self) -> Stat;
     fn get_decreased_stat(&self) -> Stat;
+    fn get_stat_multiplier(&self, stat: &Stat) -> f64;
     fn index_nature(index: i8) -> Nature;
 }
 
@@ -127,6 +128,16 @@ impl NatureData for Nature {
             Nature::Sassy => Stat::Speed,
             Nature::Careful => Stat::SpecialAttack,
             Nature::Quirky => Stat::SpecialDefence,
+        }
+    }
+
+    fn get_stat_multiplier(&self, stat: &Stat) -> f64 {
+        if self.get_decreased_stat() == *stat {
+            0.9
+        } else if self.get_increased_stat() == *stat {
+            1.1
+        } else {
+            1.0
         }
     }
 }

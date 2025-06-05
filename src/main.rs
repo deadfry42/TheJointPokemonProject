@@ -1,16 +1,13 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use pkmncore::{
-    constants::{
-        enums::{Gender, Language, StatusCondition},
-        items::Item,
-        levels::*,
-        moves::MoveType,
-        pokemon::*,
-    },
+    boxes::pc::*,
+    constants::{enums::*, items::Item, moves::MoveType, pokemon::*},
     rng::*,
     trainer::*,
 };
 use utils::hex;
+
+use crate::pkmncore::constants::priority::MovePriority;
 
 mod pkmncore;
 mod utils;
@@ -34,21 +31,18 @@ fn main() {
                 name: "Yes",
             },
         },
+        pc: PC::new_dummy(),
         money: 0,
         party: [None, None, None, None, None, None],
     };
 
     let wooper = generate_wild_pokemon(Pokemon::Wooper, 69, &plr);
 
-    println!(
-        "lvl {} ({} exp)",
-        wooper
-            .base
-            .get_base()
-            .levelling_curve
-            .exp_to_levels(wooper.exp),
-        wooper.exp,
-    );
+    println!("health evs: {}", wooper.get_ev(&Stat::Health));
+    println!("health ivs: {}", wooper.get_iv(&Stat::Health));
+    println!("nature: {}", wooper.nature);
+    println!("health stat: {}", wooper.calculate_stat(&Stat::Health));
+    println!("lvl {} ({} exp)", wooper.get_level(), wooper.exp,);
     println!(
         "Personality: 0x{} (0b{})",
         hex::decimal_to_hex(wooper.pid),

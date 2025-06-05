@@ -1,4 +1,4 @@
-use crate::pkmncore::constants::moves::MoveType;
+use crate::pkmncore::constants::moves::*;
 use crate::pkmncore::constants::priority::MovePriority;
 
 use super::constants::abilities::Ability;
@@ -11,16 +11,16 @@ use super::trainer::*;
 use super::{constants::levels::*, pokemon::*};
 
 #[allow(dead_code)]
-pub struct Battle {
+pub struct Battle<'a> {
     // "Teams" are used instead of trainers
     // for double battles
-    pub team_a: BattleSide,
-    pub team_b: BattleSide,
+    pub team_a: BattleSide<'a>,
+    pub team_b: BattleSide<'a>,
     pub is_wild: bool,
 }
 
 #[allow(dead_code)]
-impl Battle {
+impl<'a> Battle<'a> {
     fn is_single_battle(&self) -> bool {
         self.team_a.get_member_count() == 1 && self.team_b.get_member_count() == 1
     }
@@ -129,21 +129,22 @@ impl BattlePokemon {
 }
 
 #[allow(dead_code)]
-pub struct BattleSide {
-    pub trainers: Vec<BattleSideMember>,
+pub struct BattleSide<'a> {
+    pub trainers: Vec<BattleSideMember<'a>>,
 }
 
 #[allow(dead_code)]
-impl BattleSide {
+impl<'a> BattleSide<'a> {
     fn get_member_count(&self) -> usize {
         self.trainers.len()
     }
 }
 
 #[allow(dead_code)]
-pub struct BattleSideMember {
+pub struct BattleSideMember<'a> {
     pub team: [Option<BattlePokemon>; 6],
     pub trainer: Trainer,
+    pub active_pokemon: Option<&'a BattlePokemon>,
 }
 
 #[allow(dead_code)]
@@ -156,11 +157,26 @@ pub trait BattleEvent {
     fn get_priority(&self) -> MovePriority;
 }
 
-pub struct UseMoveEvent {
-    pub move_data: MoveData,
+#[allow(dead_code)]
+#[derive(Clone, Copy)]
+pub struct StatChange {
+    pub atk_change: i8,
+    pub def_change: i8,
+    pub spatk_change: i8,
+    pub spdef_change: i8,
+    pub speed_change: i8,
+    pub evasion_change: i8,
+    pub accuracy_modifier_change: f32,
 }
 
-impl BattleEvent for UseMoveEvent {
+#[allow(dead_code)]
+pub struct UseMoveEvent<'a> {
+    pub move_data: &'a MoveData,
+    pub user_member: BattleSideMember<'a>,
+    pub changes: Vec<Box<dyn MoveEffect<'a>>>,
+}
+
+impl<'a> BattleEvent for UseMoveEvent<'a> {
     fn get_priority(&self) -> MovePriority {
         self.move_data.base.get_base().move_priority
     }
@@ -177,9 +193,12 @@ impl BattleEvent for UseItemEvent {
     }
 }
 
-pub struct SwitchPokemonEvent {}
+pub struct SwitchPokemonEvent<'a> {
+    pub member: &'a BattleSideMember<'a>,
+    pub new_pokemon: &'a BattlePokemon,
+}
 
-impl BattleEvent for SwitchPokemonEvent {
+impl<'a> BattleEvent for SwitchPokemonEvent<'a> {
     fn get_priority(&self) -> MovePriority {
         MovePriority::Switching
     }

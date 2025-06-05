@@ -1,3 +1,4 @@
+use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::pokemon::*;
 
 use super::abilities::Ability;
@@ -8,6 +9,7 @@ use super::typing::*;
 #[allow(dead_code)]
 pub trait PokemonType {
     fn get_base(&self) -> PokemonBase;
+    fn get_base_stat(&self, stat: &Stat) -> i16;
 }
 
 #[allow(dead_code)]
@@ -205,6 +207,17 @@ impl PokemonType for Pokemon {
                 gender_ratio: Some(0.5),
                 base_exp: 42,
             },
+        }
+    }
+
+    fn get_base_stat(&self, stat: &Stat) -> i16 {
+        match stat {
+            Stat::Health => self.get_base().base_stats.health,
+            Stat::Speed => self.get_base().base_stats.speed,
+            Stat::Attack => self.get_base().base_stats.atk,
+            Stat::Defense => self.get_base().base_stats.def,
+            Stat::SpecialAttack => self.get_base().base_stats.spatk,
+            Stat::SpecialDefence => self.get_base().base_stats.spdef,
         }
     }
 }
