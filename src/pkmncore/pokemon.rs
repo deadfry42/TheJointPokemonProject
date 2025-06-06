@@ -60,7 +60,7 @@ impl PokemonBase {
             if gender_float < self.gender_ratio.unwrap() {
                 return Gender::Male;
             } else {
-                return Gender::Female;
+                Gender::Female
             }
         }
     }
