@@ -19,6 +19,8 @@ jobs:
         run: just install_cross
       - name: Build linux x86_64 with just
         run: just build
+      - name: Build linux aarch64 with just
+        run: just linux_aarch64
       # - name: Build windows x86_64 with just
       #   run: just cc_windows # use cc_windows cuz cross fails on windows for some reason
       - name: Upload linux-x86_64
@@ -27,6 +29,12 @@ jobs:
           name: tjpp-linux-x86_64
           path: |
             target/release/tjpp
+      - name: Upload linux-x86_64
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-linux-aarch64
+          path: |
+            target/aarch64-unknown-linux-gnu/release/tjpp
       # - name: Upload windows-x86_64
       #   uses: actions/upload-artifact@v4
       #   with:
