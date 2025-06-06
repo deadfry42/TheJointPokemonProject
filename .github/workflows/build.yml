@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: extractions/setup-just@v2
         with:
-          just-version: latest # optional semver specification, otherwise latest
+          just-version: 1.40.0
       - uses: actions/checkout@v4
       - name: Check just works
         run: just
