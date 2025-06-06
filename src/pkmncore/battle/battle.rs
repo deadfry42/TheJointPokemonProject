@@ -136,11 +136,7 @@ impl BattleUtils for Battle {
         &self.turn_count
     }
     fn is_wild_battle(&self) -> bool {
-        if self.opposing_side.trainer_a.is_wild() {
-            true
-        } else {
-            false
-        }
+        self.opposing_side.trainer_a.is_wild()
     }
     fn get_player_side(&self) -> &BattleSide {
         &self.player_side

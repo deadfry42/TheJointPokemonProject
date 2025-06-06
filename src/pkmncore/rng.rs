@@ -54,7 +54,7 @@ pub fn determine_ability(personality: &u32, pkmn: &PokemonBase) -> Ability {
         if ((personality / 65536) % 2) == 0 {
             ability1.clone()
         } else {
-            ability2.as_ref().unwrap().clone()
+            *ability2.as_ref().unwrap()
         }
     }
 }
