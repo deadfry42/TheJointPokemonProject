@@ -8,4 +8,5 @@ pub struct PokemonTranslationData {
 pub struct PokemonI18n {
     pub name: &'static str,
     pub dex: &'static str,
+    pub species: &'static str,
 }

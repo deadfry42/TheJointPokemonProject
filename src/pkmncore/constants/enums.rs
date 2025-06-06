@@ -1,3 +1,4 @@
+use crate::i18n::get_localisation;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -10,7 +11,7 @@ pub enum Language {
 impl fmt::Display for Language {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Language::English => write!(f, "English"),
+            Language::English => write!(f, "{}", get_localisation().other_langs.english),
         }
     }
 }
@@ -29,12 +30,12 @@ pub enum Stat {
 impl fmt::Display for Stat {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Stat::Health => write!(f, "Health"),
-            Stat::Speed => write!(f, "Speed"),
-            Stat::Attack => write!(f, "Attack"),
-            Stat::Defense => write!(f, "Defense"),
-            Stat::SpecialDefence => write!(f, "Sp. Defence"),
-            Stat::SpecialAttack => write!(f, "Sp. Attack"),
+            Stat::Health => write!(f, "{}", get_localisation().stats.health),
+            Stat::Speed => write!(f, "{}", get_localisation().stats.speed),
+            Stat::Attack => write!(f, "{}", get_localisation().stats.attack),
+            Stat::Defense => write!(f, "{}", get_localisation().stats.defense),
+            Stat::SpecialAttack => write!(f, "{}", get_localisation().stats.special_attack),
+            Stat::SpecialDefence => write!(f, "{}", get_localisation().stats.special_defense),
         }
     }
 }
@@ -153,9 +154,9 @@ pub enum Gender {
 impl fmt::Display for Gender {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Gender::Male => write!(f, "Male"),
-            Gender::Female => write!(f, "Female"),
-            Gender::Unknown => write!(f, "Unknown"),
+            Gender::Male => write!(f, "{}", get_localisation().gender.male),
+            Gender::Female => write!(f, "{}", get_localisation().gender.female),
+            Gender::Unknown => write!(f, "{}", get_localisation().gender.unknown),
         }
     }
 }

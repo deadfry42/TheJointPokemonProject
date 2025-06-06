@@ -74,13 +74,14 @@ fn main() {
     println!("moves: ");
     for item in wooper.moves.into_iter().enumerate() {
         if item.1.is_some() {
-            let mut move_data = item.1.as_ref().unwrap();
+            let move_data = item.1.as_ref().unwrap();
             println!(
                 "   {} : {}/{}",
                 move_data.base.get_base().name,
                 move_data.pp,
                 move_data.get_max_pp()
             );
+            println!("      --> {}", move_data.base.get_base().desc)
         } else {
             println!("   -");
         }

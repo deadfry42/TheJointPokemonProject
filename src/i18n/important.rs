@@ -1,5 +1,9 @@
 use crate::i18n::sections::{
-    abilities::AbilityTranslationData, moves::MoveTranslationData, natures::NatureTranslationData,
+    abilities::AbilityTranslationData,
+    enums::{GenderTranslationData, OtherLanguageData, StatTranslationData, TypesTranslationData},
+    items::ItemTranslationData,
+    moves::MoveTranslationData,
+    natures::NatureTranslationData,
     pokemon::PokemonTranslationData,
 };
 
@@ -11,4 +15,9 @@ pub struct Localisation {
     pub pokemon: PokemonTranslationData,
     pub nature: NatureTranslationData,
     pub abilities: AbilityTranslationData,
+    pub gender: GenderTranslationData,
+    pub items: ItemTranslationData,
+    pub stats: StatTranslationData,
+    pub types: TypesTranslationData,
+    pub other_langs: OtherLanguageData,
 }

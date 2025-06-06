@@ -1,6 +1,6 @@
 use crate::i18n::{
     important::*,
-    sections::{abilities::*, moves::*, natures::*, pokemon::*},
+    sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
 };
 
 pub const LOCALISATION: Localisation = Localisation {
@@ -10,59 +10,63 @@ pub const LOCALISATION: Localisation = Localisation {
     moves: MoveTranslationData {
         tackle: MoveI18n {
             name: "Tackle",
-            desc: "Test",
+            desc: "A physical attack in which the user charges and slams into the target with its whole body.",
         },
         growl: MoveI18n {
             name: "Growl",
-            desc: "Test",
+            desc: "The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats.",
         },
     },
 
     pokemon: PokemonTranslationData {
         bulbasaur: PokemonI18n {
             name: "Bulbasaur",
+            species: "Seed",
             dex: "Test",
         },
         ivysaur: PokemonI18n {
             name: "Ivysaur",
+            species: "Seed",
             dex: "Test",
         },
         venusaur: PokemonI18n {
             name: "Venusaur",
+            species: "Seed",
             dex: "Test",
         },
         wooper: PokemonI18n {
             name: "Wooper",
+            species: "Water Fish",
             dex: "Test",
         },
     },
 
     nature: NatureTranslationData {
-        hardy: NatureI18n { name: "Hardy" },
-        lonely: NatureI18n { name: "Lonely" },
-        brave: NatureI18n { name: "Brave" },
-        adamant: NatureI18n { name: "Adamant" },
-        naughty: NatureI18n { name: "Naughty" },
-        bold: NatureI18n { name: "Bold" },
-        docile: NatureI18n { name: "Docile" },
-        relaxed: NatureI18n { name: "Relaxed" },
-        impish: NatureI18n { name: "Impish" },
-        lax: NatureI18n { name: "Lax" },
-        timid: NatureI18n { name: "Timid" },
-        hasty: NatureI18n { name: "Hasty" },
-        serious: NatureI18n { name: "Serious" },
-        jolly: NatureI18n { name: "Jolly" },
-        naive: NatureI18n { name: "Naive" },
-        modest: NatureI18n { name: "Modest" },
-        mild: NatureI18n { name: "Mild" },
-        quiet: NatureI18n { name: "Quiet" },
-        bashful: NatureI18n { name: "Bashful" },
-        rash: NatureI18n { name: "Rash" },
-        calm: NatureI18n { name: "Calm" },
-        gentle: NatureI18n { name: "Gentle" },
-        sassy: NatureI18n { name: "Sassy" },
-        careful: NatureI18n { name: "Careful" },
-        quirky: NatureI18n { name: "Quirky" },
+        hardy: "Hardy",
+        lonely: "Lonely",
+        brave: "Brave",
+        adamant: "Adamant",
+        naughty: "Naughty",
+        bold: "Bold",
+        docile: "Docile",
+        relaxed: "Relaxed",
+        impish: "Impish",
+        lax: "Lax",
+        timid: "Timid",
+        hasty: "Hasty",
+        serious: "Serious",
+        jolly: "Jolly",
+        naive: "Naive",
+        modest: "Modest",
+        mild: "Mild",
+        quiet: "Quiet",
+        bashful: "Bashful",
+        rash: "Rash",
+        calm: "Calm",
+        gentle: "Gentle",
+        sassy: "Sassy",
+        careful: "Careful",
+        quirky: "Quirky",
     },
 
     abilities: AbilityTranslationData {
@@ -86,5 +90,54 @@ pub const LOCALISATION: Localisation = Localisation {
             name: "Chlorophyll",
             desc: "Test",
         },
+    },
+
+    gender: GenderTranslationData {
+        male: "Male",
+        female: "Female",
+        unknown: "Unknown",
+    },
+
+    other_langs: OtherLanguageData { english: "English" },
+
+    items: ItemTranslationData {
+        lucky_egg: ItemI18n {
+            name: "Lucky Egg",
+            desc: "Test",
+        },
+        connection_wire: ItemI18n {
+            name: "Connection Wire",
+            desc: "Test",
+        },
+    },
+
+    stats: StatTranslationData {
+        health: "Health",
+        speed: "Speed",
+        attack: "Attack",
+        defense: "Defense",
+        special_attack: "Sp. Attack",
+        special_defense: "Sp. Defense",
+    },
+
+    types: TypesTranslationData {
+        normal: "Normal",
+        water: "Water",
+        fire: "Fire",
+        grass: "Grass",
+        psychic: "Psychic",
+        ground: "Ground",
+        rock: "Rock",
+        bug: "Bug",
+        steel: "Steel",
+        dark: "Dark",
+        ice: "Ice",
+        dragon: "Dragon",
+        fairy: "Fairy",
+        flying: "Flying",
+        ghost: "Ghost",
+        fighting: "Fighting",
+        poison: "Poison",
+        electric: "Electric",
     },
 };

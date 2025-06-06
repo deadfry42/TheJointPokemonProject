@@ -1,3 +1,4 @@
+use crate::i18n::get_localisation;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::moves::Move;
 use crate::pkmncore::evolution::*;
@@ -29,14 +30,14 @@ impl PokemonType for Pokemon {
     fn get_base(&self) -> PokemonBase {
         match self {
             Pokemon::Bulbasaur => PokemonBase {
-                name: "Bulbasaur",
+                name: get_localisation().pokemon.bulbasaur.name,
                 pkmn: Pokemon::Bulbasaur,
                 pokedex: PokedexInfo {
                     index: 1,
                     height: 0.7,
                     weight: 6.9,
-                    species: "Seed Pokemon",
-                    entry: "This pokemon is extra gay",
+                    species: get_localisation().pokemon.bulbasaur.species,
+                    entry: get_localisation().pokemon.bulbasaur.dex,
                 },
                 ev_yield: EVs {
                     health: None,
@@ -83,14 +84,14 @@ impl PokemonType for Pokemon {
                 base_exp: 64,
             },
             Pokemon::Ivysaur => PokemonBase {
-                name: "Ivysaur",
+                name: get_localisation().pokemon.ivysaur.name,
                 pkmn: Pokemon::Ivysaur,
                 pokedex: PokedexInfo {
                     index: 2,
                     height: 1.0,
                     weight: 13.0,
-                    species: "Seed Pokemon",
-                    entry: "This pokemon is extra gay",
+                    species: get_localisation().pokemon.ivysaur.species,
+                    entry: get_localisation().pokemon.ivysaur.dex,
                 },
                 ev_yield: EVs {
                     health: None,
@@ -137,14 +138,14 @@ impl PokemonType for Pokemon {
                 base_exp: 142,
             },
             Pokemon::Venusaur => PokemonBase {
-                name: "Venusaur",
+                name: get_localisation().pokemon.venusaur.name,
                 pkmn: Pokemon::Venusaur,
                 pokedex: PokedexInfo {
                     index: 3,
                     height: 2.0,
                     weight: 100.0,
-                    species: "Seed Pokemon",
-                    entry: "This pokemon is extra gay",
+                    species: get_localisation().pokemon.venusaur.species,
+                    entry: get_localisation().pokemon.venusaur.dex,
                 },
                 ev_yield: EVs {
                     health: None,
@@ -188,14 +189,14 @@ impl PokemonType for Pokemon {
                 base_exp: 236,
             },
             Pokemon::Wooper => PokemonBase {
-                name: "Wooper",
+                name: get_localisation().pokemon.wooper.name,
                 pkmn: Pokemon::Wooper,
                 pokedex: PokedexInfo {
                     index: 194,
                     height: 0.4,
                     weight: 8.5,
-                    species: "Water Fish",
-                    entry: "This pokemon is gay",
+                    species: get_localisation().pokemon.wooper.species,
+                    entry: get_localisation().pokemon.wooper.dex,
                 },
                 ev_yield: EVs {
                     health: Some(1),

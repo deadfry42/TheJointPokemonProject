@@ -1,4 +1,5 @@
 use super::enums::Stat;
+use crate::i18n::get_localisation;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -145,31 +146,31 @@ impl NatureData for Nature {
 impl fmt::Display for Nature {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Nature::Hardy => write!(f, "Hardy"),
-            Nature::Lonely => write!(f, "Lonely"),
-            Nature::Brave => write!(f, "Brave"),
-            Nature::Adamant => write!(f, "Adamant"),
-            Nature::Naughty => write!(f, "Naughty"),
-            Nature::Bold => write!(f, "Bold"),
-            Nature::Docile => write!(f, "Docile"),
-            Nature::Relaxed => write!(f, "Relaxed"),
-            Nature::Impish => write!(f, "Impish"),
-            Nature::Lax => write!(f, "Lax"),
-            Nature::Timid => write!(f, "Timid"),
-            Nature::Hasty => write!(f, "Hasty"),
-            Nature::Serious => write!(f, "Serious"),
-            Nature::Jolly => write!(f, "Jolly"),
-            Nature::Naive => write!(f, "Naive"),
-            Nature::Modest => write!(f, "Modest"),
-            Nature::Mild => write!(f, "Mild"),
-            Nature::Quiet => write!(f, "Quiet"),
-            Nature::Bashful => write!(f, "Bashful"),
-            Nature::Rash => write!(f, "Rash"),
-            Nature::Calm => write!(f, "Calm"),
-            Nature::Gentle => write!(f, "Gentle"),
-            Nature::Sassy => write!(f, "Sassy"),
-            Nature::Careful => write!(f, "Careful"),
-            Nature::Quirky => write!(f, "Quirky"),
+            Nature::Hardy => write!(f, "{}", get_localisation().nature.hardy),
+            Nature::Lonely => write!(f, "{}", get_localisation().nature.lonely),
+            Nature::Brave => write!(f, "{}", get_localisation().nature.brave),
+            Nature::Adamant => write!(f, "{}", get_localisation().nature.adamant),
+            Nature::Naughty => write!(f, "{}", get_localisation().nature.naughty),
+            Nature::Bold => write!(f, "{}", get_localisation().nature.bold),
+            Nature::Docile => write!(f, "{}", get_localisation().nature.docile),
+            Nature::Relaxed => write!(f, "{}", get_localisation().nature.relaxed),
+            Nature::Impish => write!(f, "{}", get_localisation().nature.impish),
+            Nature::Lax => write!(f, "{}", get_localisation().nature.lax),
+            Nature::Timid => write!(f, "{}", get_localisation().nature.timid),
+            Nature::Hasty => write!(f, "{}", get_localisation().nature.hasty),
+            Nature::Serious => write!(f, "{}", get_localisation().nature.serious),
+            Nature::Jolly => write!(f, "{}", get_localisation().nature.jolly),
+            Nature::Naive => write!(f, "{}", get_localisation().nature.naive),
+            Nature::Modest => write!(f, "{}", get_localisation().nature.modest),
+            Nature::Mild => write!(f, "{}", get_localisation().nature.mild),
+            Nature::Quiet => write!(f, "{}", get_localisation().nature.quiet),
+            Nature::Bashful => write!(f, "{}", get_localisation().nature.bashful),
+            Nature::Rash => write!(f, "{}", get_localisation().nature.rash),
+            Nature::Calm => write!(f, "{}", get_localisation().nature.calm),
+            Nature::Gentle => write!(f, "{}", get_localisation().nature.gentle),
+            Nature::Sassy => write!(f, "{}", get_localisation().nature.sassy),
+            Nature::Careful => write!(f, "{}", get_localisation().nature.careful),
+            Nature::Quirky => write!(f, "{}", get_localisation().nature.quirky),
         }
     }
 }

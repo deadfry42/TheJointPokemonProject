@@ -1,3 +1,4 @@
+use crate::i18n::get_localisation;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -211,24 +212,24 @@ impl Typing for Type {
 impl fmt::Display for Type {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Type::Normal => write!(f, "Normal"),
-            Type::Water => write!(f, "Water"),
-            Type::Fire => write!(f, "Fire"),
-            Type::Grass => write!(f, "Grass"),
-            Type::Psychic => write!(f, "Psychic"),
-            Type::Ground => write!(f, "Ground"),
-            Type::Rock => write!(f, "Rock"),
-            Type::Bug => write!(f, "Bug"),
-            Type::Steel => write!(f, "Steel"),
-            Type::Dark => write!(f, "Dark"),
-            Type::Ice => write!(f, "Ice"),
-            Type::Dragon => write!(f, "Dragon"),
-            Type::Fairy => write!(f, "Fairy"),
-            Type::Flying => write!(f, "Flying"),
-            Type::Ghost => write!(f, "Ghost"),
-            Type::Fighting => write!(f, "Fighting"),
-            Type::Poison => write!(f, "Poison"),
-            Type::Electric => write!(f, "Electric"),
+            Type::Normal => write!(f, "{}", get_localisation().types.normal),
+            Type::Water => write!(f, "{}", get_localisation().types.water),
+            Type::Fire => write!(f, "{}", get_localisation().types.fire),
+            Type::Grass => write!(f, "{}", get_localisation().types.grass),
+            Type::Psychic => write!(f, "{}", get_localisation().types.psychic),
+            Type::Ground => write!(f, "{}", get_localisation().types.ground),
+            Type::Rock => write!(f, "{}", get_localisation().types.rock),
+            Type::Bug => write!(f, "{}", get_localisation().types.bug),
+            Type::Steel => write!(f, "{}", get_localisation().types.steel),
+            Type::Dark => write!(f, "{}", get_localisation().types.dark),
+            Type::Ice => write!(f, "{}", get_localisation().types.ice),
+            Type::Dragon => write!(f, "{}", get_localisation().types.dragon),
+            Type::Fairy => write!(f, "{}", get_localisation().types.fairy),
+            Type::Flying => write!(f, "{}", get_localisation().types.flying),
+            Type::Ghost => write!(f, "{}", get_localisation().types.ghost),
+            Type::Fighting => write!(f, "{}", get_localisation().types.fighting),
+            Type::Poison => write!(f, "{}", get_localisation().types.poison),
+            Type::Electric => write!(f, "{}", get_localisation().types.electric),
         }
     }
 }
