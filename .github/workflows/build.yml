@@ -10,8 +10,8 @@ jobs:
         BUILD_TARGET: [release]
     steps:
       - uses: actions/checkout@v4
-      - name: Install required packages
-        run: git clone https://mpr.makedeb.org/just; cd just; makedeb -si
+      - name: Install just
+        run: mkdir -p ~/bin; curl --proto '=https' --tlsv1.2 -sSf https://just.systems/install.sh | bash -s -- --tag 1.40.0 --to ~/bin; export PATH="$PATH:$HOME/bin"
       - name: Check just works
         run: just
       - name: Install cross.rs
