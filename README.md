@@ -1,5 +1,5 @@
 # TheJointPokemonProject
-- A fan-made pokemon fangame, made by 3 people.
+- A fan-made pokemon fangame, made by a small group of people.
 - Written in Rust, compilable for the following targets:
   - x86_64-pc-windows-gnu
   - aarch64-pc-windows-msvc
@@ -8,8 +8,12 @@
   - x86_64-apple-darwin
   - aarch64-apple-darwin
 
+> [!WARNING]
+> I am learning Rust alongside the development of this project.
+> If you see any abnormalities, or just bad code / practices, feel free to open an issue or pr, and correct me!
+
 ## compile instructions
-##### this has only really been tested on unix-based operating systems. for NT-based (windows), you're on your own.
+##### (note: this has only really been tested on unix-based operating systems. for NT-based (windows), you're on your own.)
 1. Requirements
    - [Rust (Rustup)](https://rustup.rs/)
 2. Compilation
@@ -20,7 +24,7 @@
    - You can run via `./target/release/tjpp` on unix, `.\target\release\tjpp` on nt (windows)
 
 ## cross compilation instructions
-##### this has not been properly tested.
+##### (note: this has not been properly tested.)
 1. Requirements
    - [just](https://github.com/casey/just)
    - [Rust](https://rustup.rs/) (Rustup)
