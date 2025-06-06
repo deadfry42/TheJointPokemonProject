@@ -126,14 +126,15 @@ pub fn calculate_battle_xp_gain(
 ) -> u32 {
     // gen 7 onwards xp formula
     let s: f64 = 1.0; // 1 when participated in battle, 2 if exp. share is enabled but didnt participate
-    let trainer = recipient_trainer
-        .as_any()
-        .downcast_ref::<BattleTrainer>()
-        .unwrap();
-    let t: f64 = if trainer.ot.eq(recipient.ot.as_ref().unwrap()) {
+    let trainer = recipient_trainer.as_any().downcast_ref::<BattleTrainer>();
+    let t: f64 = if trainer.is_none() {
         1.0_f64
     } else {
-        1.5_f64
+        if trainer.unwrap().ot.eq(recipient.ot.as_ref().unwrap()) {
+            1.0_f64
+        } else {
+            1.5_f64
+        }
     };
     let e: f64 = if recipient.is_holding(Item::LuckyEgg) {
         1.5_f64
