@@ -8,11 +8,11 @@ jobs:
     strategy:
       matrix:
         BUILD_TARGET: [release]
-    outputs:
-      release_built: ${{ steps.set-output.outputs.release_built }}
     steps:
       - uses: actions/checkout@v4
-      - name: Build binaries in "${{ matrix.BUILD_TARGET }}" mode
-        run: cargo build --profile ${{ matrix.BUILD_TARGET }}
-      - name: Run tests in "${{ matrix.BUILD_TARGET }}" mode
-        run: cargo test --profile ${{ matrix.BUILD_TARGET }}
+      - name: Install required packages
+        run: sudo apt install just; just install_cross
+      - name: Build linux x86_64 with just
+        run: just build
+      - name: Build windows x86_64 with just
+        run: just windows
