@@ -29,7 +29,7 @@ jobs:
           name: tjpp-linux-x86_64
           path: |
             target/release/tjpp
-      - name: Upload linux-x86_64
+      - name: Upload linux-aarch64
         uses: actions/upload-artifact@v4
         with:
           name: tjpp-linux-aarch64

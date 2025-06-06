@@ -159,7 +159,8 @@ cr_linux:
 # build linux aarch64 via cross.rs
 [group('cross.rs options')]
 cr_linux_aarch64:
-    CROSS_CONTAINER_ENGINE=podman cross build -r --target=aarch64-unknown-linux-gnu
+    # CROSS_CONTAINER_ENGINE=podman cross build -r --target=aarch64-unknown-linux-gnu
+    cross build -r --target=aarch64-unknown-linux-gnu
 
 # build macos via cross.rs, requires custom image
 [group('cross.rs options')]
