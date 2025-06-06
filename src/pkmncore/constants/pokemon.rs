@@ -1,4 +1,6 @@
 use crate::pkmncore::constants::enums::*;
+use crate::pkmncore::constants::moves::Move;
+use crate::pkmncore::moves::LevelUpMove;
 use crate::pkmncore::pokemon::*;
 
 use super::abilities::Ability;
@@ -61,6 +63,11 @@ impl PokemonType for Pokemon {
                     egg_group1: EggGroup::Grass,
                     egg_group2: Some(EggGroup::Monster),
                 },
+                learned_moves: vec![Box::new(LevelUpMove {
+                    base: Move::Tackle,
+                    level: 1,
+                })],
+                tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
                 catch_rate: 45,
@@ -106,6 +113,11 @@ impl PokemonType for Pokemon {
                     egg_group1: EggGroup::Grass,
                     egg_group2: Some(EggGroup::Monster),
                 },
+                learned_moves: vec![Box::new(LevelUpMove {
+                    base: Move::Tackle,
+                    level: 1,
+                })],
+                tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
                 catch_rate: 45,
@@ -151,6 +163,11 @@ impl PokemonType for Pokemon {
                     egg_group1: EggGroup::Grass,
                     egg_group2: Some(EggGroup::Monster),
                 },
+                learned_moves: vec![Box::new(LevelUpMove {
+                    base: Move::Tackle,
+                    level: 1,
+                })],
+                tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
                 catch_rate: 45,
@@ -200,6 +217,8 @@ impl PokemonType for Pokemon {
                     item: Item::LuckyEgg,
                     chance: 0.5,
                 }]),
+                learned_moves: vec![],
+                tm_moves: vec![],
                 levelling_curve: LevellingCurve::MediumFast,
                 catch_rate: 255,
                 base_friendship: 50,

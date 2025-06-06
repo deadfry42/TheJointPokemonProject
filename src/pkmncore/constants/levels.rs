@@ -4,10 +4,7 @@ use super::{
 };
 use crate::pkmncore::battle::battle::*;
 use crate::pkmncore::battle::pokemon::*;
-use std::{
-    any::Any,
-    fmt::{self},
-};
+use std::fmt::{self};
 
 pub trait LevellingCurveCalc {
     fn levels_to_min_exp(&self, levels: i8) -> u32;
@@ -129,11 +126,11 @@ pub fn calculate_battle_xp_gain(
 ) -> u32 {
     // gen 7 onwards xp formula
     let s: f64 = 1.0; // 1 when participated in battle, 2 if exp. share is enabled but didnt participate
-    let t: f64 = if recipient_trainer
-        .trainer
-        .info
-        .eq(recipient.ot.as_ref().unwrap())
-    {
+    let trainer = recipient_trainer
+        .as_any()
+        .downcast_ref::<BattleTrainer>()
+        .unwrap();
+    let t: f64 = if trainer.ot.eq(recipient.ot.as_ref().unwrap()) {
         1.0_f64
     } else {
         1.5_f64

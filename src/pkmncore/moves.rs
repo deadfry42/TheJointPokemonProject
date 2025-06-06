@@ -22,6 +22,31 @@ pub struct MoveData {
     pub pp_ups_used: i8,
 }
 
+pub trait LearntMove {
+    fn get_move_type(&self) -> Move;
+}
+
+pub struct LevelUpMove {
+    pub base: Move,
+    pub level: i8,
+}
+
+pub struct EvolveMove {
+    pub base: Move,
+}
+
+impl LearntMove for LevelUpMove {
+    fn get_move_type(&self) -> Move {
+        self.base
+    }
+}
+
+impl LearntMove for EvolveMove {
+    fn get_move_type(&self) -> Move {
+        self.base
+    }
+}
+
 // pub trait MoveEffect<'a> {
 //     fn get_target(&self) -> &'a BattleSideMember<'a>;
 // }

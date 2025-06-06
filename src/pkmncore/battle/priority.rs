@@ -63,23 +63,6 @@ impl Add for MovePriority {
 
 impl fmt::Display for MovePriority {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            MovePriority::Switching => write!(f, "127"),
-            MovePriority::Item => write!(f, "126"),
-            MovePriority::QuickClaw => write!(f, "120"),
-            MovePriority::Bracket5 => write!(f, "5"),
-            MovePriority::Bracket4 => write!(f, "4"),
-            MovePriority::Bracket3 => write!(f, "3"),
-            MovePriority::Bracket2 => write!(f, "2"),
-            MovePriority::Bracket1 => write!(f, "1"),
-            MovePriority::Neutral => write!(f, "0"),
-            MovePriority::Bracket_1 => write!(f, "-1"),
-            MovePriority::Bracket_2 => write!(f, "-2"),
-            MovePriority::Bracket_3 => write!(f, "-3"),
-            MovePriority::Bracket_4 => write!(f, "-4"),
-            MovePriority::Bracket_5 => write!(f, "-5"),
-            MovePriority::Bracket_6 => write!(f, "-6"),
-            MovePriority::Bracket_7 => write!(f, "-7"),
-        }
+        write!(f, "{}", MovePriority::get_numberic_value(self))
     }
 }

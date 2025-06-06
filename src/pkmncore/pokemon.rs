@@ -1,3 +1,5 @@
+use crate::pkmncore::{constants::moves::Move, moves::LearntMove};
+
 use super::{
     constants::{
         abilities::*, enums::*, items::*, levels::*, location::GameLocation, natures::*,
@@ -23,6 +25,8 @@ pub struct PokemonBase {
     pub base_exp: u32,
     pub ev_yield: EVs,
     pub held_items: Option<Vec<PokemonHeldItem>>,
+    pub tm_moves: Vec<Move>,
+    pub learned_moves: Vec<Box<dyn LearntMove>>,
 }
 
 #[allow(dead_code)]

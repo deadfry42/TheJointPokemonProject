@@ -7,10 +7,8 @@ use pkmncore::{
 };
 use utils::hex;
 
-use crate::pkmncore::constants::priority::MovePriority;
-
-mod pkmncore;
-mod utils;
+pub mod pkmncore;
+pub mod utils;
 
 #[allow(dead_code)]
 const GAME_VERSION: &'static str = "v0.0-beta";

@@ -1,4 +1,5 @@
 use crate::pkmncore::trainer::OTInformation;
+use std::any::Any;
 
 use super::pokemon::*;
 use std::ops::Deref;
@@ -18,6 +19,7 @@ pub trait BattleTrainerType {
     fn get_sent_out_index(&self) -> &usize;
     fn set_sent_out_index(&mut self, index: usize);
     fn get_available_indexes(&self) -> &Vec<usize>;
+    fn as_any(&self) -> &dyn Any;
 }
 
 #[allow(dead_code)]
@@ -61,10 +63,10 @@ impl BattleSide {
     }
 }
 
-pub struct BattleTrainer<'a> {
+pub struct BattleTrainer {
     pub currently_sent_out: usize,
     pub available_indexes: Vec<usize>,
-    pub ot: &'a OTInformation,
+    pub ot: OTInformation,
 }
 
 pub struct BattleWildPokemon {
@@ -88,9 +90,13 @@ impl BattleTrainerType for BattleWildPokemon {
     fn get_available_indexes(&self) -> &Vec<usize> {
         &self.available_indexes
     }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
 }
 
-impl<'a> BattleTrainerType for BattleTrainer<'a> {
+impl BattleTrainerType for BattleTrainer {
     fn get_sent_out_index(&self) -> &usize {
         &self.currently_sent_out
     }
@@ -106,11 +112,16 @@ impl<'a> BattleTrainerType for BattleTrainer<'a> {
     fn get_available_indexes(&self) -> &Vec<usize> {
         &self.available_indexes
     }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
 }
 
-impl<'a> BattleTrainer<'a> {
+#[allow(dead_code)]
+impl BattleTrainer {
     fn get_ot(&self) -> &OTInformation {
-        self.ot
+        &self.ot
     }
 }
 
