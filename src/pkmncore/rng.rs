@@ -49,10 +49,10 @@ pub fn determine_ability(personality: &u32, pkmn: &PokemonBase) -> Ability {
     let ability2: &Option<Ability> = &pkmn.abilities.ability2;
 
     if ability2.is_none() {
-        ability1.clone()
+        *ability1
     } else {
         if ((personality / 65536) % 2) == 0 {
-            ability1.clone()
+            *ability1
         } else {
             *ability2.as_ref().unwrap()
         }
