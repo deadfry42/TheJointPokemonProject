@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install required packages
-        run: sudo apt install just
+        run: git clone https://mpr.makedeb.org/just; cd just; makedeb -si
       - name: Check just works
         run: just
       - name: Install cross.rs
