@@ -1,6 +1,6 @@
 use super::{
     items::Item,
-    pokemon::{EvolutionByLevel, Pokemon, PokemonType},
+    pokemon::{Pokemon, PokemonType},
 };
 use crate::pkmncore::battle::battle::*;
 use crate::pkmncore::battle::pokemon::*;

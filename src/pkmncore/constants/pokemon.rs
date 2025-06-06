@@ -1,5 +1,6 @@
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::moves::Move;
+use crate::pkmncore::evolution::*;
 use crate::pkmncore::moves::LevelUpMove;
 use crate::pkmncore::pokemon::*;
 
@@ -12,6 +13,7 @@ use super::typing::*;
 pub trait PokemonType {
     fn get_base(&self) -> PokemonBase;
     fn get_base_stat(&self, stat: &Stat) -> i16;
+    fn get_evolution_level(&self) -> Option<i8>;
 }
 
 #[allow(dead_code)]
@@ -67,6 +69,10 @@ impl PokemonType for Pokemon {
                     base: Move::Tackle,
                     level: 1,
                 })],
+                evolution: Some(Box::new(LevelUpEvolution {
+                    evolution: Pokemon::Ivysaur,
+                    level: 16,
+                })),
                 tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
@@ -117,6 +123,10 @@ impl PokemonType for Pokemon {
                     base: Move::Tackle,
                     level: 1,
                 })],
+                evolution: Some(Box::new(LevelUpEvolution {
+                    evolution: Pokemon::Venusaur,
+                    level: 32,
+                })),
                 tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
@@ -167,6 +177,7 @@ impl PokemonType for Pokemon {
                     base: Move::Tackle,
                     level: 1,
                 })],
+                evolution: None,
                 tm_moves: vec![],
                 held_items: None,
                 levelling_curve: LevellingCurve::MediumSlow,
@@ -217,6 +228,7 @@ impl PokemonType for Pokemon {
                     item: Item::LuckyEgg,
                     chance: 0.5,
                 }]),
+                evolution: None,
                 learned_moves: vec![],
                 tm_moves: vec![],
                 levelling_curve: LevellingCurve::MediumFast,
@@ -239,81 +251,23 @@ impl PokemonType for Pokemon {
             Stat::SpecialDefence => self.get_base().base_stats.spdef,
         }
     }
-}
-
-#[allow(dead_code)]
-pub trait EvolutionByLevel {
-    fn get_evolution(&self) -> Option<Pokemon>;
-    fn get_evolution_level(&self) -> Option<i8>;
-}
-
-#[allow(dead_code)]
-pub trait EvolutionByItem {
-    fn get_evolution(&self) -> Option<Pokemon>;
-    fn get_evolution_item(&self) -> Option<Item>;
-}
-
-#[allow(dead_code)]
-pub trait EvolutionByTrade {
-    fn get_evolution(&self) -> Option<Pokemon>;
-}
-
-#[allow(dead_code)]
-pub trait EvolutionByTradeWithItem {
-    fn get_evolution(&self) -> Option<Pokemon>;
-    fn get_evolution_item(&self) -> Option<Item>;
-}
-
-impl EvolutionByLevel for Pokemon {
-    fn get_evolution(&self) -> Option<Pokemon> {
-        match self {
-            Pokemon::Bulbasaur => Some(Pokemon::Ivysaur),
-            Pokemon::Ivysaur => Some(Pokemon::Venusaur),
-            _ => None,
-        }
-    }
 
     fn get_evolution_level(&self) -> Option<i8> {
-        match self {
-            Pokemon::Bulbasaur => Some(16),
-            Pokemon::Ivysaur => Some(32),
-            _ => None,
-        }
-    }
-}
+        let evo_opt: Option<Box<dyn Evolution>> = Pokemon::get_base(self).evolution;
+        if evo_opt.is_none() {
+            return None;
+        } else {
+            let evo_potential: Option<&LevelUpEvolution> = evo_opt
+                .as_ref()
+                .unwrap()
+                .as_any()
+                .downcast_ref::<LevelUpEvolution>();
 
-impl EvolutionByItem for Pokemon {
-    fn get_evolution(&self) -> Option<Pokemon> {
-        match self {
-            _ => None,
-        }
-    }
-
-    fn get_evolution_item(&self) -> Option<Item> {
-        match self {
-            _ => None,
-        }
-    }
-}
-
-impl EvolutionByTrade for Pokemon {
-    fn get_evolution(&self) -> Option<Pokemon> {
-        match self {
-            _ => None,
-        }
-    }
-}
-
-impl EvolutionByTradeWithItem for Pokemon {
-    fn get_evolution(&self) -> Option<Pokemon> {
-        match self {
-            _ => None,
-        }
-    }
-
-    fn get_evolution_item(&self) -> Option<Item> {
-        match self {
-            _ => None,
+            if evo_potential.is_none() {
+                return None;
+            } else {
+                Some(evo_potential.unwrap().get_level())
+            }
         }
     }
 }

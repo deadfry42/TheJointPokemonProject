@@ -34,7 +34,7 @@ fn main() {
         party: [None, None, None, None, None, None],
     };
 
-    let wooper = generate_wild_pokemon(Pokemon::Wooper, 69, &plr);
+    let wooper = generate_wild_pokemon(Pokemon::Ivysaur, 69, &plr);
 
     println!("health evs: {}", wooper.get_ev(&Stat::Health));
     println!("health ivs: {}", wooper.get_iv(&Stat::Health));
@@ -67,6 +67,8 @@ fn main() {
     println!("nature: {}", wooper.nature);
     println!("shiny: {}", wooper.shiny);
     println!("ability: {}", wooper.ability);
+
+    println!("evolevel: {}", wooper.base.get_evolution_level().unwrap());
 
     println!("moves: ");
     for item in wooper.moves.into_iter().enumerate() {
