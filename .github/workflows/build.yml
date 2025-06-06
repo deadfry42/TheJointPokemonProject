@@ -19,17 +19,17 @@ jobs:
         run: just install_cross
       - name: Build linux x86_64 with just
         run: just build
-      - name: Build windows x86_64 with just
-        run: just cc_windows # use cc_windows cuz cross fails on windows for some reason
+      # - name: Build windows x86_64 with just
+      #   run: just cc_windows # use cc_windows cuz cross fails on windows for some reason
       - name: Upload linux-x86_64
         uses: actions/upload-artifact@v4
         with:
           name: tjpp-linux-x86_64
           path: |
             target/release/tjpp
-      - name: Upload windows-x86_64
-        uses: actions/upload-artifact@v4
-        with:
-          name: tjpp-windows-x86_64.exe
-          path: |
-            target/x86_64-pc-windows-gnu/release/tjpp.exe
+      # - name: Upload windows-x86_64
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: tjpp-windows-x86_64.exe
+      #     path: |
+      #       target/x86_64-pc-windows-gnu/release/tjpp.exe
