@@ -22,6 +22,13 @@ pub struct MoveData {
     pub pp_ups_used: i8,
 }
 
+impl MoveData {
+    pub fn get_max_pp(&self) -> i8 {
+        (self.base.get_base().move_pp as f64 * (1.0_f64 + (self.pp_ups_used as f64 / 5.0_f64)))
+            as i8
+    }
+}
+
 pub trait LearntMove {
     fn get_move_type(&self) -> Move;
 }

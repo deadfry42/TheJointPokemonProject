@@ -7,6 +7,7 @@ use pkmncore::{
 };
 use utils::hex;
 
+pub mod i18n;
 pub mod pkmncore;
 pub mod utils;
 
@@ -73,11 +74,12 @@ fn main() {
     println!("moves: ");
     for item in wooper.moves.into_iter().enumerate() {
         if item.1.is_some() {
+            let mut move_data = item.1.as_ref().unwrap();
             println!(
                 "   {} : {}/{}",
-                item.1.as_ref().unwrap().base.get_base().name,
-                item.1.as_ref().unwrap().pp,
-                item.1.as_ref().unwrap().base.get_base().move_pp
+                move_data.base.get_base().name,
+                move_data.pp,
+                move_data.get_max_pp()
             );
         } else {
             println!("   -");

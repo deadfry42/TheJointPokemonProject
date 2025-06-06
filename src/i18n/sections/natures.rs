@@ -1,0 +1,31 @@
+pub struct NatureTranslationData {
+    pub hardy: NatureI18n,
+    pub lonely: NatureI18n,
+    pub brave: NatureI18n,
+    pub adamant: NatureI18n,
+    pub naughty: NatureI18n,
+    pub bold: NatureI18n,
+    pub docile: NatureI18n,
+    pub relaxed: NatureI18n,
+    pub impish: NatureI18n,
+    pub lax: NatureI18n,
+    pub timid: NatureI18n,
+    pub hasty: NatureI18n,
+    pub serious: NatureI18n,
+    pub jolly: NatureI18n,
+    pub naive: NatureI18n,
+    pub modest: NatureI18n,
+    pub mild: NatureI18n,
+    pub quiet: NatureI18n,
+    pub bashful: NatureI18n,
+    pub rash: NatureI18n,
+    pub calm: NatureI18n,
+    pub gentle: NatureI18n,
+    pub sassy: NatureI18n,
+    pub careful: NatureI18n,
+    pub quirky: NatureI18n,
+}
+
+pub struct NatureI18n {
+    pub name: &'static str,
+}
