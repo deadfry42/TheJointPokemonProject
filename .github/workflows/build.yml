@@ -11,7 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Install required packages
-        run: sudo apt install just; just install_cross
+        run: sudo apt install just
+      - name: Check just works
+        run: just
+      - name: Install cross.rs
+        run: just install_cross
       - name: Build linux x86_64 with just
         run: just build
       - name: Build windows x86_64 with just
