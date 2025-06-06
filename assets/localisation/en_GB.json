@@ -1,0 +1,10 @@
+{
+  "name": "English (UK)",
+  "pokemon": {
+    "bulbasaur": {
+      "name": "Bulbasaur",
+      "species": "Seed",
+      "dex": "Test"
+    }
+  }
+}

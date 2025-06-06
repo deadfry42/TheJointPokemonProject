@@ -7,6 +7,10 @@ use pkmncore::{
 };
 use utils::hex;
 
+use crate::files::assets::{check_for_assets, get_asset};
+use crate::i18n::*;
+
+pub mod files;
 pub mod i18n;
 pub mod pkmncore;
 pub mod utils;
@@ -15,6 +19,17 @@ pub mod utils;
 const GAME_VERSION: &'static str = "v0.0-beta";
 
 fn main() {
+    check_for_assets();
+
+    load_localisation();
+
+    // let mut file: std::fs::File = get_asset("localisation/en_GB.json").unwrap();
+    // let mut data = String::new();
+    // file.read_to_string(&mut data).unwrap();
+
+    // let json = serde_json::from_str(&data).unwrap();
+    // println!("{}", json.find_path(&["Address", "Street"]).unwrap());
+
     println!(
         "Hello, world from {}! I was compiled on {}.",
         CURRENT_PLATFORM, COMPILED_ON

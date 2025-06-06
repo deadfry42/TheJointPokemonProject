@@ -1,5 +1,5 @@
 use crate::i18n::{
-    important::*,
+    localisation::*,
     sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
 };
 
