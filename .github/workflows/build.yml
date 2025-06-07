@@ -36,7 +36,7 @@ jobs:
           cargo clean
           just build
           cp target/release/tjpp builds/linux-x86_64
-          cp -r assets builds/linux-x64_64
+          cp -r assets builds/linux-x86_64
       - name: Upload linux x86_64
         uses: actions/upload-artifact@v4
         with:
