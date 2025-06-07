@@ -2,8 +2,8 @@ use super::{
     items::Item,
     pokemon::{Pokemon, PokemonType},
 };
+use crate::PKMNCore::battle::battle::*;
 use crate::PKMNCore::battle::pokemon::*;
-use crate::PKMNCore::{battle::battle::*, constants};
 use std::fmt::{self};
 
 pub trait LevellingCurveCalc {

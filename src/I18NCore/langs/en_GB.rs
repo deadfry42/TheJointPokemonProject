@@ -6,7 +6,7 @@ use crate::I18NCore::{
 pub const LOCALISATION: Localisation = Localisation {
     code_name: SingleValued { value: "en_GB" },
     name: SingleValued {
-        value: "English (UK)",
+        value: "English (UK, built-in)",
     },
 
     moves: MoveTranslationData {
