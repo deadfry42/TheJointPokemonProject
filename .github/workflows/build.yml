@@ -63,7 +63,7 @@ jobs:
         run: |
           cargo clean
           just windows
-          cp target/x86_64-pc-windows-gnu/release/tjpp builds/windows_x86_64
+          cp target/x86_64-pc-windows-gnu/release/tjpp.exe builds/windows_x86_64
           cp -r assets builds/windows_x86_64
       - name: Upload windows x86_64
         uses: actions/upload-artifact@v4
