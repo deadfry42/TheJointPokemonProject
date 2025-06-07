@@ -49,7 +49,7 @@ jobs:
         run: |
           cargo clean
           just linux_aarch64
-          cp target/release/tjpp builds/linux-aarch64
+          cp target/aarch64-unknown-linux-gnu/release/tjpp builds/linux-aarch64
           cp -r assets builds/linux-aarch64
       - name: Upload linux aarch64
         uses: actions/upload-artifact@v4
@@ -63,7 +63,7 @@ jobs:
         run: |
           cargo clean
           just windows
-          cp target/release/tjpp builds/windows_x86_64
+          cp target/x86_64-pc-windows-gnu/release/tjpp builds/windows_x86_64
           cp -r assets builds/windows_x86_64
       - name: Upload windows x86_64
         uses: actions/upload-artifact@v4
