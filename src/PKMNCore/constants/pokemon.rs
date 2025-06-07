@@ -256,7 +256,7 @@ impl PokemonType for Pokemon {
     fn get_evolution_level(&self) -> Option<i8> {
         let evo_opt: Option<Box<dyn Evolution>> = Pokemon::get_base(self).evolution;
         if evo_opt.is_none() {
-            return None;
+            None
         } else {
             let evo_potential: Option<&LevelUpEvolution> = evo_opt
                 .as_ref()
@@ -264,10 +264,10 @@ impl PokemonType for Pokemon {
                 .as_any()
                 .downcast_ref::<LevelUpEvolution>();
 
-            if evo_potential.is_none() {
-                return None;
+            if let Some(value) = evo_potential {
+                Some(value.get_level())
             } else {
-                Some(evo_potential.unwrap().get_level())
+                None
             }
         }
     }

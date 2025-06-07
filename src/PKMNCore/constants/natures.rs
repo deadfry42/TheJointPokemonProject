@@ -149,127 +149,127 @@ impl fmt::Display for Nature {
             Nature::Hardy => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/hardy").convert_to_string()
+                TranslationKey::new("nature/hardy").convert_to_string()
             ),
             Nature::Lonely => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/lonely").convert_to_string()
+                TranslationKey::new("nature/lonely").convert_to_string()
             ),
             Nature::Brave => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/brave").convert_to_string()
+                TranslationKey::new("nature/brave").convert_to_string()
             ),
             Nature::Adamant => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/adamant").convert_to_string()
+                TranslationKey::new("nature/adamant").convert_to_string()
             ),
             Nature::Naughty => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/naughty").convert_to_string()
+                TranslationKey::new("nature/naughty").convert_to_string()
             ),
             Nature::Bold => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/bold").convert_to_string()
+                TranslationKey::new("nature/bold").convert_to_string()
             ),
             Nature::Docile => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/docile").convert_to_string()
+                TranslationKey::new("nature/docile").convert_to_string()
             ),
             Nature::Relaxed => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/relaxed").convert_to_string()
+                TranslationKey::new("nature/relaxed").convert_to_string()
             ),
             Nature::Impish => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/impish").convert_to_string()
+                TranslationKey::new("nature/impish").convert_to_string()
             ),
             Nature::Lax => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/lax").convert_to_string()
+                TranslationKey::new("nature/lax").convert_to_string()
             ),
             Nature::Timid => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/timid").convert_to_string()
+                TranslationKey::new("nature/timid").convert_to_string()
             ),
             Nature::Hasty => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/hasty").convert_to_string()
+                TranslationKey::new("nature/hasty").convert_to_string()
             ),
             Nature::Serious => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/serious").convert_to_string()
+                TranslationKey::new("nature/serious").convert_to_string()
             ),
             Nature::Jolly => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/jolly").convert_to_string()
+                TranslationKey::new("nature/jolly").convert_to_string()
             ),
             Nature::Naive => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/naive").convert_to_string()
+                TranslationKey::new("nature/naive").convert_to_string()
             ),
             Nature::Modest => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/modest").convert_to_string()
+                TranslationKey::new("nature/modest").convert_to_string()
             ),
             Nature::Mild => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/mild").convert_to_string()
+                TranslationKey::new("nature/mild").convert_to_string()
             ),
             Nature::Quiet => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/quiet").convert_to_string()
+                TranslationKey::new("nature/quiet").convert_to_string()
             ),
             Nature::Bashful => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/bashful").convert_to_string()
+                TranslationKey::new("nature/bashful").convert_to_string()
             ),
             Nature::Rash => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/rash").convert_to_string()
+                TranslationKey::new("nature/rash").convert_to_string()
             ),
             Nature::Calm => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/calm").convert_to_string()
+                TranslationKey::new("nature/calm").convert_to_string()
             ),
             Nature::Gentle => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/gentle").convert_to_string()
+                TranslationKey::new("nature/gentle").convert_to_string()
             ),
             Nature::Sassy => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/sassy").convert_to_string()
+                TranslationKey::new("nature/sassy").convert_to_string()
             ),
             Nature::Careful => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/careful").convert_to_string()
+                TranslationKey::new("nature/careful").convert_to_string()
             ),
             Nature::Quirky => write!(
                 f,
                 "{}",
-                TranslationKey::new("natures/quirky").convert_to_string()
+                TranslationKey::new("nature/quirky").convert_to_string()
             ),
         }
     }

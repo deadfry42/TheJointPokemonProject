@@ -4,8 +4,10 @@ use crate::I18NCore::{
 };
 
 pub const LOCALISATION: Localisation = Localisation {
-    code_name: "en_GB",
-    name: "English (UK)",
+    code_name: SingleValued { value: "en_GB" },
+    name: SingleValued {
+        value: "English (UK)",
+    },
 
     moves: MoveTranslationData {
         tackle: MoveI18n {

@@ -6,11 +6,11 @@ use crate::I18NCore::sections::{
     natures::NatureTranslationData,
     pokemon::PokemonTranslationData,
 };
-use std::ops::Index;
+use std::any::Any;
 
 pub struct Localisation {
-    pub code_name: &'static str,
-    pub name: &'static str,
+    pub code_name: SingleValued,
+    pub name: SingleValued,
 
     pub moves: MoveTranslationData,
     pub pokemon: PokemonTranslationData,
@@ -23,18 +23,55 @@ pub struct Localisation {
     pub other_langs: OtherLanguageData,
 }
 
-// impl Index<&'static str> for Localisation {
-//     type Output = Box<dyn TranslationData>;
+#[allow(dead_code)]
+impl Localisation {
+    pub fn index(&self, path: &'static str) -> Box<&dyn SectionData> {
+        match path {
+            "code_name" => Box::new(&self.code_name),
+            "name" => Box::new(&self.name),
+            "moves" => Box::new(&self.moves),
+            "nature" => Box::new(&self.nature),
+            "abilities" => Box::new(&self.abilities),
+            "gender" => Box::new(&self.gender),
+            "items" => Box::new(&self.items),
+            "stats" => Box::new(&self.stats),
+            "types" => Box::new(&self.types),
+            "other_langs" => Box::new(&self.other_langs),
+            _ => Box::new(&self.pokemon),
+        }
+    }
+}
 
-//     fn index(&self, path: &'static str) -> &Self::Output {
-//         match path {
-//             "moves" => &Box::new(self.moves),
-//             _ => &Box::new(self.pokemon),
-//         }
-//     }
-// }
+pub struct SingleValued {
+    pub value: &'static str,
+}
 
-pub trait TranslationData {}
+impl SingleValued {
+    pub fn new(value: &'static str) -> SingleValued {
+        SingleValued { value: value }
+    }
+}
+#[allow(unused_variables)]
+impl I18NData for SingleValued {
+    fn index(&self, path: &'static str) -> &'static str {
+        &self.value
+    }
+}
+impl SectionData for SingleValued {
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
+}
+
+pub trait TranslationData {
+    fn index(&self, path: &'static str) -> Box<&dyn SectionData>;
+}
+pub trait I18NData {
+    fn index(&self, path: &'static str) -> &'static str;
+}
+pub trait SectionData {
+    fn as_any(&self) -> &dyn Any;
+}
 
 pub struct AvailableLocales {
     pub locales: Vec<Localisation>,

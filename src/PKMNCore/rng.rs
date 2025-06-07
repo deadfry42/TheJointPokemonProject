@@ -27,7 +27,7 @@ pub fn determine_nature(personality: &u32) -> Nature {
 }
 
 #[allow(dead_code)]
-pub fn determine_held_item(items: &Vec<PokemonHeldItem>) -> Option<Item> {
+pub fn determine_held_item(items: &[PokemonHeldItem]) -> Option<Item> {
     let chance: f64 = (rand::rng().random_range(0..1000) as f64) / 1000.0; // 0..1
     let mut stack: f64 = 0.0;
 

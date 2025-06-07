@@ -2,8 +2,8 @@ use super::{
     items::Item,
     pokemon::{Pokemon, PokemonType},
 };
-use crate::PKMNCore::battle::battle::*;
 use crate::PKMNCore::battle::pokemon::*;
+use crate::PKMNCore::{battle::battle::*, constants};
 use std::fmt::{self};
 
 pub trait LevellingCurveCalc {
@@ -66,15 +66,15 @@ impl LevellingCurveCalc for LevellingCurve {
                 i if i < 50 => {
                     ((float_lvl.powf(3.0_f64) * (100.0_f64 - float_lvl)) / 50.0_f64) as u32
                 }
-                i if 50 <= i && i < 68 => {
+                i if (50..68).contains(&i) => {
                     ((float_lvl.powf(3.0_f64) * (150.0_f64 - float_lvl)) / 100.0_f64) as u32
                 }
-                i if 68 <= i && levels < 98 => {
+                i if (68..98).contains(&i) => {
                     ((float_lvl.powf(3.0_f64)
                         * ((1911.0_f64 - (10.0_f64 * float_lvl)) / 3.0_f64).floor())
                         / 500.0_f64) as u32
                 }
-                i if 98 <= i && levels <= 100 => {
+                i if (98..=100).contains(&i) => {
                     // bulbapedia is wrong here - it said n < 100 not n <= 100 lol
                     ((float_lvl.powf(3.0_f64) * (160.0_f64 - float_lvl)) / 100.0_f64) as u32
                 }
@@ -86,10 +86,14 @@ impl LevellingCurveCalc for LevellingCurve {
                         * (((float_lvl + 1.0_f64) / 3.0_f64).floor() + 24.0_f64)
                         / 50.0_f64) as u32
                 }
-                i if 15 <= i && i < 36 => {
+                i if (15..36).contains(&i) => {
                     (float_lvl.powf(3.0_f64) * (float_lvl + 14.0_f64) / 50.0_f64) as u32
                 }
-                i if 36 <= i && i <= 100 => {
+                // i if 36 <= i && i <= 100 => {
+                //     (float_lvl.powf(3.0_f64) * ((float_lvl * 0.5_f64).floor() + 32.0_f64)
+                //         / 50.0_f64) as u32
+                // }
+                i if (36..=100).contains(&i) => {
                     (float_lvl.powf(3.0_f64) * ((float_lvl * 0.5_f64).floor() + 32.0_f64)
                         / 50.0_f64) as u32
                 }
@@ -127,15 +131,17 @@ pub fn calculate_battle_xp_gain(
     // gen 7 onwards xp formula
     let s: f64 = 1.0; // 1 when participated in battle, 2 if exp. share is enabled but didnt participate
     let trainer = recipient_trainer.as_any().downcast_ref::<BattleTrainer>();
-    let t: f64 = if trainer.is_none() {
-        1.0_f64
-    } else {
-        if trainer.unwrap().ot.eq(recipient.ot.as_ref().unwrap()) {
+
+    let t: f64 = if let Some(value) = trainer {
+        if value.ot.eq(recipient.ot.as_ref().unwrap()) {
             1.0_f64
         } else {
             1.5_f64
         }
+    } else {
+        1.0_f64
     };
+
     let e: f64 = if recipient.is_holding(Item::LuckyEgg) {
         1.5_f64
     } else {

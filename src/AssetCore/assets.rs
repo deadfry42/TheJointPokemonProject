@@ -5,7 +5,7 @@ use std::{
     path::PathBuf,
 };
 
-pub const ASSETS_PATH: &'static str = "./assets";
+pub const ASSETS_PATH: &str = "./assets";
 
 pub fn check_for_assets() -> bool {
     let assets_folder = get_assets_folder();
