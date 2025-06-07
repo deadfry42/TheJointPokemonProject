@@ -42,16 +42,18 @@ pub fn get_localisation() -> &'static localisation::Localisation {
     // TODO: Support changing localisation
     // langs::en_GB::LOCALISATION // base localisation
     //
-    let current: &mut Option<&Localisation> = Box::leak(Box::new(
-        AVAILABLE_LOCALES.lock().unwrap().get_active_locale(),
-    ));
-    if current.is_none() {
-        &langs::en_GB::LOCALISATION // return base localisation
-    } else {
-        current.unwrap()
-    }
+    // let current: &mut Option<&Localisation> = Box::leak(Box::new(
+    //     AVAILABLE_LOCALES.lock().unwrap().get_active_locale(),
+    // ));
+    // if current.is_none() {
+    //     &langs::en_GB::LOCALISATION // return base localisation
+    // } else {
+    //     current.unwrap()
+    // }
 
     // let boxed = Box::new(current.unwrap());
     // let a: &'static Localisation = Box::leak(boxed);
     // a
+
+    &langs::en_GB::LOCALISATION
 }
