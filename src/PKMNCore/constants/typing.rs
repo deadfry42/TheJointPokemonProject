@@ -1,6 +1,6 @@
 use std::fmt::{self};
 
-use crate::i18n::keys::TranslationKey;
+use crate::I18NCore::keys::TranslationKey;
 
 #[allow(dead_code)]
 pub trait Typing {

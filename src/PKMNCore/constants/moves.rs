@@ -1,7 +1,7 @@
 use super::{enums::*, typing::*};
-use crate::i18n::keys::TranslationKey;
-use crate::pkmncore::battle::priority::*;
-use crate::pkmncore::moves::*;
+use crate::I18NCore::keys::TranslationKey;
+use crate::PKMNCore::battle::priority::*;
+use crate::PKMNCore::moves::*;
 
 #[allow(dead_code)]
 pub trait MoveType {

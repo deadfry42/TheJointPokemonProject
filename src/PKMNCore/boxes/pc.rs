@@ -1,4 +1,4 @@
-use crate::pkmncore::{boxes::boxes::PCBox, pokemon::PokemonData};
+use crate::PKMNCore::{boxes::boxes::PCBox, pokemon::PokemonData};
 
 const PC_BOXES_COUNT: usize = 32;
 

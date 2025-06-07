@@ -1,4 +1,4 @@
-use crate::i18n::localisation::TranslationData;
+use crate::I18NCore::localisation::TranslationData;
 
 pub struct PokemonTranslationData {
     pub bulbasaur: PokemonI18n,

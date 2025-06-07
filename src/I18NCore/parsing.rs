@@ -1,4 +1,4 @@
-use crate::i18n::{langs, langs::json_generate::parse_json_files, localisation::*};
+use crate::I18NCore::{langs, langs::json_generate::parse_json_files, localisation::*};
 use std::io::Result;
 use std::sync::{LazyLock, Mutex};
 

@@ -1,5 +1,5 @@
-use crate::pkmncore::boxes::pc::*;
-use crate::pkmncore::constants::enums::*;
+use crate::PKMNCore::boxes::pc::*;
+use crate::PKMNCore::constants::enums::*;
 
 use super::pokemon::PokemonData;
 

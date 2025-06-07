@@ -1,5 +1,5 @@
 use super::constants::{enums::*, moves::*, typing::*};
-use crate::{i18n::keys::TranslationKey, pkmncore::battle::priority::*};
+use crate::{I18NCore::keys::TranslationKey, PKMNCore::battle::priority::*};
 
 #[allow(dead_code)]
 pub struct MoveBase {

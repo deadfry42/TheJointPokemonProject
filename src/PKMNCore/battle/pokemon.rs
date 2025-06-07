@@ -1,12 +1,12 @@
-use crate::pkmncore::constants::abilities::*;
-use crate::pkmncore::constants::enums::*;
-use crate::pkmncore::constants::items::*;
-use crate::pkmncore::constants::levels::*;
-use crate::pkmncore::constants::natures::*;
-use crate::pkmncore::constants::pokemon::*;
-use crate::pkmncore::moves::*;
-use crate::pkmncore::pokemon::*;
-use crate::pkmncore::trainer::*;
+use crate::PKMNCore::constants::abilities::*;
+use crate::PKMNCore::constants::enums::*;
+use crate::PKMNCore::constants::items::*;
+use crate::PKMNCore::constants::levels::*;
+use crate::PKMNCore::constants::natures::*;
+use crate::PKMNCore::constants::pokemon::*;
+use crate::PKMNCore::moves::*;
+use crate::PKMNCore::pokemon::*;
+use crate::PKMNCore::trainer::*;
 
 #[allow(dead_code)]
 pub struct BattlePokemon {

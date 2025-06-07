@@ -1,4 +1,4 @@
-use crate::i18n::keys::*;
+use crate::I18NCore::keys::*;
 use std::fmt::{self};
 
 #[allow(dead_code)]

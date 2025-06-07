@@ -1,4 +1,4 @@
-use crate::i18n::{
+use crate::I18NCore::{
     localisation::*,
     sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
 };

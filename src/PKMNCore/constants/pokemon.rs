@@ -1,9 +1,9 @@
-use crate::i18n::keys::TranslationKey;
-use crate::pkmncore::constants::enums::*;
-use crate::pkmncore::constants::moves::Move;
-use crate::pkmncore::evolution::*;
-use crate::pkmncore::moves::LevelUpMove;
-use crate::pkmncore::pokemon::*;
+use crate::I18NCore::keys::TranslationKey;
+use crate::PKMNCore::constants::enums::*;
+use crate::PKMNCore::constants::moves::Move;
+use crate::PKMNCore::evolution::*;
+use crate::PKMNCore::moves::LevelUpMove;
+use crate::PKMNCore::pokemon::*;
 
 use super::abilities::Ability;
 use super::items::Item;

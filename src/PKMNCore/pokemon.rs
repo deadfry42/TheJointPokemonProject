@@ -1,6 +1,6 @@
 use crate::{
-    i18n::keys::TranslationKey,
-    pkmncore::{constants::moves::Move, evolution::Evolution, moves::LearntMove},
+    I18NCore::keys::TranslationKey,
+    PKMNCore::{constants::moves::Move, evolution::Evolution, moves::LearntMove},
 };
 
 use super::{

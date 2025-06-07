@@ -1,4 +1,4 @@
-use crate::i18n::sections::{
+use crate::I18NCore::sections::{
     abilities::AbilityTranslationData,
     enums::{GenderTranslationData, OtherLanguageData, StatTranslationData, TypesTranslationData},
     items::ItemTranslationData,

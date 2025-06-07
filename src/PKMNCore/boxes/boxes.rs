@@ -1,4 +1,4 @@
-use crate::pkmncore::pokemon::PokemonData;
+use crate::PKMNCore::pokemon::PokemonData;
 
 use super::background::*;
 

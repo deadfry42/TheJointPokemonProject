@@ -1,7 +1,7 @@
 use super::battle::*;
 use super::priority::*;
-use crate::pkmncore::constants::moves::*;
-use crate::pkmncore::moves::*;
+use crate::PKMNCore::constants::moves::*;
+use crate::PKMNCore::moves::*;
 
 #[allow(dead_code)]
 pub trait BattleEvent {

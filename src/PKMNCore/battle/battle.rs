@@ -1,4 +1,4 @@
-use crate::pkmncore::trainer::OTInformation;
+use crate::PKMNCore::trainer::OTInformation;
 use std::any::Any;
 
 use super::pokemon::*;

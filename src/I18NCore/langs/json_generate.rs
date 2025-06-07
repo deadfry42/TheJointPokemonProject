@@ -1,11 +1,11 @@
 use crate::{
-    files::assets::get_asset_folder,
-    i18n::{
+    AssetCore::assets::get_asset_folder,
+    I18NCore::{
         langs::en_GB,
         localisation::*,
         sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
     },
-    utils::logger::Logger,
+    Utils::logger::Logger,
 };
 use serde_json::Value;
 use std::fs;
