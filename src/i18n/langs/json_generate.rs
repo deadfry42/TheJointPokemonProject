@@ -1,178 +1,199 @@
 use crate::{
     files::assets::get_asset_folder,
     i18n::{
+        langs::en_GB,
         localisation::*,
         sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
     },
+    utils::logger::Logger,
 };
 use serde_json::Value;
 use std::fs;
+use std::io::Result;
 
-pub fn get_json_value<'a>(json: &'a Value, path: &str) -> Option<&'a str> {
-    let mut split = path.split('/');
+pub fn parse_json_files() -> Result<Vec<Localisation>> {
+    let compatible_versions: Vec<i64> = vec![1];
+    let recommended_version: i64 = 1;
 
-    let mut itr = json;
-
-    for section in split {
-        itr = &itr[section]
-    }
-
-    let string = itr.as_str();
-    if string.is_none() {
-        return None;
-    }
-
-    Some(&string.unwrap()[..])
-}
-
-pub fn parse_json_files<'b>() -> std::io::Result<Vec<Localisation>> {
     let paths = get_asset_folder("localisation")?;
     let mut locales: Vec<Localisation> = vec![];
     for path in paths {
-        // println!("Name: {}", path.unwrap().path().display());
-        let data = fs::read_to_string(&path.unwrap().path()).unwrap();
-        let v: Value = serde_json::from_str(&data)?;
+        // println!("Name: {}", (&path).as_ref().unwrap().path().display());
+        let data: String = fs::read_to_string((&path).as_ref().unwrap().path()).unwrap();
+        let v: &'static mut Value = Box::leak(Box::new(serde_json::from_str::<Value>(&data)?));
 
-        locales.push(Localisation {
-            code_name: get_json_value(&v, "code_name").unwrap_or("Unknown"),
-            name: get_json_value(&v, "name").unwrap_or("Unknown"),
+        let code_name = &v["code_name"].as_str();
+        let name = &v["name"].as_str();
+        let file_ver = &v["version"].as_i64();
+
+        if code_name.is_none() || name.is_none() || file_ver.is_none() {
+            // ignore locale files without "name" and/or "code_name" values
+            Logger::warn(format!(
+                "Locale file {} is invalid, and will not be loaded!",
+                (&path).as_ref().unwrap().path().display()
+            ));
+            continue;
+        }
+
+        if compatible_versions.contains(&file_ver.unwrap()) {
+            if file_ver.unwrap() != recommended_version {
+                Logger::warn(format!(
+                    "Locale file {}'s version (v{}) is compatible, but out of date! Consider refactoring it!",
+                    (&path).as_ref().unwrap().path().display(),
+                    file_ver.unwrap()
+                ));
+            }
+        } else {
+            Logger::warn(format!(
+                "Locale file {}'s version (v{}) is incompatible with this version, and will not be loaded!",
+                (&path).as_ref().unwrap().path().display(),
+                file_ver.unwrap()
+            ));
+            continue;
+        }
+
+        let locale = Localisation {
+            code_name: code_name.unwrap(),
+            name: name.unwrap(),
 
             pokemon: PokemonTranslationData {
                 bulbasaur: PokemonI18n {
-                    name: get_json_value(&v, "pokemon/bulbasaur/name").unwrap_or("Bulbasaur"),
-                    dex: get_json_value(&v, "pokemon/bulbasaur/dex").unwrap_or("Unknown"),
-                    species: get_json_value(&v, "pokemon/bulbasaur/dex").unwrap_or("Seed"),
+                    name: &v["pokemon"]["bulbasaur"]["name"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.name),
+                    dex: &v["pokemon"]["bulbasaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.dex),
+                    species: &v["pokemon"]["bulbasaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.species),
                 },
                 ivysaur: PokemonI18n {
-                    name: get_json_value(&v, "pokemon/ivysaur/name").unwrap_or("Ivysaur"),
-                    dex: get_json_value(&v, "pokemon/ivysaur/dex").unwrap_or("Unknown"),
-                    species: get_json_value(&v, "pokemon/ivysaur/dex").unwrap_or("Seed"),
+                    name: &v["pokemon"]["ivysaur"]["name"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.name),
+                    dex: &v["pokemon"]["ivysaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.dex),
+                    species: &v["pokemon"]["ivysaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
                 venusaur: PokemonI18n {
-                    name: get_json_value(&v, "pokemon/venusaur/name").unwrap_or("Venusaur"),
-                    dex: get_json_value(&v, "pokemon/venusaur/dex").unwrap_or("Unknown"),
-                    species: get_json_value(&v, "pokemon/venusaur/dex").unwrap_or("Seed"),
+                    name: &v["pokemon"]["venusaur"]["name"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.name),
+                    dex: &v["pokemon"]["venusaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.dex),
+                    species: &v["pokemon"]["venusaur"]["dex"].as_str().unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
                 wooper: PokemonI18n {
-                    name: get_json_value(&v, "pokemon/wooper/name").unwrap_or("Wooper"),
-                    dex: get_json_value(&v, "pokemon/wooper/dex").unwrap_or("Unknown"),
-                    species: get_json_value(&v, "pokemon/wooper/dex").unwrap_or("Water Fish"),
+                    name: &v["pokemon"]["wooper"]["name"].as_str().unwrap_or("Wooper"),
+                    dex: &v["pokemon"]["wooper"]["dex"].as_str().unwrap_or("Unknown"),
+                    species: &v["pokemon"]["wooper"]["dex"].as_str().unwrap_or("Water Fish"),
                 },
             },
 
             moves: MoveTranslationData {
                 tackle: MoveI18n {
-                    name: get_json_value(&v, "moves/tackle/name").unwrap_or("Tackle"),
-                    desc: get_json_value(&v, "moves/tackle/desc").unwrap_or("A physical attack in which the user charges and slams into the target with its whole body."),
+                    name: &v["moves"]["tackle"]["name"].as_str().unwrap_or("Tackle"),
+                    desc: &v["moves"]["tackle"]["desc"].as_str().unwrap_or("A physical attack in which the user charges and slams into the target with its whole body."),
                 },
                 growl: MoveI18n {
-                    name: get_json_value(&v, "moves/growl/name").unwrap_or("Growl"),
-                    desc: get_json_value(&v, "moves/growl/desc").unwrap_or("The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats."),
+                    name: &v["moves"]["growl"]["name"].as_str().unwrap_or("Growl"),
+                    desc: &v["moves"]["growl"]["desc"].as_str().unwrap_or("The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats."),
                 },
             },
 
             nature: NatureTranslationData {
-                hardy: get_json_value(&v, "natures/hardy").unwrap_or("Hardy"),
-                lonely: get_json_value(&v, "natures/lonely").unwrap_or("Lonely"),
-                brave: get_json_value(&v, "natures/brave").unwrap_or("Brave"),
-                adamant: get_json_value(&v, "natures/adamant").unwrap_or("Adamant"),
-                naughty: get_json_value(&v, "natures/naughty").unwrap_or("Naughty"),
-                bold: get_json_value(&v, "natures/bold").unwrap_or("Bold"),
-                docile: get_json_value(&v, "natures/docile").unwrap_or("Docile"),
-                relaxed: get_json_value(&v, "natures/relaxed").unwrap_or("Relaxed"),
-                impish: get_json_value(&v, "natures/impish").unwrap_or("Impish"),
-                lax: get_json_value(&v, "natures/lax").unwrap_or("Lax"),
-                timid: get_json_value(&v, "natures/timid").unwrap_or("Timid"),
-                hasty: get_json_value(&v, "natures/hasty").unwrap_or("Hasty"),
-                serious: get_json_value(&v, "natures/serious").unwrap_or("Serious"),
-                jolly: get_json_value(&v, "natures/jolly").unwrap_or("Jolly"),
-                naive: get_json_value(&v, "natures/naive").unwrap_or("Naive"),
-                modest: get_json_value(&v, "natures/modest").unwrap_or("Modest"),
-                mild: get_json_value(&v, "natures/mild").unwrap_or("Mild"),
-                quiet: get_json_value(&v, "natures/quiet").unwrap_or("Quiet"),
-                bashful: get_json_value(&v, "natures/bashful").unwrap_or("Bashful"),
-                rash: get_json_value(&v, "natures/rash").unwrap_or("Rash"),
-                calm: get_json_value(&v, "natures/calm").unwrap_or("Calm"),
-                gentle: get_json_value(&v, "natures/gentle").unwrap_or("Gentle"),
-                sassy: get_json_value(&v, "natures/sassy").unwrap_or("Sassy"),
-                careful: get_json_value(&v, "natures/careful").unwrap_or("Careful"),
-                quirky: get_json_value(&v, "natures/quirky").unwrap_or("Quirky"),
+                hardy: &v["natures"]["hardy"].as_str().unwrap_or("Hardy"),
+                lonely: &v["natures"]["lonely"].as_str().unwrap_or("Lonely"),
+                brave: &v["natures"]["brave"].as_str().unwrap_or("Brave"),
+                adamant: &v["natures"]["adamant"].as_str().unwrap_or("Adamant"),
+                naughty: &v["natures"]["naughty"].as_str().unwrap_or("Naughty"),
+                bold: &v["natures"]["bold"].as_str().unwrap_or("Bold"),
+                docile: &v["natures"]["docile"].as_str().unwrap_or("Docile"),
+                relaxed: &v["natures"]["relaxed"].as_str().unwrap_or("Relaxed"),
+                impish: &v["natures"]["impish"].as_str().unwrap_or("Impish"),
+                lax: &v["natures"]["lax"].as_str().unwrap_or("Lax"),
+                timid: &v["natures"]["timid"].as_str().unwrap_or("Timid"),
+                hasty: &v["natures"]["hasty"].as_str().unwrap_or("Hasty"),
+                serious: &v["natures"]["serious"].as_str().unwrap_or("Serious"),
+                jolly: &v["natures"]["jolly"].as_str().unwrap_or("Jolly"),
+                naive: &v["natures"]["naive"].as_str().unwrap_or("Naive"),
+                modest: &v["natures"]["modest"].as_str().unwrap_or("Modest"),
+                mild: &v["natures"]["mild"].as_str().unwrap_or("Mild"),
+                quiet: &v["natures"]["quiet"].as_str().unwrap_or("Quiet"),
+                bashful: &v["natures"]["bashful"].as_str().unwrap_or("Bashful"),
+                rash: &v["natures"]["rash"].as_str().unwrap_or("Rash"),
+                calm: &v["natures"]["calm"].as_str().unwrap_or("Calm"),
+                gentle: &v["natures"]["gentle"].as_str().unwrap_or("Gentle"),
+                sassy: &v["natures"]["sassy"].as_str().unwrap_or("Sassy"),
+                careful: &v["natures"]["careful"].as_str().unwrap_or("Careful"),
+                quirky: &v["natures"]["quirky"].as_str().unwrap_or("Quirky"),
             },
 
             abilities: AbilityTranslationData {
                 damp: AbilityI18n {
-                    name: get_json_value(&v, "abilities/damp/name").unwrap_or("Damp"),
-                    desc: get_json_value(&v, "abilities/damp/desc").unwrap_or("Test"),
+                    name: &v["abilities"]["damp"]["name"].as_str().unwrap_or("Damp"),
+                    desc: &v["abilities"]["damp"]["desc"].as_str().unwrap_or("Test"),
                 },
                 water_absorb: AbilityI18n {
-                    name: get_json_value(&v, "abilities/water_absorb/name").unwrap_or("Water Absorb"),
-                    desc: get_json_value(&v, "abilities/water_absorb/desc").unwrap_or("Test"),
+                    name: &v["abilities"]["water_absorb"]["name"].as_str().unwrap_or("Water Absorb"),
+                    desc: &v["abilities"]["water_absorb"]["desc"].as_str().unwrap_or("Test"),
                 },
                 unaware: AbilityI18n {
-                    name: get_json_value(&v, "abilities/unaware/name").unwrap_or("Unaware"),
-                    desc: get_json_value(&v, "abilities/unaware/desc").unwrap_or("Test"),
+                    name: &v["abilities"]["unaware"]["name"].as_str().unwrap_or("Unaware"),
+                    desc: &v["abilities"]["unaware"]["desc"].as_str().unwrap_or("Test"),
                 },
                 overgrow: AbilityI18n {
-                    name: get_json_value(&v, "abilities/overgrow/name").unwrap_or("Overgrow"),
-                    desc: get_json_value(&v, "abilities/overgrow/desc").unwrap_or("Test"),
+                    name: &v["abilities"]["overgrow"]["name"].as_str().unwrap_or("Overgrow"),
+                    desc: &v["abilities"]["overgrow"]["desc"].as_str().unwrap_or("Test"),
                 },
                 chlorophyll: AbilityI18n {
-                    name: get_json_value(&v, "abilities/chlorophyll/name").unwrap_or("Chlorophyll"),
-                    desc: get_json_value(&v, "abilities/chlorophyll/desc").unwrap_or("Test"),
+                    name: &v["abilities"]["chlorophyll"]["name"].as_str().unwrap_or("Chlorophyll"),
+                    desc: &v["abilities"]["chlorophyll"]["desc"].as_str().unwrap_or("Test"),
                 },
             },
 
             gender: GenderTranslationData {
-                male: get_json_value(&v, "genders/male").unwrap_or("Male"),
-                female: get_json_value(&v, "genders/female").unwrap_or("Female"),
-                unknown: get_json_value(&v, "genders/unknown").unwrap_or("Unknown"),
+                male: &v["genders"]["male"].as_str().unwrap_or("Male"),
+                female: &v["genders"]["female"].as_str().unwrap_or("Female"),
+                unknown: &v["genders"]["unknown"].as_str().unwrap_or("Unknown"),
             },
 
             other_langs: OtherLanguageData {
-                english: get_json_value(&v, "other_langs/english").unwrap_or("English"),
+                english: &v["other_langs"]["english"].as_str().unwrap_or("English"),
             },
 
             items: ItemTranslationData {
                 lucky_egg: ItemI18n {
-                    name: get_json_value(&v, "items/lucky_egg/name").unwrap_or("Lucky Egg"),
-                    desc: get_json_value(&v, "items/lucky_egg/desc").unwrap_or("Test"),
+                    name: &v["items"]["lucky_egg"]["name"].as_str().unwrap_or("Lucky Egg"),
+                    desc: &v["items"]["lucky_egg"]["desc"].as_str().unwrap_or("Test"),
                 },
                 connection_wire: ItemI18n {
-                    name: get_json_value(&v, "items/connection_wire/name").unwrap_or("Connection Wire"),
-                    desc: get_json_value(&v, "items/connection_wire/desc").unwrap_or("Test"),
+                    name: &v["items"]["connection_wire"]["name"].as_str().unwrap_or("Connection Wire"),
+                    desc: &v["items"]["connection_wire"]["desc"].as_str().unwrap_or("Test"),
                 },
             },
 
             stats: StatTranslationData {
-                health: get_json_value(&v, "stats/health").unwrap_or("Health"),
-                speed: get_json_value(&v, "stats/speed").unwrap_or("Speed"),
-                attack: get_json_value(&v, "stats/attack").unwrap_or("Attack"),
-                defense: get_json_value(&v, "stats/defense").unwrap_or("Defense"),
-                special_attack: get_json_value(&v, "stats/special_attack").unwrap_or("Sp. Attack"),
-                special_defense: get_json_value(&v, "stats/special_defense").unwrap_or("Sp. Defense"),
+                health: &v["stats"]["health"].as_str().unwrap_or("Health"),
+                speed: &v["stats"]["speed"].as_str().unwrap_or("Speed"),
+                attack: &v["stats"]["attack"].as_str().unwrap_or("Attack"),
+                defense: &v["stats"]["defense"].as_str().unwrap_or("Defense"),
+                special_attack: &v["stats"]["special_attack"].as_str().unwrap_or("Sp. Attack"),
+                special_defense: &v["stats"]["special_defense"].as_str().unwrap_or("Sp. Defense"),
             },
 
             types: TypesTranslationData {
-                normal: get_json_value(&v, "types/normal").unwrap_or("Normal"),
-                water: get_json_value(&v, "types/water").unwrap_or("Water"),
-                fire: get_json_value(&v, "types/fire").unwrap_or("Fire"),
-                grass: get_json_value(&v, "types/grass").unwrap_or("Grass"),
-                psychic: get_json_value(&v, "types/psychic").unwrap_or("Psychic"),
-                ground: get_json_value(&v, "types/ground").unwrap_or("Ground"),
-                rock: get_json_value(&v, "types/rock").unwrap_or("Rock"),
-                bug: get_json_value(&v, "types/bug").unwrap_or("Bug"),
-                steel: get_json_value(&v, "types/steel").unwrap_or("Steel"),
-                dark: get_json_value(&v, "types/dark").unwrap_or("Dark"),
-                ice: get_json_value(&v, "types/ice").unwrap_or("Ice"),
-                dragon: get_json_value(&v, "types/dragon").unwrap_or("Dragon"),
-                fairy: get_json_value(&v, "types/fairy").unwrap_or("Fairy"),
-                flying: get_json_value(&v, "types/flying").unwrap_or("Flying"),
-                ghost: get_json_value(&v, "types/ghost").unwrap_or("Ghost"),
-                fighting: get_json_value(&v, "types/fighting").unwrap_or("Fighting"),
-                poison: get_json_value(&v, "types/poison").unwrap_or("Poison"),
-                electric: get_json_value(&v, "types/electric").unwrap_or("Electric"),
+                normal: &v["types"]["normal"].as_str().unwrap_or("Normal"),
+                water: &v["types"]["water"].as_str().unwrap_or("Water"),
+                fire: &v["types"]["fire"].as_str().unwrap_or("Fire"),
+                grass: &v["types"]["grass"].as_str().unwrap_or("Grass"),
+                psychic: &v["types"]["psychic"].as_str().unwrap_or("Psychic"),
+                ground: &v["types"]["ground"].as_str().unwrap_or("Ground"),
+                rock: &v["types"]["rock"].as_str().unwrap_or("Rock"),
+                bug: &v["types"]["bug"].as_str().unwrap_or("Bug"),
+                steel: &v["types"]["steel"].as_str().unwrap_or("Steel"),
+                dark: &v["types"]["dark"].as_str().unwrap_or("Dark"),
+                ice: &v["types"]["ice"].as_str().unwrap_or("Ice"),
+                dragon: &v["types"]["dragon"].as_str().unwrap_or("Dragon"),
+                fairy: &v["types"]["fairy"].as_str().unwrap_or("Fairy"),
+                flying: &v["types"]["flying"].as_str().unwrap_or("Flying"),
+                ghost: &v["types"]["ghost"].as_str().unwrap_or("Ghost"),
+                fighting: &v["types"]["fighting"].as_str().unwrap_or("Fighting"),
+                poison: &v["types"]["poison"].as_str().unwrap_or("Poison"),
+                electric: &v["types"]["electric"].as_str().unwrap_or("Electric"),
             },
-        })
+        };
+
+        locales.push(locale)
     }
     Ok(locales)
 }

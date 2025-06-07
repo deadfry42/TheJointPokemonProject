@@ -1,0 +1,132 @@
+{
+  "code_name": "en_lolcat",
+  "name": "Lolcat",
+  "version": 1,
+  "pokemon": {
+    "bulbasaur": {
+      "name": "onion creature",
+      "species": "seed",
+      "dex": "Test"
+    },
+    "ivysaur": {
+      "name": "medium onion creature",
+      "species": "seed",
+      "dex": "Test"
+    },
+    "venusaur": {
+      "name": "big onion creature",
+      "species": "seed",
+      "dex": "Test"
+    },
+    "wooper": {
+      "name": "woop woop",
+      "species": "river snack",
+      "dex": "Test"
+    }
+  },
+  "items": {
+    "lucky_egg": {
+      "name": "epic chicken baby",
+      "desc": "Test"
+    },
+    "connection_wire": {
+      "name": "string",
+      "desc": "Test"
+    }
+  },
+  "moves": {
+    "tackle": {
+      "name": "tackle",
+      "desc": "attak the other cat"
+    },
+    "growl": {
+      "name": "meow",
+      "desc": "meow at the other cats to reduce their attax"
+    }
+  },
+  "abilities": {
+    "damp": {
+      "name": "wet cat",
+      "desc": "Test"
+    },
+    "water_absorb": {
+      "name": "not wet cat",
+      "desc": "Test"
+    },
+    "unaware": {
+      "name": "unaware cat",
+      "desc": "Test"
+    },
+    "overgrow": {
+      "name": "plant cat",
+      "desc": "Test"
+    },
+    "chlorophyll": {
+      "name": "photosyntesis cat",
+      "desc": "Test"
+    }
+  },
+  "nature": {
+    "hardy": "tuff cat",
+    "lonely": "one cat :(",
+    "brave": "brave cat",
+    "adamant": "affirming cat",
+    "naughty": "bad cat >:)",
+    "bold": "stronk cat",
+    "docile": "friend cat",
+    "relaxed": "relaxy cat",
+    "impish": "impy cat",
+    "lax": "sleepy cat",
+    "timid": "shy cat",
+    "hasty": "zoomie cat",
+    "serious": "serious cat",
+    "jolly": "happy cat",
+    "naive": "unaware cat",
+    "modest": "pleasant cat",
+    "mild": "mild cat",
+    "quiet": "cat steps",
+    "bashful": "jumpy cat",
+    "rash": "rash cat",
+    "calm": "calm cat",
+    "gentle": "not destructive cat",
+    "sassy": "normal cat behaviour",
+    "careful": "keep things _on_ counter",
+    "quirky": "quirk cat"
+  },
+  "stats": {
+    "health": "helf",
+    "speed": "zoomies",
+    "attack": "scratch power",
+    "defense": "hiss",
+    "special_attack": "super scratch power",
+    "special_defense": "super hiss"
+  },
+  "types": {
+    "normal": "rat",
+    "water": "fish",
+    "fire": "hot stuffs",
+    "grass": "yum grass",
+    "psychic": "hoomans",
+    "ground": "erf",
+    "rock": "Rock",
+    "bug": "stick thingy",
+    "steel": "owchie shiny",
+    "dark": "angy",
+    "ice": "cold stuffs",
+    "dragon": "cool stuffs",
+    "fairy": ">.< magix",
+    "flying": "bird",
+    "ghost": "spookie",
+    "fighting": "owchie",
+    "poison": "tasty",
+    "electric": "outlet"
+  },
+  "gender": {
+    "male": "male cat",
+    "female": "female cat",
+    "unknown": "not cat"
+  },
+  "other_langs": {
+    "english": "l'anglais"
+  }
+}

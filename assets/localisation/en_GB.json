@@ -1,6 +1,7 @@
 {
   "code_name": "en_GB",
   "name": "English (UK)",
+  "version": 1,
   "pokemon": {
     "bulbasaur": {
       "name": "Bulbasaur",
@@ -8,12 +9,12 @@
       "dex": "Test"
     },
     "ivysaur": {
-      "name": "Bulbasaur",
+      "name": "Ivysaur",
       "species": "Seed",
       "dex": "Test"
     },
     "venusaur": {
-      "name": "Bulbasaur",
+      "name": "Venusaur",
       "species": "Seed",
       "dex": "Test"
     },
@@ -43,7 +44,28 @@
       "desc": "The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats."
     }
   },
-  "abilities": {},
+  "abilities": {
+    "damp": {
+      "name": "Damp",
+      "desc": "Test"
+    },
+    "water_absorb": {
+      "name": "Water Absorb",
+      "desc": "Test"
+    },
+    "unaware": {
+      "name": "Unaware",
+      "desc": "Test"
+    },
+    "overgrow": {
+      "name": "Overgrow",
+      "desc": "Test"
+    },
+    "chlorophyll": {
+      "name": "Chlorophyll",
+      "desc": "Test"
+    }
+  },
   "nature": {
     "hardy": "Hardy",
     "lonely": "Lonely",

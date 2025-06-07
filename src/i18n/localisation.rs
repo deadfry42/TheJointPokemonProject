@@ -21,3 +21,29 @@ pub struct Localisation {
     pub types: TypesTranslationData,
     pub other_langs: OtherLanguageData,
 }
+
+pub struct AvailableLocales {
+    pub locales: Vec<Localisation>,
+    pub current_locale_index: usize,
+}
+
+impl AvailableLocales {
+    pub const fn new() -> AvailableLocales {
+        AvailableLocales {
+            locales: vec![],
+            current_locale_index: 0,
+        }
+    }
+
+    pub fn add_locale(&mut self, locale: Localisation) {
+        self.locales.push(locale)
+    }
+
+    pub fn set_active_locale_index(&mut self, i: usize) {
+        self.current_locale_index = i;
+    }
+
+    pub fn get_active_locale(&self) -> Option<&Localisation> {
+        self.locales.get(self.current_locale_index)
+    }
+}
