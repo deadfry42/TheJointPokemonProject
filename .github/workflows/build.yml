@@ -13,23 +13,27 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
+
       - name: Check just works
         run: just
-      - name: Install cross.rs
-        run: just install_cross
 
       - name: Create build folders
-        run: mkdir builds |
-          mkdir builds/linux-x86_64 |
-          mkdir builds/linux-aarch64 |
-          mkdir builds/windows-x86_64 |
+        run: |
+          mkdir builds
+          mkdir builds/linux-x86_64
+          mkdir builds/linux-aarch64
+          mkdir builds/windows-x86_64
+
+      - name: Install cross.rs
+        run: just install_cross
 
       ## we can only feasibly build linux (x86_64 & aarch64) and windows (x86_64 only)
       # this is because macos has licensing issues, and aarch64 windows doesn't have a gnu toolchain (msvc has licensing issues too)
       # i think i'll have to manually build these targets, but i can only do macos aarch64, which should be fine
       # linux x86_64
       - name: Build linux x86_64
-        run: cargo clean |
+        run: |
+          cargo clean
           just build
           cp target/release/tjpp builds/linux-x86_64
           cp -r assets builds/linux-x64_64
@@ -42,7 +46,8 @@ jobs:
 
       # linux aarch64
       - name: Build linux aarch64
-        run: cargo clean |
+        run: |
+          cargo clean
           just linux_aarch64
           cp target/release/tjpp builds/linux-aarch64
           cp -r assets builds/linux-aarch64
@@ -55,7 +60,8 @@ jobs:
 
       # windows x86_64
       - name: Build windows x86_64
-        run: cargo clean |
+        run: |
+          cargo clean
           just windows
           cp target/release/tjpp builds/windows_x86_64
           cp -r assets builds/windows_x86_64
