@@ -6,6 +6,7 @@ use crate::i18n::sections::{
     natures::NatureTranslationData,
     pokemon::PokemonTranslationData,
 };
+use std::ops::Index;
 
 pub struct Localisation {
     pub code_name: &'static str,
@@ -21,6 +22,19 @@ pub struct Localisation {
     pub types: TypesTranslationData,
     pub other_langs: OtherLanguageData,
 }
+
+// impl Index<&'static str> for Localisation {
+//     type Output = Box<dyn TranslationData>;
+
+//     fn index(&self, path: &'static str) -> &Self::Output {
+//         match path {
+//             "moves" => &Box::new(self.moves),
+//             _ => &Box::new(self.pokemon),
+//         }
+//     }
+// }
+
+pub trait TranslationData {}
 
 pub struct AvailableLocales {
     pub locales: Vec<Localisation>,

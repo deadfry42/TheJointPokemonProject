@@ -1,5 +1,5 @@
 use super::enums::Stat;
-use crate::i18n::get_localisation;
+use crate::i18n::keys::*;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -146,31 +146,131 @@ impl NatureData for Nature {
 impl fmt::Display for Nature {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Nature::Hardy => write!(f, "{}", get_localisation().nature.hardy),
-            Nature::Lonely => write!(f, "{}", get_localisation().nature.lonely),
-            Nature::Brave => write!(f, "{}", get_localisation().nature.brave),
-            Nature::Adamant => write!(f, "{}", get_localisation().nature.adamant),
-            Nature::Naughty => write!(f, "{}", get_localisation().nature.naughty),
-            Nature::Bold => write!(f, "{}", get_localisation().nature.bold),
-            Nature::Docile => write!(f, "{}", get_localisation().nature.docile),
-            Nature::Relaxed => write!(f, "{}", get_localisation().nature.relaxed),
-            Nature::Impish => write!(f, "{}", get_localisation().nature.impish),
-            Nature::Lax => write!(f, "{}", get_localisation().nature.lax),
-            Nature::Timid => write!(f, "{}", get_localisation().nature.timid),
-            Nature::Hasty => write!(f, "{}", get_localisation().nature.hasty),
-            Nature::Serious => write!(f, "{}", get_localisation().nature.serious),
-            Nature::Jolly => write!(f, "{}", get_localisation().nature.jolly),
-            Nature::Naive => write!(f, "{}", get_localisation().nature.naive),
-            Nature::Modest => write!(f, "{}", get_localisation().nature.modest),
-            Nature::Mild => write!(f, "{}", get_localisation().nature.mild),
-            Nature::Quiet => write!(f, "{}", get_localisation().nature.quiet),
-            Nature::Bashful => write!(f, "{}", get_localisation().nature.bashful),
-            Nature::Rash => write!(f, "{}", get_localisation().nature.rash),
-            Nature::Calm => write!(f, "{}", get_localisation().nature.calm),
-            Nature::Gentle => write!(f, "{}", get_localisation().nature.gentle),
-            Nature::Sassy => write!(f, "{}", get_localisation().nature.sassy),
-            Nature::Careful => write!(f, "{}", get_localisation().nature.careful),
-            Nature::Quirky => write!(f, "{}", get_localisation().nature.quirky),
+            Nature::Hardy => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/hardy").convert_to_string()
+            ),
+            Nature::Lonely => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/lonely").convert_to_string()
+            ),
+            Nature::Brave => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/brave").convert_to_string()
+            ),
+            Nature::Adamant => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/adamant").convert_to_string()
+            ),
+            Nature::Naughty => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/naughty").convert_to_string()
+            ),
+            Nature::Bold => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/bold").convert_to_string()
+            ),
+            Nature::Docile => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/docile").convert_to_string()
+            ),
+            Nature::Relaxed => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/relaxed").convert_to_string()
+            ),
+            Nature::Impish => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/impish").convert_to_string()
+            ),
+            Nature::Lax => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/lax").convert_to_string()
+            ),
+            Nature::Timid => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/timid").convert_to_string()
+            ),
+            Nature::Hasty => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/hasty").convert_to_string()
+            ),
+            Nature::Serious => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/serious").convert_to_string()
+            ),
+            Nature::Jolly => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/jolly").convert_to_string()
+            ),
+            Nature::Naive => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/naive").convert_to_string()
+            ),
+            Nature::Modest => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/modest").convert_to_string()
+            ),
+            Nature::Mild => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/mild").convert_to_string()
+            ),
+            Nature::Quiet => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/quiet").convert_to_string()
+            ),
+            Nature::Bashful => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/bashful").convert_to_string()
+            ),
+            Nature::Rash => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/rash").convert_to_string()
+            ),
+            Nature::Calm => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/calm").convert_to_string()
+            ),
+            Nature::Gentle => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/gentle").convert_to_string()
+            ),
+            Nature::Sassy => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/sassy").convert_to_string()
+            ),
+            Nature::Careful => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/careful").convert_to_string()
+            ),
+            Nature::Quirky => write!(
+                f,
+                "{}",
+                TranslationKey::new("natures/quirky").convert_to_string()
+            ),
         }
     }
 }

@@ -1,4 +1,4 @@
-use crate::i18n::get_localisation;
+use crate::i18n::keys::*;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -14,11 +14,31 @@ pub enum Ability {
 impl fmt::Display for Ability {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Ability::Damp => write!(f, "{}", get_localisation().abilities.damp.name),
-            Ability::WaterAbsorb => write!(f, "{}", get_localisation().abilities.water_absorb.name),
-            Ability::Unaware => write!(f, "{}", get_localisation().abilities.unaware.name),
-            Ability::Overgrow => write!(f, "{}", get_localisation().abilities.overgrow.name),
-            Ability::Chlorophyll => write!(f, "{}", get_localisation().abilities.chlorophyll.name),
+            Ability::Damp => write!(
+                f,
+                "{}",
+                TranslationKey::new("abilities/damp/name").convert_to_string()
+            ),
+            Ability::WaterAbsorb => write!(
+                f,
+                "{}",
+                TranslationKey::new("abilities/water_absorb/name").convert_to_string()
+            ),
+            Ability::Unaware => write!(
+                f,
+                "{}",
+                TranslationKey::new("abilities/unaware/name").convert_to_string()
+            ),
+            Ability::Overgrow => write!(
+                f,
+                "{}",
+                TranslationKey::new("abilities/overgrow/name").convert_to_string()
+            ),
+            Ability::Chlorophyll => write!(
+                f,
+                "{}",
+                TranslationKey::new("abilities/chlorophyll/name").convert_to_string()
+            ),
         }
     }
 }

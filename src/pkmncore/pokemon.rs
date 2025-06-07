@@ -1,4 +1,7 @@
-use crate::pkmncore::{constants::moves::Move, evolution::Evolution, moves::LearntMove};
+use crate::{
+    i18n::keys::TranslationKey,
+    pkmncore::{constants::moves::Move, evolution::Evolution, moves::LearntMove},
+};
 
 use super::{
     constants::{
@@ -11,7 +14,7 @@ use super::{
 
 #[allow(dead_code)]
 pub struct PokemonBase {
-    pub name: &'static str,
+    pub name: TranslationKey,
     pub types: TypeSet,
     pub pkmn: Pokemon,
     pub pokedex: PokedexInfo,
@@ -35,10 +38,10 @@ impl PokemonBase {
     pub fn summarise(&self) -> String {
         format!(
             "Pokemon {}\nType1: {}\nPokedexInfo: {}, {}\nStats: {}hp, {}spd, {}atk, {}def, {}spatk, {}spdef\nCatch rate: {}\nFriendship: {}\nGender Ratio: {}% to be Male.\nEgg cycles: {}\nAbility1: {}",
-            self.name,
+            self.name.convert_to_string(),
             self.types.type1,
-            self.pokedex.species,
-            self.pokedex.entry,
+            self.pokedex.species.convert_to_string(),
+            self.pokedex.entry.convert_to_string(),
             self.base_stats.health,
             self.base_stats.speed,
             self.base_stats.atk,
@@ -156,8 +159,8 @@ pub struct PokedexInfo {
     pub index: i32,
     pub height: f64,
     pub weight: f64,
-    pub species: &'static str,
-    pub entry: &'static str,
+    pub species: TranslationKey,
+    pub entry: TranslationKey,
 }
 
 #[allow(dead_code)]

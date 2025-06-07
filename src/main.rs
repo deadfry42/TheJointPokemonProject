@@ -7,8 +7,8 @@ use pkmncore::{
 };
 use utils::hex;
 
-use crate::files::assets::{check_for_assets, get_asset};
-use crate::i18n::*;
+use crate::files::assets::check_for_assets;
+use crate::i18n::parsing::*;
 
 pub mod files;
 pub mod i18n;
@@ -92,11 +92,14 @@ fn main() {
             let move_data = item.1.as_ref().unwrap();
             println!(
                 "   {} : {}/{}",
-                move_data.base.get_base().name,
+                move_data.base.get_base().name.convert_to_string(),
                 move_data.pp,
                 move_data.get_max_pp()
             );
-            println!("      --> {}", move_data.base.get_base().desc)
+            println!(
+                "      --> {}",
+                move_data.base.get_base().desc.convert_to_string()
+            )
         } else {
             println!("   -");
         }

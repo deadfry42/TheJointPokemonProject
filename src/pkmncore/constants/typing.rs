@@ -1,5 +1,6 @@
-use crate::i18n::get_localisation;
 use std::fmt::{self};
+
+use crate::i18n::keys::TranslationKey;
 
 #[allow(dead_code)]
 pub trait Typing {
@@ -212,24 +213,96 @@ impl Typing for Type {
 impl fmt::Display for Type {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Type::Normal => write!(f, "{}", get_localisation().types.normal),
-            Type::Water => write!(f, "{}", get_localisation().types.water),
-            Type::Fire => write!(f, "{}", get_localisation().types.fire),
-            Type::Grass => write!(f, "{}", get_localisation().types.grass),
-            Type::Psychic => write!(f, "{}", get_localisation().types.psychic),
-            Type::Ground => write!(f, "{}", get_localisation().types.ground),
-            Type::Rock => write!(f, "{}", get_localisation().types.rock),
-            Type::Bug => write!(f, "{}", get_localisation().types.bug),
-            Type::Steel => write!(f, "{}", get_localisation().types.steel),
-            Type::Dark => write!(f, "{}", get_localisation().types.dark),
-            Type::Ice => write!(f, "{}", get_localisation().types.ice),
-            Type::Dragon => write!(f, "{}", get_localisation().types.dragon),
-            Type::Fairy => write!(f, "{}", get_localisation().types.fairy),
-            Type::Flying => write!(f, "{}", get_localisation().types.flying),
-            Type::Ghost => write!(f, "{}", get_localisation().types.ghost),
-            Type::Fighting => write!(f, "{}", get_localisation().types.fighting),
-            Type::Poison => write!(f, "{}", get_localisation().types.poison),
-            Type::Electric => write!(f, "{}", get_localisation().types.electric),
+            Type::Normal => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/normal").convert_to_string()
+            ),
+            Type::Water => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/water").convert_to_string()
+            ),
+            Type::Fire => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/fire").convert_to_string()
+            ),
+            Type::Grass => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/grass").convert_to_string()
+            ),
+            Type::Psychic => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/psychic").convert_to_string()
+            ),
+            Type::Ground => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/ground").convert_to_string()
+            ),
+            Type::Rock => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/rock").convert_to_string()
+            ),
+            Type::Bug => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/bug").convert_to_string()
+            ),
+            Type::Steel => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/steel").convert_to_string()
+            ),
+            Type::Dark => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/dark").convert_to_string()
+            ),
+            Type::Ice => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/ice").convert_to_string()
+            ),
+            Type::Dragon => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/dragon").convert_to_string()
+            ),
+            Type::Fairy => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/fairy").convert_to_string()
+            ),
+            Type::Flying => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/flying").convert_to_string()
+            ),
+            Type::Ghost => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/ghost").convert_to_string()
+            ),
+            Type::Fighting => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/fighting").convert_to_string()
+            ),
+            Type::Poison => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/poison").convert_to_string()
+            ),
+            Type::Electric => write!(
+                f,
+                "{}",
+                TranslationKey::new("types/electric").convert_to_string()
+            ),
         }
     }
 }

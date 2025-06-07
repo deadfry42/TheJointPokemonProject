@@ -1,4 +1,4 @@
-use crate::i18n::get_localisation;
+use crate::i18n::keys::TranslationKey;
 use std::fmt::{self};
 
 #[allow(dead_code)]
@@ -11,7 +11,11 @@ pub enum Language {
 impl fmt::Display for Language {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Language::English => write!(f, "{}", get_localisation().other_langs.english),
+            Language::English => write!(
+                f,
+                "{}",
+                TranslationKey::new("other_langs/english").convert_to_string()
+            ),
         }
     }
 }
@@ -30,12 +34,36 @@ pub enum Stat {
 impl fmt::Display for Stat {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Stat::Health => write!(f, "{}", get_localisation().stats.health),
-            Stat::Speed => write!(f, "{}", get_localisation().stats.speed),
-            Stat::Attack => write!(f, "{}", get_localisation().stats.attack),
-            Stat::Defense => write!(f, "{}", get_localisation().stats.defense),
-            Stat::SpecialAttack => write!(f, "{}", get_localisation().stats.special_attack),
-            Stat::SpecialDefence => write!(f, "{}", get_localisation().stats.special_defense),
+            Stat::Health => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/health").convert_to_string()
+            ),
+            Stat::Speed => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/speed").convert_to_string()
+            ),
+            Stat::Attack => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/attack").convert_to_string()
+            ),
+            Stat::Defense => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/defense").convert_to_string()
+            ),
+            Stat::SpecialAttack => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/special_attack").convert_to_string()
+            ),
+            Stat::SpecialDefence => write!(
+                f,
+                "{}",
+                TranslationKey::new("stats/special_defense").convert_to_string()
+            ),
         }
     }
 }
@@ -154,9 +182,21 @@ pub enum Gender {
 impl fmt::Display for Gender {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
-            Gender::Male => write!(f, "{}", get_localisation().gender.male),
-            Gender::Female => write!(f, "{}", get_localisation().gender.female),
-            Gender::Unknown => write!(f, "{}", get_localisation().gender.unknown),
+            Gender::Male => write!(
+                f,
+                "{}",
+                TranslationKey::new("gender/male").convert_to_string()
+            ),
+            Gender::Female => write!(
+                f,
+                "{}",
+                TranslationKey::new("gender/female").convert_to_string()
+            ),
+            Gender::Unknown => write!(
+                f,
+                "{}",
+                TranslationKey::new("gender/unknown").convert_to_string()
+            ),
         }
     }
 }

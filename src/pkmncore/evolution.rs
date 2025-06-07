@@ -85,3 +85,24 @@ impl ItemEvolution {
         self.item
     }
 }
+
+pub struct FriendshipEvolution {
+    pub evolution: Pokemon,
+    pub friendship: u8,
+}
+
+impl Evolution for FriendshipEvolution {
+    fn get_evolution(&self) -> &Pokemon {
+        &self.evolution
+    }
+
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
+}
+
+impl FriendshipEvolution {
+    pub fn get_friendship(&self) -> u8 {
+        self.friendship
+    }
+}

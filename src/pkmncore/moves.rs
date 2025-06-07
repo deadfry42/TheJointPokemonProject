@@ -1,10 +1,10 @@
 use super::constants::{enums::*, moves::*, typing::*};
-use crate::pkmncore::battle::priority::*;
+use crate::{i18n::keys::TranslationKey, pkmncore::battle::priority::*};
 
 #[allow(dead_code)]
 pub struct MoveBase {
-    pub name: &'static str,
-    pub desc: &'static str,
+    pub name: TranslationKey,
+    pub desc: TranslationKey,
     pub move_type: Type,
     pub move_range: MoveRange,
     pub move_category: MoveCategory,

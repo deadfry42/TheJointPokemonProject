@@ -1,5 +1,5 @@
 use super::{enums::*, typing::*};
-use crate::i18n::get_localisation;
+use crate::i18n::keys::TranslationKey;
 use crate::pkmncore::battle::priority::*;
 use crate::pkmncore::moves::*;
 
@@ -25,8 +25,8 @@ impl MoveType for Move {
     fn get_base(&self) -> MoveBase {
         match self {
             Move::Tackle => MoveBase {
-                name: get_localisation().moves.tackle.name,
-                desc: get_localisation().moves.tackle.desc,
+                name: TranslationKey::new("moves/tackle/name"),
+                desc: TranslationKey::new("moves/tackle/desc"),
                 move_category: MoveCategory::Physical,
                 move_range: MoveRange::Normal,
                 move_type: Type::Normal,
@@ -36,8 +36,8 @@ impl MoveType for Move {
                 move_pp: 35,
             },
             Move::Growl => MoveBase {
-                name: get_localisation().moves.growl.name,
-                desc: get_localisation().moves.growl.desc,
+                name: TranslationKey::new("moves/growl/name"),
+                desc: TranslationKey::new("moves/growl/desc"),
                 move_category: MoveCategory::Status,
                 move_range: MoveRange::ManyOthers,
                 move_type: Type::Normal,
