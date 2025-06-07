@@ -17,43 +17,51 @@ jobs:
         run: just
       - name: Install cross.rs
         run: just install_cross
-      - name: Clean building environment
-        run: cargo clean
+
+      - name: Create build folders
+        run: mkdir builds |
+          mkdir builds/linux-x86_64 |
+          mkdir builds/linux-aarch64 |
+          mkdir builds/windows-x86_64 |
 
       ## we can only feasibly build linux (x86_64 & aarch64) and windows (x86_64 only)
       # this is because macos has licensing issues, and aarch64 windows doesn't have a gnu toolchain (msvc has licensing issues too)
       # i think i'll have to manually build these targets, but i can only do macos aarch64, which should be fine
-
       # linux x86_64
-      - name: Build linux x86_64 with just
-        run: just build
-      - name: Upload linux-x86_64
+      - name: Build linux x86_64
+        run: cargo clean |
+          just build
+          cp target/release/tjpp builds/linux-x86_64
+          cp -r assets builds/linux-x64_64
+      - name: Upload linux x86_64
         uses: actions/upload-artifact@v4
         with:
           name: tjpp-linux-x86_64
           path: |
-            target/release/tjpp
+            builds/linux-x86_64
 
       # linux aarch64
-      - name: Clean building environment
-        run: cargo clean
-      - name: Build linux aarch64 with just
-        run: just linux_aarch64
-      - name: Upload linux-aarch64
+      - name: Build linux aarch64
+        run: cargo clean |
+          just linux_aarch64
+          cp target/release/tjpp builds/linux-aarch64
+          cp -r assets builds/linux-aarch64
+      - name: Upload linux aarch64
         uses: actions/upload-artifact@v4
         with:
           name: tjpp-linux-aarch64
           path: |
-            target/aarch64-unknown-linux-gnu/release/tjpp
+            builds/linux-aarch64
 
       # windows x86_64
-      - name: Clean building environment
-        run: cargo clean
-      - name: Build windows x86_64 with just
-        run: just windows
-      - name: Upload windows-x86_64
+      - name: Build windows x86_64
+        run: cargo clean |
+          just windows
+          cp target/release/tjpp builds/windows_x86_64
+          cp -r assets builds/windows_x86_64
+      - name: Upload windows x86_64
         uses: actions/upload-artifact@v4
         with:
-          name: tjpp-windows-x86_64.exe
+          name: tjpp-windows-x86_64
           path: |
-            target/x86_64-pc-windows-gnu/release/tjpp.exe
+            builds/windows-x86_64
