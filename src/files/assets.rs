@@ -1,5 +1,11 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
-use std::{env::*, fs::*, path::PathBuf};
+use std::{
+    env::*,
+    fs::{self, *},
+    path::PathBuf,
+};
+
+pub const ASSETS_PATH: &'static str = "./assets";
 
 pub fn check_for_assets() -> bool {
     let assets_folder = get_assets_folder();
@@ -11,11 +17,15 @@ pub fn get_working_directory() -> std::io::Result<PathBuf> {
 }
 
 pub fn get_assets_folder() -> std::io::Result<ReadDir> {
-    Ok(std::fs::read_dir("./assets/")?)
+    Ok(std::fs::read_dir(format!("{}/", ASSETS_PATH))?)
 }
 
 pub fn get_asset(path: &str) -> std::io::Result<File> {
-    Ok(File::open(format!("./assets/{}", path))?)
+    Ok(File::open(format!("{}/{}", ASSETS_PATH, path))?)
+}
+
+pub fn get_asset_folder(path: &str) -> std::io::Result<ReadDir> {
+    Ok(fs::read_dir(format!("{}/{}", ASSETS_PATH, path))?)
 }
 
 pub fn get_compiling_platform() -> &'static str {
