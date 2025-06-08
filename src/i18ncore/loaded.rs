@@ -7,6 +7,12 @@ pub struct LoadedLocales {
     selected: Option<&'static str>,
 }
 
+impl Default for LoadedLocales {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl LoadedLocales {
     pub fn new() -> LoadedLocales {
         LoadedLocales {
@@ -28,14 +34,14 @@ impl LoadedLocales {
     }
 
     pub fn set_selected_locale(&mut self, name: &'static str) {
-        if let Some(_) = self.get_locale(name) {
+        if self.get_locale(name).is_some() {
             self.selected = Some(name);
         }
     }
 
     pub fn add_locale(&mut self, locale: Locale) {
         if self.locales.contains_key(locale.code_name.value) {
-            Logger::warn(format!("Adding locale that already exists!"));
+            Logger::warn("Adding locale that already exists!".to_string());
         }
         self.locales.insert(locale.code_name.value, locale);
     }
