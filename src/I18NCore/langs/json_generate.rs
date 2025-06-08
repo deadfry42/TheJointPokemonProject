@@ -3,7 +3,14 @@ use crate::{
     I18NCore::{
         langs::en_GB,
         localisation::*,
-        sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
+        sections::{
+            abilities::{AbilityLocale, AbilityLocaleContainer},
+            enums::{GenderLocale, OtherLanguageLocale, StatLocale, TypesLocale},
+            items::{ItemLocale, ItemLocaleContainer},
+            moves::{MoveLocale, MoveLocaleContainer},
+            natures::NatureLocale,
+            pokemon::{PokemonLocale, PokemonLocaleContainer},
+        },
     },
     Utils::logger::Logger,
 };
@@ -11,14 +18,13 @@ use serde_json::Value;
 use std::fs;
 use std::io::Result;
 
-pub fn parse_json_files() -> Result<Vec<Localisation>> {
+pub fn parse_json_files() -> Result<Vec<Locale>> {
     let compatible_versions: Vec<i64> = vec![1];
     let recommended_version: i64 = 1;
 
     let paths = get_asset_folder("localisation")?;
-    let mut locales: Vec<Localisation> = vec![];
+    let mut locales: Vec<Locale> = vec![];
     for path in paths {
-        // println!("Name: {}", (&path).as_ref().unwrap().path().display());
         let data: String = fs::read_to_string((&path).as_ref().unwrap().path()).unwrap();
         let v: &'static mut Value = Box::leak(Box::new(serde_json::from_str::<Value>(&data)?));
 
@@ -52,12 +58,12 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
             continue;
         }
 
-        let locale = Localisation {
-            code_name: SingleValued::new(code_name.unwrap()),
-            name: SingleValued::new(name.unwrap()),
+        let locale = Locale {
+            code_name: SingleValuedData::new(code_name.unwrap()),
+            name: SingleValuedData::new(name.unwrap()),
 
-            pokemon: PokemonTranslationData {
-                bulbasaur: PokemonI18n {
+            pokemon: PokemonLocaleContainer {
+                bulbasaur: PokemonLocale {
                     name: v["pokemon"]["bulbasaur"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.name),
@@ -68,7 +74,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.species),
                 },
-                ivysaur: PokemonI18n {
+                ivysaur: PokemonLocale {
                     name: v["pokemon"]["ivysaur"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.name),
@@ -79,7 +85,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
-                venusaur: PokemonI18n {
+                venusaur: PokemonLocale {
                     name: v["pokemon"]["venusaur"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.name),
@@ -90,7 +96,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
-                wooper: PokemonI18n {
+                wooper: PokemonLocale {
                     name: v["pokemon"]["wooper"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.wooper.name),
@@ -103,8 +109,8 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                 },
             },
 
-            moves: MoveTranslationData {
-                tackle: MoveI18n {
+            moves: MoveLocaleContainer {
+                tackle: MoveLocale {
                     name: v["moves"]["tackle"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.tackle.name),
@@ -112,7 +118,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.tackle.desc),
                 },
-                growl: MoveI18n {
+                growl: MoveLocale {
                     name: v["moves"]["growl"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.growl.name),
@@ -122,7 +128,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                 },
             },
 
-            nature: NatureTranslationData {
+            nature: NatureLocale {
                 hardy: v["natures"]["hardy"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.hardy),
@@ -200,8 +206,8 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                     .unwrap_or(en_GB::LOCALISATION.nature.quirky),
             },
 
-            abilities: AbilityTranslationData {
-                damp: AbilityI18n {
+            abilities: AbilityLocaleContainer {
+                damp: AbilityLocale {
                     name: v["abilities"]["damp"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.damp.name),
@@ -209,7 +215,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.damp.desc),
                 },
-                water_absorb: AbilityI18n {
+                water_absorb: AbilityLocale {
                     name: v["abilities"]["water_absorb"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.water_absorb.name),
@@ -217,7 +223,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.water_absorb.desc),
                 },
-                unaware: AbilityI18n {
+                unaware: AbilityLocale {
                     name: v["abilities"]["unaware"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.unaware.name),
@@ -225,7 +231,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.unaware.name),
                 },
-                overgrow: AbilityI18n {
+                overgrow: AbilityLocale {
                     name: v["abilities"]["overgrow"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.overgrow.name),
@@ -233,7 +239,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.overgrow.name),
                 },
-                chlorophyll: AbilityI18n {
+                chlorophyll: AbilityLocale {
                     name: v["abilities"]["chlorophyll"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.abilities.chlorophyll.name),
@@ -243,7 +249,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                 },
             },
 
-            gender: GenderTranslationData {
+            gender: GenderLocale {
                 male: v["genders"]["male"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.gender.male),
@@ -255,14 +261,14 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                     .unwrap_or(en_GB::LOCALISATION.gender.unknown),
             },
 
-            other_langs: OtherLanguageData {
+            other_langs: OtherLanguageLocale {
                 english: v["other_langs"]["english"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.other_langs.english),
             },
 
-            items: ItemTranslationData {
-                lucky_egg: ItemI18n {
+            items: ItemLocaleContainer {
+                lucky_egg: ItemLocale {
                     name: v["items"]["lucky_egg"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.items.lucky_egg.name),
@@ -270,7 +276,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.items.lucky_egg.desc),
                 },
-                connection_wire: ItemI18n {
+                connection_wire: ItemLocale {
                     name: v["items"]["connection_wire"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.items.connection_wire.name),
@@ -280,7 +286,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                 },
             },
 
-            stats: StatTranslationData {
+            stats: StatLocale {
                 health: v["stats"]["health"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.stats.health),
@@ -301,7 +307,7 @@ pub fn parse_json_files() -> Result<Vec<Localisation>> {
                     .unwrap_or(en_GB::LOCALISATION.stats.special_defense),
             },
 
-            types: TypesTranslationData {
+            types: TypesLocale {
                 normal: v["types"]["normal"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.normal),

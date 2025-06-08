@@ -3,47 +3,47 @@ use crate::I18NCore::{
     sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
 };
 
-pub const LOCALISATION: Localisation = Localisation {
-    code_name: SingleValued { value: "en_GB" },
-    name: SingleValued {
+pub const LOCALISATION: Locale = Locale {
+    code_name: SingleValuedData { value: "en_GB" },
+    name: SingleValuedData {
         value: "English (UK, built-in)",
     },
 
-    moves: MoveTranslationData {
-        tackle: MoveI18n {
+    moves: MoveLocaleContainer {
+        tackle: MoveLocale {
             name: "Tackle",
             desc: "A physical attack in which the user charges and slams into the target with its whole body.",
         },
-        growl: MoveI18n {
+        growl: MoveLocale {
             name: "Growl",
             desc: "The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats.",
         },
     },
 
-    pokemon: PokemonTranslationData {
-        bulbasaur: PokemonI18n {
+    pokemon: PokemonLocaleContainer {
+        bulbasaur: PokemonLocale {
             name: "Bulbasaur",
             species: "Seed",
             dex: "Test",
         },
-        ivysaur: PokemonI18n {
+        ivysaur: PokemonLocale {
             name: "Ivysaur",
             species: "Seed",
             dex: "Test",
         },
-        venusaur: PokemonI18n {
+        venusaur: PokemonLocale {
             name: "Venusaur",
             species: "Seed",
             dex: "Test",
         },
-        wooper: PokemonI18n {
+        wooper: PokemonLocale {
             name: "Wooper",
             species: "Water Fish",
             dex: "Test",
         },
     },
 
-    nature: NatureTranslationData {
+    nature: NatureLocale {
         hardy: "Hardy",
         lonely: "Lonely",
         brave: "Brave",
@@ -71,49 +71,49 @@ pub const LOCALISATION: Localisation = Localisation {
         quirky: "Quirky",
     },
 
-    abilities: AbilityTranslationData {
-        damp: AbilityI18n {
+    abilities: AbilityLocaleContainer {
+        damp: AbilityLocale {
             name: "Damp",
             desc: "Test",
         },
-        water_absorb: AbilityI18n {
+        water_absorb: AbilityLocale {
             name: "WaterAbsorb",
             desc: "Test",
         },
-        unaware: AbilityI18n {
+        unaware: AbilityLocale {
             name: "Unaware",
             desc: "Test",
         },
-        overgrow: AbilityI18n {
+        overgrow: AbilityLocale {
             name: "Overgrow",
             desc: "Test",
         },
-        chlorophyll: AbilityI18n {
+        chlorophyll: AbilityLocale {
             name: "Chlorophyll",
             desc: "Test",
         },
     },
 
-    gender: GenderTranslationData {
+    gender: GenderLocale {
         male: "Male",
         female: "Female",
         unknown: "Unknown",
     },
 
-    other_langs: OtherLanguageData { english: "English" },
+    other_langs: OtherLanguageLocale { english: "English" },
 
-    items: ItemTranslationData {
-        lucky_egg: ItemI18n {
+    items: ItemLocaleContainer {
+        lucky_egg: ItemLocale {
             name: "Lucky Egg",
             desc: "Test",
         },
-        connection_wire: ItemI18n {
+        connection_wire: ItemLocale {
             name: "Connection Wire",
             desc: "Test",
         },
     },
 
-    stats: StatTranslationData {
+    stats: StatLocale {
         health: "Health",
         speed: "Speed",
         attack: "Attack",
@@ -122,7 +122,7 @@ pub const LOCALISATION: Localisation = Localisation {
         special_defense: "Sp. Defense",
     },
 
-    types: TypesTranslationData {
+    types: TypesLocale {
         normal: "Normal",
         water: "Water",
         fire: "Fire",

@@ -1,41 +1,56 @@
-use crate::I18NCore::localisation::{I18NData, SectionData, TranslationData};
 use std::any::Any;
 
-pub struct MoveTranslationData {
-    pub tackle: MoveI18n,
-    pub growl: MoveI18n,
+use crate::I18NCore::localisation::{DataSection, SectionType};
+
+pub struct MoveLocaleContainer {
+    pub tackle: MoveLocale,
+    pub growl: MoveLocale,
 }
 
-impl TranslationData for MoveTranslationData {
-    fn index(&self, path: &'static str) -> Box<&dyn SectionData> {
-        match path {
-            "tackle" => Box::new(&self.tackle),
-            _ => Box::new(&self.growl),
-        }
-    }
-}
-impl SectionData for MoveTranslationData {
+impl DataSection for MoveLocaleContainer {
     fn as_any(&self) -> &dyn Any {
         self
     }
+
+    fn get_section_type(&self) -> crate::I18NCore::localisation::SectionType {
+        SectionType::Container
+    }
+
+    fn run_container_index(&self, path: &'static str) -> Option<Box<&dyn DataSection>> {
+        Some(match path {
+            "tackle" => Box::new(&self.tackle),
+            _ => Box::new(&self.growl),
+        })
+    }
+
+    fn run_data_index(&self, _: &'static str) -> Option<&'static str> {
+        None
+    }
 }
 
-pub struct MoveI18n {
+pub struct MoveLocale {
     pub name: &'static str,
     pub desc: &'static str,
 }
 
-impl I18NData for MoveI18n {
-    fn index(&self, path: &'static str) -> &'static str {
-        match path {
-            "desc" => &self.desc,
-            _ => &self.name,
-        }
-    }
-}
-impl SectionData for MoveI18n {
+impl DataSection for MoveLocale {
     fn as_any(&self) -> &dyn Any {
         self
+    }
+
+    fn get_section_type(&self) -> SectionType {
+        SectionType::Data
+    }
+
+    fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
+        Some(match path {
+            "desc" => &self.desc,
+            _ => &self.name,
+        })
+    }
+
+    fn run_container_index(&self, _: &'static str) -> Option<Box<&dyn DataSection>> {
+        None
     }
 }
 

@@ -1,31 +1,32 @@
-use crate::I18NCore::sections::{
-    abilities::AbilityTranslationData,
-    enums::{GenderTranslationData, OtherLanguageData, StatTranslationData, TypesTranslationData},
-    items::ItemTranslationData,
-    moves::MoveTranslationData,
-    natures::NatureTranslationData,
-    pokemon::PokemonTranslationData,
-};
 use std::any::Any;
 
-pub struct Localisation {
-    pub code_name: SingleValued,
-    pub name: SingleValued,
+use crate::I18NCore::sections::{
+    abilities::AbilityLocaleContainer,
+    enums::{GenderLocale, OtherLanguageLocale, StatLocale, TypesLocale},
+    items::ItemLocaleContainer,
+    moves::MoveLocaleContainer,
+    natures::NatureLocale,
+    pokemon::PokemonLocaleContainer,
+};
 
-    pub moves: MoveTranslationData,
-    pub pokemon: PokemonTranslationData,
-    pub nature: NatureTranslationData,
-    pub abilities: AbilityTranslationData,
-    pub gender: GenderTranslationData,
-    pub items: ItemTranslationData,
-    pub stats: StatTranslationData,
-    pub types: TypesTranslationData,
-    pub other_langs: OtherLanguageData,
+pub struct Locale {
+    pub code_name: SingleValuedData,
+    pub name: SingleValuedData,
+
+    pub moves: MoveLocaleContainer,
+    pub pokemon: PokemonLocaleContainer,
+    pub abilities: AbilityLocaleContainer,
+    pub items: ItemLocaleContainer,
+    pub other_langs: OtherLanguageLocale,
+    pub nature: NatureLocale,
+    pub gender: GenderLocale,
+    pub stats: StatLocale,
+    pub types: TypesLocale,
 }
 
 #[allow(dead_code)]
-impl Localisation {
-    pub fn index(&self, path: &'static str) -> Box<&dyn SectionData> {
+impl Locale {
+    pub fn index(&self, path: &'static str) -> Box<&dyn DataSection> {
         match path {
             "code_name" => Box::new(&self.code_name),
             "name" => Box::new(&self.name),
@@ -42,59 +43,41 @@ impl Localisation {
     }
 }
 
-pub struct SingleValued {
+pub struct SingleValuedData {
     pub value: &'static str,
 }
 
-impl SingleValued {
-    pub fn new(value: &'static str) -> SingleValued {
-        SingleValued { value: value }
+impl SingleValuedData {
+    pub fn new(value: &'static str) -> SingleValuedData {
+        SingleValuedData { value: value }
     }
 }
 #[allow(unused_variables)]
-impl I18NData for SingleValued {
-    fn index(&self, path: &'static str) -> &'static str {
-        &self.value
-    }
-}
-impl SectionData for SingleValued {
+impl DataSection for SingleValuedData {
     fn as_any(&self) -> &dyn Any {
         self
     }
+    fn get_section_type(&self) -> SectionType {
+        SectionType::SingleValued
+    }
+    fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
+        Some(&self.value)
+    }
+    fn run_container_index(&self, path: &'static str) -> Option<Box<&dyn DataSection>> {
+        None
+    }
 }
 
-pub trait TranslationData {
-    fn index(&self, path: &'static str) -> Box<&dyn SectionData>;
-}
-pub trait I18NData {
-    fn index(&self, path: &'static str) -> &'static str;
-}
-pub trait SectionData {
+pub trait DataSection {
     fn as_any(&self) -> &dyn Any;
+    fn get_section_type(&self) -> SectionType;
+    fn run_container_index(&self, path: &'static str) -> Option<Box<&dyn DataSection>>;
+    fn run_data_index(&self, path: &'static str) -> Option<&'static str>;
 }
 
-pub struct AvailableLocales {
-    pub locales: Vec<Localisation>,
-    pub current_locale_index: usize,
-}
-
-impl AvailableLocales {
-    pub const fn new() -> AvailableLocales {
-        AvailableLocales {
-            locales: vec![],
-            current_locale_index: 0,
-        }
-    }
-
-    pub fn add_locale(&mut self, locale: Localisation) {
-        self.locales.push(locale)
-    }
-
-    pub fn set_active_locale_index(&mut self, i: usize) {
-        self.current_locale_index = i;
-    }
-
-    pub fn get_active_locale(&self) -> Option<&Localisation> {
-        self.locales.get(self.current_locale_index)
-    }
+#[derive(PartialEq, Eq)]
+pub enum SectionType {
+    SingleValued,
+    Container,
+    Data,
 }

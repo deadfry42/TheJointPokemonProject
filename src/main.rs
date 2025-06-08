@@ -44,6 +44,10 @@ fn main() {
         "Translated string (code_name): {}",
         TranslationKey::new("code_name").convert_to_string()
     );
+    println!(
+        "Translated string (name): {}",
+        TranslationKey::new("name").convert_to_string()
+    );
 
     // let plr = Player {
     //     trainer: Trainer {

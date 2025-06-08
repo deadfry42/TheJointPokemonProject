@@ -1,7 +1,8 @@
-use crate::I18NCore::localisation::{I18NData, SectionData};
 use std::any::Any;
 
-pub struct NatureTranslationData {
+use crate::I18NCore::localisation::{DataSection, SectionType};
+
+pub struct NatureLocale {
     pub hardy: &'static str,
     pub lonely: &'static str,
     pub brave: &'static str,
@@ -29,9 +30,17 @@ pub struct NatureTranslationData {
     pub quirky: &'static str,
 }
 
-impl I18NData for NatureTranslationData {
-    fn index(&self, path: &'static str) -> &'static str {
-        match path {
+impl DataSection for NatureLocale {
+    fn as_any(&self) -> &dyn Any {
+        self
+    }
+
+    fn get_section_type(&self) -> crate::I18NCore::localisation::SectionType {
+        SectionType::Data
+    }
+
+    fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
+        Some(match path {
             "hardy" => &self.hardy,
             "lonely" => &self.lonely,
             "brave" => &self.brave,
@@ -57,11 +66,10 @@ impl I18NData for NatureTranslationData {
             "sassy" => &self.sassy,
             "careful" => &self.careful,
             _ => &self.quirky,
-        }
+        })
     }
-}
-impl SectionData for NatureTranslationData {
-    fn as_any(&self) -> &dyn Any {
-        self
+
+    fn run_container_index(&self, _: &'static str) -> Option<Box<&dyn DataSection>> {
+        None
     }
 }

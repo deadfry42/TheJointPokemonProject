@@ -1,11 +1,8 @@
-use std::{ops::Deref, str::Split};
+use std::str::Split;
 
-use crate::{
-    I18NCore::{
-        localisation::{I18NData, Localisation, SectionData},
-        parsing::get_localisation,
-    },
-    Utils::logger::Logger,
+use crate::I18NCore::{
+    localisation::{DataSection, Locale, SectionType, SingleValuedData},
+    parsing::get_localisation,
 };
 
 pub struct TranslationKey {
@@ -22,76 +19,82 @@ impl TranslationKey {
     }
 
     pub fn convert_to_string(&self) -> &'static str {
-        
-        for key in self.path {
-            // like folder navigation but way more complicated than it should be
-            
-            
-            
+        if self.path.len() == 0 {
+            return "???";
         }
-        
+
+        let locale: &Locale = get_localisation();
+
+        let mut count = -1;
+        let mut truncated_path: Vec<&'static str> = self.path.clone();
+        truncated_path.retain(|_| {
+            // remove first element
+            count += 1;
+            count > 0
+        });
+
+        let mut current_section: Option<Box<&dyn DataSection>> = None;
+
+        // first iteration, for locale, cuz it's different
+        // value from locale base, has to be singlevalued
+        if let Some(first_key) = self.path.get(0) {
+            let basesection: Box<&dyn DataSection> = locale.index(first_key);
+
+            if basesection.get_section_type() == SectionType::Container
+                || basesection.get_section_type() == SectionType::Data
+            {
+                current_section = Some(basesection);
+            } else if let Some(singlevalued) = basesection
+                .as_ref()
+                .as_any()
+                .downcast_ref::<SingleValuedData>()
+            {
+                return singlevalued.value;
+            }
+        } else {
+            return "???";
+        }
+
+        if count <= 0 || current_section.is_none() {
+            return "???";
+        } // count == truncated_path.len()
+
+        for key in truncated_path.iter() {
+            // like folder navigation but way more complicated than it should be
+
+            if let Some(validsection) = &current_section {
+                if validsection.get_section_type() == SectionType::Container {
+                    current_section = validsection.run_container_index(key)
+                } else if validsection.get_section_type() == SectionType::Data {
+                    return validsection.run_data_index(key).unwrap_or("???");
+                } else if let Some(singlevalued) = current_section
+                    .as_ref()
+                    .unwrap()
+                    .as_ref()
+                    .as_any()
+                    .downcast_ref::<SingleValuedData>()
+                {
+                    return singlevalued.value;
+                }
+            }
+
+            // else if let Some(i18n) = current_section
+            //     .as_ref()
+            //     .unwrap()
+            //     .as_any()
+            //     .downcast_ref::<Box<&dyn I18NData>>()
+            // {
+            //     return i18n.index(key);
+            // } else if let Some(translation) = current_section
+            //     .as_ref()
+            //     .unwrap()
+            //     .as_any()
+            //     .downcast_ref::<Box<&dyn TranslationData>>()
+            // {
+            //     current_section = Some(translation.index(key))
+            // }
+        }
+
         "???"
     }
-
-    // pub fn convert_to_string(&self) -> &'static str {
-    // pub fn i18n_value(
-    //     key: &TranslationKey,
-    //     section: Box<&dyn I18NData>,
-    // ) -> Option<&'static str> {
-    //     let last_key: Option<&&'static str> = key.path.get(key.path.len() - 1);
-
-    //     if last_key.is_none() {
-    //         // somethings probably fucked up, lol
-    //         Logger::warn(format!("fucked up @ {}", key.path.join("/")));
-    //         return None;
-    //     }
-
-    //     None
-    // }
-
-    // pub fn section(key: &TranslationKey, index: usize) -> Option<&'static str> {
-    //     let locale: &Localisation = get_localisation();
-
-    //     let index_predicate: Option<&&str> = key.path.get(index);
-
-    //     if index_predicate.is_none() {
-    //         return None;
-    //     }
-
-    //     let section_obj: Box<&dyn SectionData> = locale.index(index_predicate.unwrap());
-
-    //     let i18n_potential = section_obj
-    //         .as_ref()
-    //         .as_any()
-    //         .downcast_ref::<Box<dyn I18NData>>();
-
-    //     if i18n_potential.is_some() {
-    //         i18n_value(key, Box::new(i18n_potential.unwrap().deref()))
-    //     } else {
-    //         // TODO I FORGOT INDEXING
-    //         section(key, index + 1) // recursive
-    //     }
-    // }
-
-    // pub fn intern(key: &TranslationKey) -> Option<&'static str> {
-    //     if key.path.len() < 1 {
-    //         return None;
-    //     } else if key.path.len() == 1 {
-    //         let locale: &Localisation = get_localisation();
-
-    //     }
-
-    //     if key.path.get(0).is_none() {
-    //         return None;
-    //     }
-
-    //     println!("Test");
-
-    //     section(key, 1)
-    // }
-
-    // intern(self).unwrap_or("???")
-    //
-    //     "???"
-    // }
 }
