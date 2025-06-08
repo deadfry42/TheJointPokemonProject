@@ -1,9 +1,9 @@
 name: Tests
 
-on: push
+on: workflow_dispatch
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,3 +22,6 @@ jobs:
 
       - name: Run cargo tests
         run: cargo test --verbose
+
+      - name: Run clippy tests
+        run: cargo clippy --all-targets --all-features

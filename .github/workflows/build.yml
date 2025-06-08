@@ -1,8 +1,30 @@
 name: Build
 
-on: workflow_dispatch
+on: push
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        BUILD_TARGET: [release]
+    steps:
+      - uses: extractions/setup-just@v2
+        with:
+          just-version: 1.40.0
+      - uses: actions/checkout@v4
+
+      - name: Check just works
+        run: just
+
+      - name: Check that cargo works
+        run: cargo
+
+      - name: Run cargo tests
+        run: cargo test --verbose
+
+      - name: Run clippy tests
+        run: cargo clippy --all-targets --all-features
   build:
     runs-on: ubuntu-latest
     strategy:
