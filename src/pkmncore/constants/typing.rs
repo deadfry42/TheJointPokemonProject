@@ -216,92 +216,84 @@ impl fmt::Display for Type {
             Type::Normal => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/normal").convert_to_string()
+                TranslationKey::new("type/normal").convert_to_string()
             ),
             Type::Water => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/water").convert_to_string()
+                TranslationKey::new("type/water").convert_to_string()
             ),
             Type::Fire => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/fire").convert_to_string()
+                TranslationKey::new("type/fire").convert_to_string()
             ),
             Type::Grass => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/grass").convert_to_string()
+                TranslationKey::new("type/grass").convert_to_string()
             ),
             Type::Psychic => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/psychic").convert_to_string()
+                TranslationKey::new("type/psychic").convert_to_string()
             ),
             Type::Ground => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/ground").convert_to_string()
+                TranslationKey::new("type/ground").convert_to_string()
             ),
             Type::Rock => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/rock").convert_to_string()
+                TranslationKey::new("type/rock").convert_to_string()
             ),
-            Type::Bug => write!(
-                f,
-                "{}",
-                TranslationKey::new("types/bug").convert_to_string()
-            ),
+            Type::Bug => write!(f, "{}", TranslationKey::new("type/bug").convert_to_string()),
             Type::Steel => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/steel").convert_to_string()
+                TranslationKey::new("type/steel").convert_to_string()
             ),
             Type::Dark => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/dark").convert_to_string()
+                TranslationKey::new("type/dark").convert_to_string()
             ),
-            Type::Ice => write!(
-                f,
-                "{}",
-                TranslationKey::new("types/ice").convert_to_string()
-            ),
+            Type::Ice => write!(f, "{}", TranslationKey::new("type/ice").convert_to_string()),
             Type::Dragon => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/dragon").convert_to_string()
+                TranslationKey::new("type/dragon").convert_to_string()
             ),
             Type::Fairy => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/fairy").convert_to_string()
+                TranslationKey::new("type/fairy").convert_to_string()
             ),
             Type::Flying => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/flying").convert_to_string()
+                TranslationKey::new("type/flying").convert_to_string()
             ),
             Type::Ghost => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/ghost").convert_to_string()
+                TranslationKey::new("type/ghost").convert_to_string()
             ),
             Type::Fighting => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/fighting").convert_to_string()
+                TranslationKey::new("type/fighting").convert_to_string()
             ),
             Type::Poison => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/poison").convert_to_string()
+                TranslationKey::new("type/poison").convert_to_string()
             ),
             Type::Electric => write!(
                 f,
                 "{}",
-                TranslationKey::new("types/electric").convert_to_string()
+                TranslationKey::new("type/electric").convert_to_string()
             ),
         }
     }

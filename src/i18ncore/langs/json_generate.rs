@@ -111,152 +111,152 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
 
             moves: MoveLocaleContainer {
                 tackle: MoveLocale {
-                    name: v["moves"]["tackle"]["name"]
+                    name: v["move"]["tackle"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.tackle.name),
-                    desc: v["moves"]["tackle"]["desc"]
+                    desc: v["move"]["tackle"]["desc"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.tackle.desc),
                 },
                 growl: MoveLocale {
-                    name: v["moves"]["growl"]["name"]
+                    name: v["move"]["growl"]["name"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.growl.name),
-                    desc: v["moves"]["growl"]["desc"]
+                    desc: v["move"]["growl"]["desc"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.moves.growl.desc),
                 },
             },
 
             nature: NatureLocale {
-                hardy: v["natures"]["hardy"]
+                hardy: v["nature"]["hardy"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.hardy),
-                lonely: v["natures"]["lonely"]
+                lonely: v["nature"]["lonely"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.lonely),
-                brave: v["natures"]["brave"]
+                brave: v["nature"]["brave"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.brave),
-                adamant: v["natures"]["adamant"]
+                adamant: v["nature"]["adamant"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.adamant),
-                naughty: v["natures"]["naughty"]
+                naughty: v["nature"]["naughty"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.naughty),
-                bold: v["natures"]["bold"]
+                bold: v["nature"]["bold"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.bold),
-                docile: v["natures"]["docile"]
+                docile: v["nature"]["docile"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.docile),
-                relaxed: v["natures"]["relaxed"]
+                relaxed: v["nature"]["relaxed"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.relaxed),
-                impish: v["natures"]["impish"]
+                impish: v["nature"]["impish"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.impish),
-                lax: v["natures"]["lax"]
+                lax: v["nature"]["lax"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.lax),
-                timid: v["natures"]["timid"]
+                timid: v["nature"]["timid"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.timid),
-                hasty: v["natures"]["hasty"]
+                hasty: v["nature"]["hasty"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.hasty),
-                serious: v["natures"]["serious"]
+                serious: v["nature"]["serious"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.serious),
-                jolly: v["natures"]["jolly"]
+                jolly: v["nature"]["jolly"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.jolly),
-                naive: v["natures"]["naive"]
+                naive: v["nature"]["naive"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.naive),
-                modest: v["natures"]["modest"]
+                modest: v["nature"]["modest"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.modest),
-                mild: v["natures"]["mild"]
+                mild: v["nature"]["mild"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.mild),
-                quiet: v["natures"]["quiet"]
+                quiet: v["nature"]["quiet"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.quiet),
-                bashful: v["natures"]["bashful"]
+                bashful: v["nature"]["bashful"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.bashful),
-                rash: v["natures"]["rash"]
+                rash: v["nature"]["rash"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.rash),
-                calm: v["natures"]["calm"]
+                calm: v["nature"]["calm"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.calm),
-                gentle: v["natures"]["gentle"]
+                gentle: v["nature"]["gentle"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.gentle),
-                sassy: v["natures"]["sassy"]
+                sassy: v["nature"]["sassy"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.sassy),
-                careful: v["natures"]["careful"]
+                careful: v["nature"]["careful"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.careful),
-                quirky: v["natures"]["quirky"]
+                quirky: v["nature"]["quirky"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.nature.quirky),
             },
 
-            abilities: AbilityLocaleContainer {
+            ability: AbilityLocaleContainer {
                 damp: AbilityLocale {
-                    name: v["abilities"]["damp"]["name"]
+                    name: v["ability"]["damp"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.damp.name),
-                    desc: v["abilities"]["damp"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.ability.damp.name),
+                    desc: v["ability"]["damp"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.damp.desc),
+                        .unwrap_or(en_GB::LOCALISATION.ability.damp.desc),
                 },
                 water_absorb: AbilityLocale {
-                    name: v["abilities"]["water_absorb"]["name"]
+                    name: v["ability"]["water_absorb"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.water_absorb.name),
-                    desc: v["abilities"]["water_absorb"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.ability.water_absorb.name),
+                    desc: v["ability"]["water_absorb"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.water_absorb.desc),
+                        .unwrap_or(en_GB::LOCALISATION.ability.water_absorb.desc),
                 },
                 unaware: AbilityLocale {
-                    name: v["abilities"]["unaware"]["name"]
+                    name: v["ability"]["unaware"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.unaware.name),
-                    desc: v["abilities"]["unaware"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.ability.unaware.name),
+                    desc: v["ability"]["unaware"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.unaware.name),
+                        .unwrap_or(en_GB::LOCALISATION.ability.unaware.name),
                 },
                 overgrow: AbilityLocale {
-                    name: v["abilities"]["overgrow"]["name"]
+                    name: v["ability"]["overgrow"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.overgrow.name),
-                    desc: v["abilities"]["overgrow"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.ability.overgrow.name),
+                    desc: v["ability"]["overgrow"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.overgrow.name),
+                        .unwrap_or(en_GB::LOCALISATION.ability.overgrow.name),
                 },
                 chlorophyll: AbilityLocale {
-                    name: v["abilities"]["chlorophyll"]["name"]
+                    name: v["ability"]["chlorophyll"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.chlorophyll.name),
-                    desc: v["abilities"]["chlorophyll"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.ability.chlorophyll.name),
+                    desc: v["ability"]["chlorophyll"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.abilities.chlorophyll.name),
+                        .unwrap_or(en_GB::LOCALISATION.ability.chlorophyll.name),
                 },
             },
 
             gender: GenderLocale {
-                male: v["genders"]["male"]
+                male: v["gender"]["male"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.gender.male),
-                female: v["genders"]["female"]
+                female: v["gender"]["female"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.gender.female),
-                unknown: v["genders"]["unknown"]
+                unknown: v["gender"]["unknown"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.gender.unknown),
             },
@@ -267,99 +267,99 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     .unwrap_or(en_GB::LOCALISATION.other_langs.english),
             },
 
-            items: ItemLocaleContainer {
+            item: ItemLocaleContainer {
                 lucky_egg: ItemLocale {
-                    name: v["items"]["lucky_egg"]["name"]
+                    name: v["item"]["lucky_egg"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.items.lucky_egg.name),
-                    desc: v["items"]["lucky_egg"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.item.lucky_egg.name),
+                    desc: v["item"]["lucky_egg"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.items.lucky_egg.desc),
+                        .unwrap_or(en_GB::LOCALISATION.item.lucky_egg.desc),
                 },
                 connection_wire: ItemLocale {
-                    name: v["items"]["connection_wire"]["name"]
+                    name: v["item"]["connection_wire"]["name"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.items.connection_wire.name),
-                    desc: v["items"]["connection_wire"]["desc"]
+                        .unwrap_or(en_GB::LOCALISATION.item.connection_wire.name),
+                    desc: v["item"]["connection_wire"]["desc"]
                         .as_str()
-                        .unwrap_or(en_GB::LOCALISATION.items.connection_wire.desc),
+                        .unwrap_or(en_GB::LOCALISATION.item.connection_wire.desc),
                 },
             },
 
-            stats: StatLocale {
-                health: v["stats"]["health"]
+            stat: StatLocale {
+                health: v["stat"]["health"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.health),
-                speed: v["stats"]["speed"]
+                    .unwrap_or(en_GB::LOCALISATION.stat.health),
+                speed: v["stat"]["speed"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.speed),
-                attack: v["stats"]["attack"]
+                    .unwrap_or(en_GB::LOCALISATION.stat.speed),
+                attack: v["stat"]["attack"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.attack),
-                defense: v["stats"]["defense"]
+                    .unwrap_or(en_GB::LOCALISATION.stat.attack),
+                defense: v["stat"]["defense"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.defense),
-                special_attack: v["stats"]["special_attack"]
+                    .unwrap_or(en_GB::LOCALISATION.stat.defense),
+                special_attack: v["stat"]["special_attack"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.special_attack),
-                special_defense: v["stats"]["special_defense"]
+                    .unwrap_or(en_GB::LOCALISATION.stat.special_attack),
+                special_defense: v["stat"]["special_defense"]
                     .as_str()
-                    .unwrap_or(en_GB::LOCALISATION.stats.special_defense),
+                    .unwrap_or(en_GB::LOCALISATION.stat.special_defense),
             },
 
             types: TypesLocale {
-                normal: v["types"]["normal"]
+                normal: v["type"]["normal"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.normal),
-                water: v["types"]["water"]
+                water: v["type"]["water"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.water),
-                fire: v["types"]["fire"]
+                fire: v["type"]["fire"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.fire),
-                grass: v["types"]["grass"]
+                grass: v["type"]["grass"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.grass),
-                psychic: v["types"]["psychic"]
+                psychic: v["type"]["psychic"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.psychic),
-                ground: v["types"]["ground"]
+                ground: v["type"]["ground"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.ground),
-                rock: v["types"]["rock"]
+                rock: v["type"]["rock"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.rock),
-                bug: v["types"]["bug"]
+                bug: v["type"]["bug"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.bug),
-                steel: v["types"]["steel"]
+                steel: v["type"]["steel"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.steel),
-                dark: v["types"]["dark"]
+                dark: v["type"]["dark"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.dark),
-                ice: v["types"]["ice"]
+                ice: v["type"]["ice"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.ice),
-                dragon: v["types"]["dragon"]
+                dragon: v["type"]["dragon"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.dragon),
-                fairy: v["types"]["fairy"]
+                fairy: v["type"]["fairy"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.fairy),
-                flying: v["types"]["flying"]
+                flying: v["type"]["flying"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.flying),
-                ghost: v["types"]["ghost"]
+                ghost: v["type"]["ghost"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.ghost),
-                fighting: v["types"]["fighting"]
+                fighting: v["type"]["fighting"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.fighting),
-                poison: v["types"]["poison"]
+                poison: v["type"]["poison"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.poison),
-                electric: v["types"]["electric"]
+                electric: v["type"]["electric"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.electric),
             },

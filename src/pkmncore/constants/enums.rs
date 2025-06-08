@@ -37,32 +37,32 @@ impl fmt::Display for Stat {
             Stat::Health => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/health").convert_to_string()
+                TranslationKey::new("stat/health").convert_to_string()
             ),
             Stat::Speed => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/speed").convert_to_string()
+                TranslationKey::new("stat/speed").convert_to_string()
             ),
             Stat::Attack => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/attack").convert_to_string()
+                TranslationKey::new("stat/attack").convert_to_string()
             ),
             Stat::Defense => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/defense").convert_to_string()
+                TranslationKey::new("stat/defense").convert_to_string()
             ),
             Stat::SpecialAttack => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/special_attack").convert_to_string()
+                TranslationKey::new("stat/special_attack").convert_to_string()
             ),
             Stat::SpecialDefence => write!(
                 f,
                 "{}",
-                TranslationKey::new("stats/special_defense").convert_to_string()
+                TranslationKey::new("stat/special_defense").convert_to_string()
             ),
         }
     }

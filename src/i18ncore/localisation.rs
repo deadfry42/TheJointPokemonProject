@@ -14,15 +14,15 @@ pub struct Locale {
     pub code_name: SingleValuedData,
     pub name: SingleValuedData,
 
-    pub moves: MoveLocaleContainer,
+    pub moves: MoveLocaleContainer, // move
     pub pokemon: PokemonLocaleContainer,
-    pub abilities: AbilityLocaleContainer,
-    pub items: ItemLocaleContainer,
+    pub ability: AbilityLocaleContainer,
+    pub item: ItemLocaleContainer,
     pub other_langs: OtherLanguageLocale,
     pub nature: NatureLocale,
     pub gender: GenderLocale,
-    pub stats: StatLocale,
-    pub types: TypesLocale,
+    pub stat: StatLocale,
+    pub types: TypesLocale, // type
 }
 
 #[allow(dead_code)]
@@ -31,13 +31,13 @@ impl Locale {
         match path {
             "code_name" => Box::new(&self.code_name),
             "name" => Box::new(&self.name),
-            "moves" => Box::new(&self.moves),
+            "move" => Box::new(&self.moves),
             "nature" => Box::new(&self.nature),
-            "abilities" => Box::new(&self.abilities),
+            "ability" => Box::new(&self.ability),
             "gender" => Box::new(&self.gender),
-            "items" => Box::new(&self.items),
-            "stats" => Box::new(&self.stats),
-            "types" => Box::new(&self.types),
+            "item" => Box::new(&self.item),
+            "stat" => Box::new(&self.stat),
+            "type" => Box::new(&self.types),
             "other_langs" => Box::new(&self.other_langs),
             _ => Box::new(&self.pokemon),
         }

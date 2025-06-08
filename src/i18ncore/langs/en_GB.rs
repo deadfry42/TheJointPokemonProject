@@ -71,7 +71,7 @@ pub const LOCALISATION: Locale = Locale {
         quirky: "Quirky",
     },
 
-    abilities: AbilityLocaleContainer {
+    ability: AbilityLocaleContainer {
         damp: AbilityLocale {
             name: "Damp",
             desc: "Test",
@@ -102,7 +102,7 @@ pub const LOCALISATION: Locale = Locale {
 
     other_langs: OtherLanguageLocale { english: "English" },
 
-    items: ItemLocaleContainer {
+    item: ItemLocaleContainer {
         lucky_egg: ItemLocale {
             name: "Lucky Egg",
             desc: "Test",
@@ -113,7 +113,7 @@ pub const LOCALISATION: Locale = Locale {
         },
     },
 
-    stats: StatLocale {
+    stat: StatLocale {
         health: "Health",
         speed: "Speed",
         attack: "Attack",

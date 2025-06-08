@@ -24,7 +24,7 @@
       "dex": "Test"
     }
   },
-  "items": {
+  "item": {
     "lucky_egg": {
       "name": "Lucky Egg",
       "desc": "Test"
@@ -34,7 +34,7 @@
       "desc": "Test"
     }
   },
-  "moves": {
+  "move": {
     "tackle": {
       "name": "Tackle",
       "desc": "A physical attack in which the user charges and slams into the target with its whole body."
@@ -44,7 +44,7 @@
       "desc": "The user growls in an endearing way, making opposing Pokémon less wary. This lowers their Attack stats."
     }
   },
-  "abilities": {
+  "ability": {
     "damp": {
       "name": "Damp",
       "desc": "Test"
@@ -93,7 +93,7 @@
     "careful": "Careful",
     "quirky": "Quirky"
   },
-  "stats": {
+  "stat": {
     "health": "Health",
     "speed": "Speed",
     "attack": "Attack",
@@ -101,7 +101,7 @@
     "special_attack": "Sp. Attack",
     "special_defense": "Sp. Defense"
   },
-  "types": {
+  "type": {
     "normal": "Normal",
     "water": "Water",
     "fire": "Fire",

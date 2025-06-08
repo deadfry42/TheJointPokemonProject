@@ -5,6 +5,7 @@ use std::sync::Mutex;
 
 use crate::assetcore::gamedata::GameData;
 use crate::i18ncore::loaded::LoadedLocales;
+use crate::pkmncore::constants::typing::Type;
 use crate::{assetcore::assets::check_for_assets, i18ncore::keys::TranslationKey};
 use crate::{i18ncore::parsing::*, pkmncore::constants::natures::Nature};
 

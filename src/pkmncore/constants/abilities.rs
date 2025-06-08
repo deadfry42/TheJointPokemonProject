@@ -17,27 +17,27 @@ impl fmt::Display for Ability {
             Ability::Damp => write!(
                 f,
                 "{}",
-                TranslationKey::new("abilities/damp/name").convert_to_string()
+                TranslationKey::new("ability/damp/name").convert_to_string()
             ),
             Ability::WaterAbsorb => write!(
                 f,
                 "{}",
-                TranslationKey::new("abilities/water_absorb/name").convert_to_string()
+                TranslationKey::new("ability/water_absorb/name").convert_to_string()
             ),
             Ability::Unaware => write!(
                 f,
                 "{}",
-                TranslationKey::new("abilities/unaware/name").convert_to_string()
+                TranslationKey::new("ability/unaware/name").convert_to_string()
             ),
             Ability::Overgrow => write!(
                 f,
                 "{}",
-                TranslationKey::new("abilities/overgrow/name").convert_to_string()
+                TranslationKey::new("ability/overgrow/name").convert_to_string()
             ),
             Ability::Chlorophyll => write!(
                 f,
                 "{}",
-                TranslationKey::new("abilities/chlorophyll/name").convert_to_string()
+                TranslationKey::new("ability/chlorophyll/name").convert_to_string()
             ),
         }
     }

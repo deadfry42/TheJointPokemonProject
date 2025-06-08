@@ -14,12 +14,12 @@ impl fmt::Display for Item {
             Item::LuckyEgg => write!(
                 f,
                 "{}",
-                TranslationKey::new("items/lucky_egg").convert_to_string()
+                TranslationKey::new("item/lucky_egg").convert_to_string()
             ),
             Item::ConnectionWire => write!(
                 f,
                 "{}",
-                TranslationKey::new("items/connection_wire").convert_to_string()
+                TranslationKey::new("item/connection_wire").convert_to_string()
             ),
         }
     }

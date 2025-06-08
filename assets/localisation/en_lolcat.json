@@ -24,7 +24,7 @@
       "dex": "Test"
     }
   },
-  "items": {
+  "item": {
     "lucky_egg": {
       "name": "epic chicken baby",
       "desc": "Test"
@@ -34,7 +34,7 @@
       "desc": "Test"
     }
   },
-  "moves": {
+  "move": {
     "tackle": {
       "name": "tackle",
       "desc": "attak the other cat"
@@ -44,7 +44,7 @@
       "desc": "meow at the other cats to reduce their attax"
     }
   },
-  "abilities": {
+  "ability": {
     "damp": {
       "name": "wet cat",
       "desc": "Test"
@@ -93,7 +93,7 @@
     "careful": "keep things _on_ counter",
     "quirky": "quirk cat"
   },
-  "stats": {
+  "stat": {
     "health": "helf",
     "speed": "zoomies",
     "attack": "scratch power",
@@ -101,7 +101,7 @@
     "special_attack": "super scratch power",
     "special_defense": "super hiss"
   },
-  "types": {
+  "type": {
     "normal": "rat",
     "water": "fish",
     "fire": "hot stuffs",

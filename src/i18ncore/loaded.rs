@@ -1,7 +1,4 @@
-use std::{
-    collections::HashMap,
-    fmt::{Error, Result},
-};
+use std::collections::HashMap;
 
 use crate::{i18ncore::localisation::Locale, utils::logger::Logger};
 
