@@ -44,18 +44,17 @@ pub fn determine_held_item(items: &[PokemonHeldItem]) -> Option<Item> {
 }
 
 #[allow(dead_code)]
+#[allow(clippy::if_same_then_else)]
 pub fn determine_ability(personality: &u32, pkmn: &PokemonBase) -> Ability {
     let ability1: &Ability = &pkmn.abilities.ability1;
     let ability2: &Option<Ability> = &pkmn.abilities.ability2;
 
     if ability2.is_none() {
         *ability1
+    } else if ((personality / 65536) % 2) == 0 {
+        *ability1
     } else {
-        if ((personality / 65536) % 2) == 0 {
-            *ability1
-        } else {
-            *ability2.as_ref().unwrap()
-        }
+        *ability2.as_ref().unwrap()
     }
 }
 

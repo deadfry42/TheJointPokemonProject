@@ -49,7 +49,7 @@ pub struct SingleValuedData {
 
 impl SingleValuedData {
     pub fn new(value: &'static str) -> SingleValuedData {
-        SingleValuedData { value: value }
+        SingleValuedData { value }
     }
 }
 #[allow(unused_variables)]
@@ -61,7 +61,7 @@ impl DataSection for SingleValuedData {
         SectionType::SingleValued
     }
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
-        Some(&self.value)
+        Some(self.value)
     }
     fn run_container_index(&self, path: &'static str) -> Option<Box<&dyn DataSection>> {
         None

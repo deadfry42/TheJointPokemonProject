@@ -25,7 +25,7 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
     let paths = get_asset_folder("localisation")?;
     let mut locales: Vec<Locale> = vec![];
     for path in paths {
-        let data: String = fs::read_to_string((&path).as_ref().unwrap().path()).unwrap();
+        let data: String = fs::read_to_string(path.as_ref().unwrap().path()).unwrap();
         let v: &'static mut Value = Box::leak(Box::new(serde_json::from_str::<Value>(&data)?));
 
         let code_name = v["code_name"].as_str();
@@ -36,7 +36,7 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
             // ignore locale files without "name" and/or "code_name" values
             Logger::warn(format!(
                 "Locale file {} is invalid, and will not be loaded!",
-                (&path).as_ref().unwrap().path().display()
+                path.as_ref().unwrap().path().display()
             ));
             continue;
         }
@@ -45,14 +45,14 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
             if file_ver.unwrap() != recommended_version {
                 Logger::warn(format!(
                     "Locale file {}'s version (v{}) is compatible, but out of date! Consider refactoring it!",
-                    (&path).as_ref().unwrap().path().display(),
+                    path.as_ref().unwrap().path().display(),
                     file_ver.unwrap()
                 ));
             }
         } else {
             Logger::warn(format!(
                 "Locale file {}'s version (v{}) is incompatible with this version, and will not be loaded!",
-                (&path).as_ref().unwrap().path().display(),
+                path.as_ref().unwrap().path().display(),
                 file_ver.unwrap()
             ));
             continue;

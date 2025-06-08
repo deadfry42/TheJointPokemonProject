@@ -19,9 +19,9 @@ impl DataSection for GenderLocale {
 
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
         Some(match path {
-            "male" => &self.male,
-            "female" => &self.female,
-            _ => &self.unknown,
+            "male" => self.male,
+            "female" => self.female,
+            _ => self.unknown,
         })
     }
 
@@ -50,12 +50,12 @@ impl DataSection for StatLocale {
 
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
         Some(match path {
-            "health" => &self.health,
-            "speed" => &self.speed,
-            "attack" => &self.attack,
-            "defense" => &self.defense,
-            "special_attack" => &self.special_attack,
-            _ => &self.special_defense,
+            "health" => self.health,
+            "speed" => self.speed,
+            "attack" => self.attack,
+            "defense" => self.defense,
+            "special_attack" => self.special_attack,
+            _ => self.special_defense,
         })
     }
 
@@ -79,8 +79,8 @@ impl DataSection for OtherLanguageLocale {
 
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
         Some(match path {
-            "english" => &self.english,
-            _ => &self.english,
+            "english" => self.english,
+            _ => self.english,
         })
     }
 
@@ -121,24 +121,24 @@ impl DataSection for TypesLocale {
 
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
         Some(match path {
-            "normal" => &self.normal,
-            "water" => &self.water,
-            "fire" => &self.fire,
-            "grass" => &self.grass,
-            "psychic" => &self.psychic,
-            "ground" => &self.ground,
-            "rock" => &self.rock,
-            "bug" => &self.bug,
-            "steel" => &self.steel,
-            "dark" => &self.dark,
-            "ice" => &self.ice,
-            "dragon" => &self.dragon,
-            "fairy" => &self.fairy,
-            "flying" => &self.flying,
-            "ghost" => &self.ghost,
-            "fighting" => &self.fighting,
-            "poison" => &self.poison,
-            _ => &self.electric,
+            "normal" => self.normal,
+            "water" => self.water,
+            "fire" => self.fire,
+            "grass" => self.grass,
+            "psychic" => self.psychic,
+            "ground" => self.ground,
+            "rock" => self.rock,
+            "bug" => self.bug,
+            "steel" => self.steel,
+            "dark" => self.dark,
+            "ice" => self.ice,
+            "dragon" => self.dragon,
+            "fairy" => self.fairy,
+            "flying" => self.flying,
+            "ghost" => self.ghost,
+            "fighting" => self.fighting,
+            "poison" => self.poison,
+            _ => self.electric,
         })
     }
 

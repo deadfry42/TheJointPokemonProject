@@ -50,8 +50,8 @@ impl DataSection for AbilityLocale {
 
     fn run_data_index(&self, path: &'static str) -> Option<&'static str> {
         Some(match path {
-            "desc" => &self.desc,
-            _ => &self.name,
+            "desc" => self.desc,
+            _ => self.name,
         })
     }
 

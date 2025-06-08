@@ -13,19 +13,19 @@ pub fn check_for_assets() -> bool {
 }
 
 pub fn get_working_directory() -> std::io::Result<PathBuf> {
-    Ok(current_dir()?)
+    current_dir()
 }
 
 pub fn get_assets_folder() -> std::io::Result<ReadDir> {
-    Ok(std::fs::read_dir(format!("{}/", ASSETS_PATH))?)
+    std::fs::read_dir(format!("{}/", ASSETS_PATH))
 }
 
 pub fn get_asset(path: &str) -> std::io::Result<File> {
-    Ok(File::open(format!("{}/{}", ASSETS_PATH, path))?)
+    File::open(format!("{}/{}", ASSETS_PATH, path))
 }
 
 pub fn get_asset_folder(path: &str) -> std::io::Result<ReadDir> {
-    Ok(fs::read_dir(format!("{}/{}", ASSETS_PATH, path))?)
+    fs::read_dir(format!("{}/{}", ASSETS_PATH, path))
 }
 
 pub fn get_compiling_platform() -> &'static str {

@@ -7,6 +7,12 @@ pub struct AvailableLocales {
     pub current_locale_index: usize,
 }
 
+impl Default for AvailableLocales {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 impl AvailableLocales {
     pub const fn new() -> AvailableLocales {
         AvailableLocales {

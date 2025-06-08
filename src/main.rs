@@ -17,7 +17,7 @@ pub mod pkmncore;
 pub mod utils;
 
 #[allow(dead_code)]
-const GAME_VERSION: &'static str = "v0.0-beta";
+const GAME_VERSION: &str = "v0.0-beta";
 
 fn main() {
     check_for_assets();

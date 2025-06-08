@@ -59,12 +59,10 @@ impl PokemonBase {
     pub fn get_gender(&self, gender_float: f32) -> Gender {
         if self.gender_ratio.is_none() {
             Gender::Unknown
+        } else if gender_float < self.gender_ratio.unwrap() {
+            Gender::Male
         } else {
-            if gender_float < self.gender_ratio.unwrap() {
-                Gender::Male
-            } else {
-                Gender::Female
-            }
+            Gender::Female
         }
     }
 }

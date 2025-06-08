@@ -19,7 +19,7 @@ impl TranslationKey {
     }
 
     pub fn convert_to_string(&self) -> &'static str {
-        if self.path.len() == 0 {
+        if self.path.is_empty() {
             return "???";
         }
 
@@ -37,7 +37,7 @@ impl TranslationKey {
 
         // first iteration, for locale, cuz it's different
         // value from locale base, has to be singlevalued
-        if let Some(first_key) = self.path.get(0) {
+        if let Some(first_key) = self.path.first() {
             let basesection: Box<&dyn DataSection> = locale.index(first_key);
 
             if basesection.get_section_type() == SectionType::Container
