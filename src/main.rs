@@ -8,7 +8,6 @@ use crate::i18ncore::loaded::LoadedLocales;
 use crate::i18ncore::parsing::*;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::items::*;
-use crate::pkmncore::constants::location::GameLocation;
 use crate::pkmncore::constants::moves::MoveType;
 
 use crate::pkmncore::boxes::pc::*;
@@ -51,7 +50,7 @@ fn main() {
     get_game_data()
         .unwrap()
         .loaded_locales
-        .set_selected_locale("en_GB");
+        .set_selected_locale("en_lolcat");
 
     let plr = Player {
         trainer: Trainer {
@@ -68,8 +67,17 @@ fn main() {
         party: [None, None, None, None, None, None],
     };
 
-    let wooper = generate_wild_pokemon(Pokemon::Foliwli, 69, &plr);
+    let wooper = generate_wild_pokemon(Pokemon::Foliwli, 5, &plr);
 
+    println!(
+        "name: {}",
+        wooper
+            .base
+            .get_base()
+            .translation_path
+            .get_name()
+            .convert_to_string()
+    );
     println!("health evs: {}", wooper.get_ev(&Stat::Health));
     println!("health ivs: {}", wooper.get_iv(&Stat::Health));
     println!("nature: {}", wooper.nature);

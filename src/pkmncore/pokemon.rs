@@ -1,6 +1,7 @@
 use crate::{
     i18ncore::keys::TranslationKey,
     pkmncore::{constants::moves::Move, evolution::Evolution, moves::LearntMove},
+    utils::strings::*,
 };
 
 use super::{
@@ -14,10 +15,10 @@ use super::{
 
 #[allow(dead_code)]
 pub struct PokemonBase {
-    pub name: TranslationKey,
+    pub translation_path: PokemonTranslation,
     pub types: TypeSet,
     pub pkmn: Pokemon,
-    pub pokedex: PokedexInfo,
+    pub pokedex_info: PokedexInfo,
     pub base_stats: BaseStats,
     pub catch_rate: u8,
     pub base_friendship: u8,
@@ -33,15 +34,37 @@ pub struct PokemonBase {
     pub evolution: Option<Box<dyn Evolution>>,
 }
 
+pub struct PokemonTranslation {
+    pub path: &'static str,
+}
+
+impl PokemonTranslation {
+    pub fn new(path: &'static str) -> PokemonTranslation {
+        PokemonTranslation { path: path }
+    }
+
+    pub fn get_name(&self) -> TranslationKey {
+        TranslationKey::new(concatenate_strings(self.path, "name"))
+    }
+
+    pub fn get_species(&self) -> TranslationKey {
+        TranslationKey::new(concatenate_strings(self.path, "species"))
+    }
+
+    pub fn get_entry(&self) -> TranslationKey {
+        TranslationKey::new(concatenate_strings(self.path, "dex"))
+    }
+}
+
 #[allow(dead_code)]
 impl PokemonBase {
     pub fn summarise(&self) -> String {
         format!(
             "Pokemon {}\nType1: {}\nPokedexInfo: {}, {}\nStats: {}hp, {}spd, {}atk, {}def, {}spatk, {}spdef\nCatch rate: {}\nFriendship: {}\nGender Ratio: {}% to be Male.\nEgg cycles: {}\nAbility1: {}",
-            self.name.convert_to_string(),
+            self.translation_path.get_name().convert_to_string(),
             self.types.type1,
-            self.pokedex.species.convert_to_string(),
-            self.pokedex.entry.convert_to_string(),
+            self.translation_path.get_species().convert_to_string(),
+            self.translation_path.get_entry().convert_to_string(),
             self.base_stats.health,
             self.base_stats.speed,
             self.base_stats.atk,
@@ -154,11 +177,8 @@ pub struct IVs {
 
 #[allow(dead_code)]
 pub struct PokedexInfo {
-    pub index: i32,
     pub height: f64,
     pub weight: f64,
-    pub species: TranslationKey,
-    pub entry: TranslationKey,
 }
 
 #[allow(dead_code)]

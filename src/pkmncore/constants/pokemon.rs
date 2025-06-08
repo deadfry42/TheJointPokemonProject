@@ -1,4 +1,3 @@
-use crate::i18ncore::keys::TranslationKey;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::moves::Move;
 use crate::pkmncore::evolution::*;
@@ -31,14 +30,11 @@ impl PokemonType for Pokemon {
     fn get_base(&self) -> PokemonBase {
         match self {
             Pokemon::Bulbasaur => PokemonBase {
-                name: TranslationKey::new("pokemon/bulbasaur/name"),
+                translation_path: PokemonTranslation::new("pokemon/bulbasaur/"),
                 pkmn: Pokemon::Bulbasaur,
-                pokedex: PokedexInfo {
-                    index: 1,
+                pokedex_info: PokedexInfo {
                     height: 0.7,
                     weight: 6.9,
-                    species: TranslationKey::new("pokemon/bulbasaur/species"),
-                    entry: TranslationKey::new("pokemon/bulbasaur/dex"),
                 },
                 ev_yield: EVs {
                     health: None,
@@ -85,14 +81,11 @@ impl PokemonType for Pokemon {
                 base_exp: 64,
             },
             Pokemon::Ivysaur => PokemonBase {
-                name: TranslationKey::new("pokemon/ivysaur/name"),
+                translation_path: PokemonTranslation::new("pokemon/ivysaur/"),
                 pkmn: Pokemon::Ivysaur,
-                pokedex: PokedexInfo {
-                    index: 2,
+                pokedex_info: PokedexInfo {
                     height: 1.0,
                     weight: 13.0,
-                    species: TranslationKey::new("pokemon/ivysaur/species"),
-                    entry: TranslationKey::new("pokemon/ivysaur/dex"),
                 },
                 ev_yield: EVs {
                     health: None,
@@ -139,14 +132,11 @@ impl PokemonType for Pokemon {
                 base_exp: 142,
             },
             Pokemon::Venusaur => PokemonBase {
-                name: TranslationKey::new("pokemon/venusaur/name"),
+                translation_path: PokemonTranslation::new("pokemon/venusaur/"),
                 pkmn: Pokemon::Venusaur,
-                pokedex: PokedexInfo {
-                    index: 3,
+                pokedex_info: PokedexInfo {
                     height: 2.0,
                     weight: 100.0,
-                    species: TranslationKey::new("pokemon/venusaur/species"),
-                    entry: TranslationKey::new("pokemon/venusaur/dex"),
                 },
                 ev_yield: EVs {
                     health: None,
@@ -190,14 +180,11 @@ impl PokemonType for Pokemon {
                 base_exp: 236,
             },
             Pokemon::Wooper => PokemonBase {
-                name: TranslationKey::new("pokemon/wooper/name"),
+                translation_path: PokemonTranslation::new("pokemon/wooper/"),
                 pkmn: Pokemon::Wooper,
-                pokedex: PokedexInfo {
-                    index: 194,
+                pokedex_info: PokedexInfo {
                     height: 0.4,
                     weight: 8.5,
-                    species: TranslationKey::new("pokemon/wooper/species"),
-                    entry: TranslationKey::new("pokemon/wooper/dex"),
                 },
                 ev_yield: EVs {
                     health: Some(1),
@@ -241,14 +228,11 @@ impl PokemonType for Pokemon {
                 base_exp: 42,
             },
             Pokemon::Foliwli => PokemonBase {
-                name: TranslationKey::new("pokemon/foliwi/name"),
+                translation_path: PokemonTranslation::new("pokemon/foliwi/"),
                 pkmn: Pokemon::Foliwli,
-                pokedex: PokedexInfo {
-                    index: 1,
+                pokedex_info: PokedexInfo {
                     height: 0.4,
                     weight: 2.5,
-                    species: TranslationKey::new("pokemon/foliwi/species"),
-                    entry: TranslationKey::new("pokemon/foliwi/dex"),
                 },
                 ev_yield: EVs {
                     health: None,
