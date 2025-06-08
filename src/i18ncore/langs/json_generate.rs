@@ -19,8 +19,8 @@ use std::fs;
 use std::io::Result;
 
 pub fn parse_json_files() -> Result<Vec<Locale>> {
-    let compatible_versions: Vec<i64> = vec![1];
-    let recommended_version: i64 = 1;
+    let compatible_versions: Vec<i64> = vec![2];
+    let recommended_version: i64 = 2;
 
     let paths = get_asset_folder("localisation")?;
     let mut locales: Vec<Locale> = vec![];

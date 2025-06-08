@@ -5,6 +5,8 @@ use std::sync::Mutex;
 
 use crate::assetcore::gamedata::GameData;
 use crate::i18ncore::loaded::LoadedLocales;
+use crate::pkmncore::constants::enums::Gender;
+use crate::pkmncore::constants::moves::{Move, MoveType};
 use crate::pkmncore::constants::typing::Type;
 use crate::{assetcore::assets::check_for_assets, i18ncore::keys::TranslationKey};
 use crate::{i18ncore::parsing::*, pkmncore::constants::natures::Nature};
@@ -52,11 +54,6 @@ fn main() {
     );
 
     println!(
-        "Translated string (pokemon/bulbasaur/species): {}",
-        Pokemon::Bulbasaur.get_base().name.convert_to_string()
-    );
-    println!("Translated string (nature/quirky): {}", Nature::Quirky);
-    println!(
         "Translated string (code_name): {}",
         TranslationKey::new("code_name").convert_to_string()
     );
@@ -64,6 +61,17 @@ fn main() {
         "Translated string (name): {}",
         TranslationKey::new("name").convert_to_string()
     );
+    println!(
+        "Translated string (pokemon/bulbasaur/species): {}",
+        Pokemon::Bulbasaur.get_base().name.convert_to_string()
+    );
+    println!("Translated string (type/fire): {}", Type::Fire);
+    println!("Translated string (gender/male): {}", Gender::Male);
+    println!(
+        "Translated string (move/tackle/desc): {}",
+        Move::Tackle.get_base().desc.convert_to_string()
+    );
+    println!("Translated string (nature/quirky): {}", Nature::Quirky);
 
     // let plr = Player {
     //     trainer: Trainer {
