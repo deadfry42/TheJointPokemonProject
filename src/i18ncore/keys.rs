@@ -77,22 +77,6 @@ impl TranslationKey {
                     return singlevalued.value;
                 }
             }
-
-            // else if let Some(i18n) = current_section
-            //     .as_ref()
-            //     .unwrap()
-            //     .as_any()
-            //     .downcast_ref::<Box<&dyn I18NData>>()
-            // {
-            //     return i18n.index(key);
-            // } else if let Some(translation) = current_section
-            //     .as_ref()
-            //     .unwrap()
-            //     .as_any()
-            //     .downcast_ref::<Box<&dyn TranslationData>>()
-            // {
-            //     current_section = Some(translation.index(key))
-            // }
         }
 
         "???"
