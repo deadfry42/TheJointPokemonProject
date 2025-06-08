@@ -23,7 +23,7 @@ impl TranslationKey {
             return "???";
         }
 
-        let locale: &Locale = get_localisation();
+        let locale: Locale = get_localisation();
 
         let mut count = -1;
         let mut truncated_path: Vec<&'static str> = self.path.clone();

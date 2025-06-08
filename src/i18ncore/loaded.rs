@@ -30,12 +30,9 @@ impl LoadedLocales {
         }
     }
 
-    pub fn set_selected_locale(&mut self, name: &'static str) -> Result {
+    pub fn set_selected_locale(&mut self, name: &'static str) {
         if let Some(_) = self.get_locale(name) {
             self.selected = Some(name);
-            Result::Ok(())
-        } else {
-            Result::Err(Error)
         }
     }
 

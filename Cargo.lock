@@ -314,6 +314,7 @@ version = "0.1.0"
 dependencies = [
  "chrono",
  "current_platform",
+ "lazy_static",
  "rand",
  "sdl3",
  "serde",

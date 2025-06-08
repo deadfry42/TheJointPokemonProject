@@ -1,11 +1,14 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
+use lazy_static::lazy_static;
 use pkmncore::constants::pokemon::*;
-use std::sync::{LazyLock, Mutex};
+use std::sync::Mutex;
 
 use crate::assetcore::gamedata::GameData;
 use crate::i18ncore::loaded::LoadedLocales;
 use crate::{assetcore::assets::check_for_assets, i18ncore::keys::TranslationKey};
 use crate::{i18ncore::parsing::*, pkmncore::constants::natures::Nature};
+
+extern crate lazy_static;
 
 pub mod assetcore;
 pub mod i18ncore;
@@ -15,16 +18,32 @@ pub mod utils;
 #[allow(dead_code)]
 const GAME_VERSION: &str = "v0.0-beta";
 
-pub static GAME_DATA: LazyLock<Mutex<GameData>> = LazyLock::new(|| {
-    Mutex::new(GameData {
-        loaded_locales: LoadedLocales::new(),
-    })
-});
+// pub static GAME_DATA: LazyLock<Mutex<GameData>> = LazyLock::new(|| {
+//     Mutex::new(GameData {
+//         loaded_locales: LoadedLocales::new(),
+//     })
+// });
+
+lazy_static! {
+    pub static ref GAME_DATA: Mutex<GameData> = Mutex::new(GameData {
+        loaded_locales: LoadedLocales::new()
+    });
+}
+
+pub fn get_game_data() -> Option<std::sync::MutexGuard<'static, GameData>> {
+    // TODO: verify this is a good way to do this :)
+    Some(GAME_DATA.lock().unwrap())
+}
 
 fn main() {
     check_for_assets();
 
     load_localisation();
+
+    get_game_data()
+        .unwrap()
+        .loaded_locales
+        .set_selected_locale("en_lolcat");
 
     println!(
         "Hello, world from {}! I was compiled on {}.",
