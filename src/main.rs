@@ -8,6 +8,7 @@ use crate::i18ncore::loaded::LoadedLocales;
 use crate::i18ncore::parsing::*;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::items::*;
+use crate::pkmncore::constants::location::GameLocation;
 use crate::pkmncore::constants::moves::MoveType;
 
 use crate::pkmncore::boxes::pc::*;
@@ -76,6 +77,11 @@ fn main() {
     //     Move::Tackle.get_base().desc.convert_to_string()
     // );
     // println!("Translated string (nature/quirky): {}", Nature::Quirky);
+
+    println!(
+        "Translated string (location/mystery_zone): {}",
+        GameLocation::MysteryZone
+    );
 
     let plr = Player {
         trainer: Trainer {

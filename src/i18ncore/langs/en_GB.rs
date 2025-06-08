@@ -1,6 +1,9 @@
 use crate::i18ncore::{
     localisation::*,
-    sections::{abilities::*, enums::*, items::*, moves::*, natures::*, pokemon::*},
+    sections::{
+        abilities::*, enums::*, items::*, locations::LocationLocale, moves::*, natures::*,
+        pokemon::*,
+    },
 };
 
 pub const LOCALISATION: Locale = Locale {
@@ -141,5 +144,9 @@ pub const LOCALISATION: Locale = Locale {
         fighting: "Fighting",
         poison: "Poison",
         electric: "Electric",
+    },
+
+    location: LocationLocale {
+        mystery_zone: "Mystery Zone",
     },
 };

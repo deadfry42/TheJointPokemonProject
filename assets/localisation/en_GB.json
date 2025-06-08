@@ -1,7 +1,7 @@
 {
   "code_name": "en_GB",
   "name": "English (UK)",
-  "version": 2,
+  "version": 3,
   "pokemon": {
     "bulbasaur": {
       "name": "Bulbasaur",
@@ -128,5 +128,8 @@
   },
   "other_langs": {
     "english": "English"
+  },
+  "location": {
+    "mystery_zone": "Mystery Zone"
   }
 }

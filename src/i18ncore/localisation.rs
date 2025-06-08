@@ -4,6 +4,7 @@ use crate::i18ncore::sections::{
     abilities::AbilityLocaleContainer,
     enums::{GenderLocale, OtherLanguageLocale, StatLocale, TypesLocale},
     items::ItemLocaleContainer,
+    locations::LocationLocale,
     moves::MoveLocaleContainer,
     natures::NatureLocale,
     pokemon::PokemonLocaleContainer,
@@ -19,6 +20,7 @@ pub struct Locale {
     pub ability: AbilityLocaleContainer,
     pub item: ItemLocaleContainer,
     pub other_langs: OtherLanguageLocale,
+    pub location: LocationLocale,
     pub nature: NatureLocale,
     pub gender: GenderLocale,
     pub stat: StatLocale,
@@ -30,6 +32,7 @@ impl Locale {
     pub fn index(&self, path: &'static str) -> Box<&dyn DataSection> {
         match path {
             "code_name" => Box::new(&self.code_name),
+            "location" => Box::new(&self.location),
             "name" => Box::new(&self.name),
             "move" => Box::new(&self.moves),
             "nature" => Box::new(&self.nature),

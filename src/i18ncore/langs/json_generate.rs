@@ -7,6 +7,7 @@ use crate::{
             abilities::{AbilityLocale, AbilityLocaleContainer},
             enums::{GenderLocale, OtherLanguageLocale, StatLocale, TypesLocale},
             items::{ItemLocale, ItemLocaleContainer},
+            locations::LocationLocale,
             moves::{MoveLocale, MoveLocaleContainer},
             natures::NatureLocale,
             pokemon::{PokemonLocale, PokemonLocaleContainer},
@@ -19,8 +20,8 @@ use std::fs;
 use std::io::Result;
 
 pub fn parse_json_files() -> Result<Vec<Locale>> {
-    let compatible_versions: Vec<i64> = vec![2];
-    let recommended_version: i64 = 2;
+    let compatible_versions: Vec<i64> = vec![2, 3];
+    let recommended_version: i64 = 3;
 
     let paths = get_asset_folder("localisation")?;
     let mut locales: Vec<Locale> = vec![];
@@ -362,6 +363,12 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                 electric: v["type"]["electric"]
                     .as_str()
                     .unwrap_or(en_GB::LOCALISATION.types.electric),
+            },
+
+            location: LocationLocale {
+                mystery_zone: v["location"]["mystery_zone"]
+                    .as_str()
+                    .unwrap_or(en_GB::LOCALISATION.location.mystery_zone),
             },
         };
 
