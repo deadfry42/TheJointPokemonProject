@@ -1,19 +1,20 @@
-use PKMNCore::{
-    boxes::pc::*,
-    constants::{enums::*, items::Item, moves::MoveType, pokemon::*},
-    rng::*,
-    trainer::*,
-};
-use Utils::hex;
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
+use pkmncore::constants::pokemon::*;
+// use pkmncore::{
+//     boxes::pc::*,
+//     constants::{enums::*, items::Item, moves::MoveType, pokemon::*},
+//     rng::*,
+//     trainer::*,
+// };
+// use utils::hex;
 
-use crate::{AssetCore::assets::check_for_assets, I18NCore::keys::TranslationKey};
-use crate::{I18NCore::parsing::*, PKMNCore::constants::natures::Nature};
+use crate::{assetcore::assets::check_for_assets, i18ncore::keys::TranslationKey};
+use crate::{i18ncore::parsing::*, pkmncore::constants::natures::Nature};
 
-pub mod AssetCore;
-pub mod I18NCore;
-pub mod PKMNCore;
-pub mod Utils;
+pub mod assetcore;
+pub mod i18ncore;
+pub mod pkmncore;
+pub mod utils;
 
 #[allow(dead_code)]
 const GAME_VERSION: &'static str = "v0.0-beta";
