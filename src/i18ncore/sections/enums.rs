@@ -2,6 +2,7 @@ use std::any::Any;
 
 use crate::i18ncore::localisation::{DataSection, SectionType};
 
+#[derive(Clone, Copy)]
 pub struct GenderLocale {
     pub male: &'static str,
     pub female: &'static str,
@@ -30,6 +31,7 @@ impl DataSection for GenderLocale {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct StatLocale {
     pub health: &'static str,
     pub speed: &'static str,
@@ -64,6 +66,7 @@ impl DataSection for StatLocale {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct OtherLanguageLocale {
     pub english: &'static str,
 }
@@ -89,6 +92,7 @@ impl DataSection for OtherLanguageLocale {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct TypesLocale {
     pub normal: &'static str,
     pub water: &'static str,

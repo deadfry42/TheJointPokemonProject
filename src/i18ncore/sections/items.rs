@@ -2,6 +2,7 @@ use std::any::Any;
 
 use crate::i18ncore::localisation::{DataSection, SectionType};
 
+#[derive(Clone, Copy)]
 pub struct ItemLocaleContainer {
     pub lucky_egg: ItemLocale,
     pub connection_wire: ItemLocale,
@@ -28,6 +29,7 @@ impl DataSection for ItemLocaleContainer {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct ItemLocale {
     pub name: &'static str,
     pub desc: &'static str,

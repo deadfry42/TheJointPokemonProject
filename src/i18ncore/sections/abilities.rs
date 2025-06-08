@@ -2,6 +2,7 @@ use std::any::Any;
 
 use crate::i18ncore::localisation::{DataSection, SectionType};
 
+#[derive(Clone, Copy)]
 pub struct AbilityLocaleContainer {
     pub damp: AbilityLocale,
     pub water_absorb: AbilityLocale,
@@ -34,6 +35,7 @@ impl DataSection for AbilityLocaleContainer {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct AbilityLocale {
     pub name: &'static str,
     pub desc: &'static str,

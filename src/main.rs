@@ -1,13 +1,8 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use pkmncore::constants::pokemon::*;
-// use pkmncore::{
-//     boxes::pc::*,
-//     constants::{enums::*, items::Item, moves::MoveType, pokemon::*},
-//     rng::*,
-//     trainer::*,
-// };
-// use utils::hex;
 
+use crate::assetcore::gamedata::GameData;
+use crate::i18ncore::loaded::LoadedLocales;
 use crate::{assetcore::assets::check_for_assets, i18ncore::keys::TranslationKey};
 use crate::{i18ncore::parsing::*, pkmncore::constants::natures::Nature};
 
@@ -20,16 +15,13 @@ pub mod utils;
 const GAME_VERSION: &str = "v0.0-beta";
 
 fn main() {
+    let mut game: GameData = GameData {
+        loaded_locales: LoadedLocales::new(),
+    };
+
     check_for_assets();
 
-    load_localisation();
-
-    // let mut file: std::fs::File = get_asset("localisation/en_GB.json").unwrap();
-    // let mut data = String::new();
-    // file.read_to_string(&mut data).unwrap();
-
-    // let json = serde_json::from_str(&data).unwrap();
-    // println!("{}", json.find_path(&["Address", "Street"]).unwrap());
+    load_localisation(&mut game);
 
     println!(
         "Hello, world from {}! I was compiled on {}.",

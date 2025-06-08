@@ -9,6 +9,7 @@ use crate::i18ncore::sections::{
     pokemon::PokemonLocaleContainer,
 };
 
+#[derive(Clone, Copy)]
 pub struct Locale {
     pub code_name: SingleValuedData,
     pub name: SingleValuedData,
@@ -43,6 +44,7 @@ impl Locale {
     }
 }
 
+#[derive(Clone, Copy)]
 pub struct SingleValuedData {
     pub value: &'static str,
 }

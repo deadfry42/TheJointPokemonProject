@@ -1,7 +1,7 @@
+use crate::i18ncore::localisation::{DataSection, SectionType};
 use std::any::Any;
 
-use crate::i18ncore::localisation::{DataSection, SectionType};
-
+#[derive(Clone, Copy)]
 pub struct NatureLocale {
     pub hardy: &'static str,
     pub lonely: &'static str,
