@@ -11,10 +11,7 @@ pub fn load_localisation() {
     let locales: Result<Vec<Locale>> = parse_json_files();
     if locales.is_ok() {
         for locale in locales.unwrap().iter() {
-            get_game_data()
-                .unwrap()
-                .loaded_locales
-                .add_locale(locale.clone());
+            get_game_data().unwrap().loaded_locales.add_locale(*locale);
         }
     }
 }

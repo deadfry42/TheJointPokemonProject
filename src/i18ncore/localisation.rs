@@ -14,7 +14,7 @@ pub struct Locale {
     pub code_name: SingleValuedData,
     pub name: SingleValuedData,
 
-    pub moves: MoveLocaleContainer, // move
+    pub moves: MoveLocaleContainer, // "move"
     pub pokemon: PokemonLocaleContainer,
     pub ability: AbilityLocaleContainer,
     pub item: ItemLocaleContainer,
@@ -22,7 +22,7 @@ pub struct Locale {
     pub nature: NatureLocale,
     pub gender: GenderLocale,
     pub stat: StatLocale,
-    pub types: TypesLocale, // type
+    pub types: TypesLocale, // "type"
 }
 
 #[allow(dead_code)]
