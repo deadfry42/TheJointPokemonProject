@@ -52,12 +52,10 @@ pub fn determine_ability(personality: &u32, pkmn: &PokemonBase) -> Ability {
 
     if ability2.is_none() {
         *ability1
+    } else if ((personality / 65536) % 2) == 0 {
+        *ability1
     } else {
-        if ((personality / 65536) % 2) == 0 {
-            *ability1
-        } else {
-            *ability2.as_ref().unwrap()
-        }
+        *ability2.as_ref().unwrap()
     }
 }
 
