@@ -314,6 +314,7 @@ pub enum EggGroup {
     HumanLike,
     Fairy,
     Monster,
+    None,
 }
 
 impl fmt::Display for EggGroup {
@@ -332,6 +333,7 @@ impl fmt::Display for EggGroup {
             EggGroup::HumanLike => write!(f, "HumanLike"),
             EggGroup::Fairy => write!(f, "Fairy"),
             EggGroup::Monster => write!(f, "Monster"),
+            EggGroup::None => write!(f, "Not discovered"),
         }
     }
 }

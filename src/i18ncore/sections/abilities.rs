@@ -9,6 +9,7 @@ pub struct AbilityLocaleContainer {
     pub unaware: AbilityLocale,
     pub overgrow: AbilityLocale,
     pub chlorophyll: AbilityLocale,
+    pub drought: AbilityLocale,
 }
 
 impl DataSection for AbilityLocaleContainer {
@@ -26,6 +27,7 @@ impl DataSection for AbilityLocaleContainer {
             "water_absorb" => Box::new(&self.water_absorb),
             "unaware" => Box::new(&self.unaware),
             "overgrow" => Box::new(&self.overgrow),
+            "drought" => Box::new(&self.drought),
             _ => Box::new(&self.chlorophyll),
         })
     }

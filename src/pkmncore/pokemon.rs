@@ -119,7 +119,7 @@ impl PokemonData {
 pub struct AbilitySet {
     pub ability1: Ability,
     pub ability2: Option<Ability>,
-    pub hability: Ability,
+    pub hability: Option<Ability>,
 }
 
 #[allow(dead_code)]

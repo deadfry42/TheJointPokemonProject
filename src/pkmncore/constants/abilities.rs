@@ -9,6 +9,7 @@ pub enum Ability {
     Unaware,
     Overgrow,
     Chlorophyll,
+    Drought,
 }
 
 impl fmt::Display for Ability {
@@ -38,6 +39,11 @@ impl fmt::Display for Ability {
                 f,
                 "{}",
                 TranslationKey::new("ability/chlorophyll/name").convert_to_string()
+            ),
+            Ability::Drought => write!(
+                f,
+                "{}",
+                TranslationKey::new("ability/drought/name").convert_to_string()
             ),
         }
     }

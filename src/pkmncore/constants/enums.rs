@@ -131,6 +131,17 @@ pub enum MoveRange {
 }
 
 #[allow(dead_code)]
+pub enum Weather {
+    Sunlight,
+    Rain,
+    Sandstorm,
+    Snow, // replaces hail
+          // StrongSunlight // Primal Groudon
+          // StrongRain // Primal Kyogre
+          // StrongWinds // Mega Rayquaza
+}
+
+#[allow(dead_code)]
 pub enum Pokeball {
     Pokeball,
     Greatball,
@@ -199,4 +210,10 @@ impl fmt::Display for Gender {
             ),
         }
     }
+}
+
+#[derive(PartialEq, Clone, Copy)]
+pub enum BagCategory {
+    KeyItems,
+    Pocket,
 }

@@ -24,6 +24,7 @@ pub enum Pokemon {
     Ivysaur,
     Venusaur,
     Wooper,
+    Foliwli,
 }
 
 impl PokemonType for Pokemon {
@@ -50,7 +51,7 @@ impl PokemonType for Pokemon {
                 abilities: AbilitySet {
                     ability1: Ability::Overgrow,
                     ability2: None,
-                    hability: Ability::Chlorophyll,
+                    hability: Some(Ability::Chlorophyll),
                 },
                 base_stats: BaseStats {
                     health: 45,
@@ -104,7 +105,7 @@ impl PokemonType for Pokemon {
                 abilities: AbilitySet {
                     ability1: Ability::Overgrow,
                     ability2: None,
-                    hability: Ability::Chlorophyll,
+                    hability: Some(Ability::Chlorophyll),
                 },
                 base_stats: BaseStats {
                     health: 60,
@@ -158,7 +159,7 @@ impl PokemonType for Pokemon {
                 abilities: AbilitySet {
                     ability1: Ability::Overgrow,
                     ability2: None,
-                    hability: Ability::Chlorophyll,
+                    hability: Some(Ability::Chlorophyll),
                 },
                 base_stats: BaseStats {
                     health: 80,
@@ -209,7 +210,7 @@ impl PokemonType for Pokemon {
                 abilities: AbilitySet {
                     ability1: Ability::Damp,
                     ability2: Some(Ability::WaterAbsorb),
-                    hability: Ability::Unaware,
+                    hability: Some(Ability::Unaware),
                 },
                 base_stats: BaseStats {
                     health: 55,
@@ -238,6 +239,54 @@ impl PokemonType for Pokemon {
                 egg_cycles: 20,
                 gender_ratio: Some(0.5),
                 base_exp: 42,
+            },
+            Pokemon::Foliwli => PokemonBase {
+                name: TranslationKey::new("pokemon/foliwi/name"),
+                pkmn: Pokemon::Foliwli,
+                pokedex: PokedexInfo {
+                    index: 1,
+                    height: 0.4,
+                    weight: 2.5,
+                    species: TranslationKey::new("pokemon/foliwi/species"),
+                    entry: TranslationKey::new("pokemon/foliwi/dex"),
+                },
+                ev_yield: EVs {
+                    health: None,
+                    speed: None,
+                    atk: Some(1),
+                    def: None,
+                    spatk: None,
+                    spdef: None,
+                },
+                abilities: AbilitySet {
+                    ability1: Ability::Overgrow,
+                    ability2: Some(Ability::Chlorophyll),
+                    hability: Some(Ability::Drought),
+                },
+                base_stats: BaseStats {
+                    health: 55,
+                    speed: 45,
+                    atk: 60,
+                    def: 60,
+                    spatk: 50,
+                    spdef: 50,
+                },
+                types: TypeSet {
+                    type1: Type::Grass,
+                    type2: None,
+                    egg_group1: EggGroup::Grass,
+                    egg_group2: Some(EggGroup::Field),
+                },
+                held_items: None,
+                evolution: None,
+                learned_moves: vec![],
+                tm_moves: vec![],
+                levelling_curve: LevellingCurve::MediumSlow,
+                catch_rate: 45,
+                base_friendship: 50,
+                egg_cycles: 20,
+                gender_ratio: Some(0.875),
+                base_exp: 84,
             },
         }
     }

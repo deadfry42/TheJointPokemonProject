@@ -1,11 +1,11 @@
-use crate::pkmncore::trainer::OTInformation;
+use crate::pkmncore::{constants::enums::Weather, trainer::OTInformation};
 use std::any::Any;
 
 use super::pokemon::*;
 use std::ops::Deref;
 
 #[allow(dead_code)]
-pub trait BattleUtils {
+pub trait BattleBase {
     fn get_turn_count(&self) -> &u32; // realistically a u8 would work here, but just in case some battles exceed 256 turns, im using u32
     fn is_wild_battle(&self) -> bool;
     fn process_turn(&self);
@@ -129,9 +129,10 @@ pub struct Battle {
     pub turn_count: u32,
     pub player_side: BattleSide,
     pub opposing_side: BattleSide,
+    pub weather: Weather,
 }
 
-impl BattleUtils for Battle {
+impl BattleBase for Battle {
     fn get_turn_count(&self) -> &u32 {
         &self.turn_count
     }

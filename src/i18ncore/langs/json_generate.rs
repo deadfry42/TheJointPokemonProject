@@ -71,7 +71,7 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     dex: v["pokemon"]["bulbasaur"]["dex"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.dex),
-                    species: v["pokemon"]["bulbasaur"]["dex"]
+                    species: v["pokemon"]["bulbasaur"]["species"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.bulbasaur.species),
                 },
@@ -82,7 +82,7 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     dex: v["pokemon"]["ivysaur"]["dex"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.dex),
-                    species: v["pokemon"]["ivysaur"]["dex"]
+                    species: v["pokemon"]["ivysaur"]["species"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
@@ -93,7 +93,7 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     dex: v["pokemon"]["venusaur"]["dex"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.dex),
-                    species: v["pokemon"]["venusaur"]["dex"]
+                    species: v["pokemon"]["venusaur"]["species"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.ivysaur.species),
                 },
@@ -104,9 +104,20 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     dex: v["pokemon"]["wooper"]["dex"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.wooper.dex),
-                    species: v["pokemon"]["wooper"]["dex"]
+                    species: v["pokemon"]["wooper"]["species"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.pokemon.wooper.species),
+                },
+                foliwi: PokemonLocale {
+                    name: v["pokemon"]["foliwi"]["name"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.pokemon.foliwi.name),
+                    dex: v["pokemon"]["foliwi"]["dex"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.pokemon.foliwi.dex),
+                    species: v["pokemon"]["foliwi"]["species"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.pokemon.foliwi.species),
                 },
             },
 
@@ -247,6 +258,14 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     desc: v["ability"]["chlorophyll"]["desc"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.ability.chlorophyll.name),
+                },
+                drought: AbilityLocale {
+                    name: v["ability"]["drought"]["name"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.ability.drought.name),
+                    desc: v["ability"]["drought"]["desc"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.ability.drought.name),
                 },
             },
 

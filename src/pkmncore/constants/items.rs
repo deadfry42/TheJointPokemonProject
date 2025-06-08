@@ -1,5 +1,9 @@
-use crate::i18ncore::keys::*;
+use crate::{i18ncore::keys::*, pkmncore::constants::enums::BagCategory};
 use std::fmt::{self};
+
+pub trait ItemBase {
+    fn get_category(&self) -> BagCategory;
+}
 
 #[allow(dead_code)]
 #[derive(PartialEq, Clone, Copy)]
@@ -21,6 +25,15 @@ impl fmt::Display for Item {
                 "{}",
                 TranslationKey::new("item/connection_wire/name").convert_to_string()
             ),
+        }
+    }
+}
+
+impl ItemBase for Item {
+    fn get_category(&self) -> BagCategory {
+        match self {
+            Item::LuckyEgg => BagCategory::Pocket,
+            Item::ConnectionWire => BagCategory::Pocket,
         }
     }
 }

@@ -44,6 +44,11 @@ pub const LOCALISATION: Locale = Locale {
             species: "Water Fish",
             dex: "Test",
         },
+        foliwi: PokemonLocale {
+            name: "Foliwi",
+            species: "Emu",
+            dex: "Test",
+        },
     },
 
     nature: NatureLocale {
@@ -93,6 +98,10 @@ pub const LOCALISATION: Locale = Locale {
         },
         chlorophyll: AbilityLocale {
             name: "Chlorophyll",
+            desc: "Test",
+        },
+        drought: AbilityLocale {
+            name: "Drought",
             desc: "Test",
         },
     },

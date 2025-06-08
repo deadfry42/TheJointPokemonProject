@@ -51,37 +51,7 @@ fn main() {
     get_game_data()
         .unwrap()
         .loaded_locales
-        .set_selected_locale("en_lolcat");
-
-    // println!(
-    //     "Hello, world from {}! I was compiled on {}.",
-    //     CURRENT_PLATFORM, COMPILED_ON
-    // );
-
-    // println!(
-    //     "Translated string (code_name): {}",
-    //     TranslationKey::new("code_name").convert_to_string()
-    // );
-    // println!(
-    //     "Translated string (name): {}",
-    //     TranslationKey::new("name").convert_to_string()
-    // );
-    // println!(
-    //     "Translated string (pokemon/bulbasaur/species): {}",
-    //     Pokemon::Bulbasaur.get_base().name.convert_to_string()
-    // );
-    // println!("Translated string (type/fire): {}", Type::Fire);
-    // println!("Translated string (gender/male): {}", Gender::Male);
-    // println!(
-    //     "Translated string (move/tackle/desc): {}",
-    //     Move::Tackle.get_base().desc.convert_to_string()
-    // );
-    // println!("Translated string (nature/quirky): {}", Nature::Quirky);
-
-    println!(
-        "Translated string (location/mystery_zone): {}",
-        GameLocation::MysteryZone
-    );
+        .set_selected_locale("en_GB");
 
     let plr = Player {
         trainer: Trainer {
@@ -98,7 +68,7 @@ fn main() {
         party: [None, None, None, None, None, None],
     };
 
-    let wooper = generate_wild_pokemon(Pokemon::Wooper, 69, &plr);
+    let wooper = generate_wild_pokemon(Pokemon::Foliwli, 69, &plr);
 
     println!("health evs: {}", wooper.get_ev(&Stat::Health));
     println!("health ivs: {}", wooper.get_iv(&Stat::Health));

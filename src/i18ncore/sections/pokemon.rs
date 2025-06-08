@@ -8,6 +8,7 @@ pub struct PokemonLocaleContainer {
     pub ivysaur: PokemonLocale,
     pub venusaur: PokemonLocale,
     pub wooper: PokemonLocale,
+    pub foliwi: PokemonLocale,
 }
 
 impl DataSection for PokemonLocaleContainer {
@@ -24,6 +25,7 @@ impl DataSection for PokemonLocaleContainer {
             "bulbasaur" => Box::new(&self.bulbasaur),
             "ivysaur" => Box::new(&self.ivysaur),
             "venusaur" => Box::new(&self.venusaur),
+            "foliwi" => Box::new(&self.foliwi),
             _ => Box::new(&self.wooper),
         })
     }
