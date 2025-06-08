@@ -2,7 +2,7 @@ use lazy_static::lazy_static;
 use pkmncore::constants::pokemon::*;
 use std::sync::Mutex;
 
-use crate::assetcore::assets::check_for_assets;
+use crate::assetcore::assets::assets_available;
 use crate::assetcore::gamedata::GameData;
 use crate::i18ncore::loaded::LoadedLocales;
 use crate::i18ncore::parsing::*;
@@ -14,6 +14,7 @@ use crate::pkmncore::boxes::pc::*;
 use crate::pkmncore::rng::*;
 use crate::pkmncore::trainer::*;
 
+use crate::utils::logger::Logger;
 use crate::utils::*;
 
 extern crate lazy_static;
@@ -38,7 +39,11 @@ pub fn get_game_data() -> Option<std::sync::MutexGuard<'static, GameData>> {
 }
 
 fn main() {
-    check_for_assets();
+    if !assets_available() {
+        Logger::error_literal("The game could not find an assets folder!");
+        Logger::log_literal("Exiting game...");
+        return;
+    }
 
     load_localisation();
 
@@ -138,4 +143,6 @@ fn main() {
             println!("   -");
         }
     }
+
+    // std::thread::sleep(std::time::Duration::from_secs(100));
 }

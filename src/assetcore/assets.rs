@@ -7,7 +7,7 @@ use std::{
 
 pub const ASSETS_PATH: &str = "./assets";
 
-pub fn check_for_assets() -> bool {
+pub fn assets_available() -> bool {
     let assets_folder = get_assets_folder();
     assets_folder.is_ok()
 }
