@@ -1,5 +1,6 @@
 use current_platform::{COMPILED_ON, CURRENT_PLATFORM};
 use pkmncore::constants::pokemon::*;
+use std::sync::{LazyLock, Mutex};
 
 use crate::assetcore::gamedata::GameData;
 use crate::i18ncore::loaded::LoadedLocales;
@@ -14,14 +15,16 @@ pub mod utils;
 #[allow(dead_code)]
 const GAME_VERSION: &str = "v0.0-beta";
 
-fn main() {
-    let mut game: GameData = GameData {
+pub static GAME_DATA: LazyLock<Mutex<GameData>> = LazyLock::new(|| {
+    Mutex::new(GameData {
         loaded_locales: LoadedLocales::new(),
-    };
+    })
+});
 
+fn main() {
     check_for_assets();
 
-    load_localisation(&mut game);
+    load_localisation();
 
     println!(
         "Hello, world from {}! I was compiled on {}.",
@@ -112,5 +115,5 @@ fn main() {
     //     }
     // }
 
-    // std::thread::sleep(std::time::Duration::from_secs(100));
+    std::thread::sleep(std::time::Duration::from_secs(100));
 }

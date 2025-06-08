@@ -1,5 +1,5 @@
 use crate::{
-    GameData,
+    GAME_DATA,
     i18ncore::{
         langs::{self, json_generate::parse_json_files},
         localisation::*,
@@ -7,15 +7,23 @@ use crate::{
 };
 use std::io::Result;
 
-pub fn load_localisation(game: &mut GameData) {
+pub fn load_localisation() {
     let locales: Result<Vec<Locale>> = parse_json_files();
     if locales.is_ok() {
         for locale in locales.unwrap().iter() {
-            game.loaded_locales.add_locale(locale.clone());
+            GAME_DATA
+                .lock()
+                .unwrap()
+                .loaded_locales
+                .add_locale(locale.clone());
         }
     }
 }
 
 pub fn get_localisation() -> &'static Locale {
+    // let loaded_locales = GAME_DATA.lock().unwrap().loaded_locales;
+
+    // loaded_locales.get_selected_locale().unwrap_or() &
+
     &langs::en_GB::LOCALISATION
 }
