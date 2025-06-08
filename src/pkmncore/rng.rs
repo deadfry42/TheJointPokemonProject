@@ -1,10 +1,10 @@
 use super::battling::pokemon::*;
 use super::constants::abilities::Ability;
 use super::constants::items::*;
-use super::constants::levels::LevellingCurveCalc;
 use super::constants::moves::{Move, MoveType};
 use super::constants::natures::*;
 use super::constants::pokemon::{Pokemon, PokemonType};
+use super::levels::LevellingCurveCalc;
 use super::moves::MoveData;
 use super::trainer::Player;
 use super::{pokemon::*, trainer::OTInformation};

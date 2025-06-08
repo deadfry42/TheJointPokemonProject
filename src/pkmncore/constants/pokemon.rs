@@ -2,12 +2,12 @@ use crate::i18ncore::keys::TranslationKey;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::moves::Move;
 use crate::pkmncore::evolution::*;
+use crate::pkmncore::levels::*;
 use crate::pkmncore::moves::LevelUpMove;
 use crate::pkmncore::pokemon::*;
 
 use super::abilities::Ability;
 use super::items::Item;
-use super::levels::*;
 use super::typing::*;
 
 #[allow(dead_code)]

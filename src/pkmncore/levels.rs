@@ -1,9 +1,9 @@
-use super::{
+use crate::pkmncore::battling::battle::*;
+use crate::pkmncore::battling::pokemon::*;
+use crate::pkmncore::constants::{
     items::Item,
     pokemon::{Pokemon, PokemonType},
 };
-use crate::pkmncore::battling::battle::*;
-use crate::pkmncore::battling::pokemon::*;
 use std::fmt::{self};
 
 pub trait LevellingCurveCalc {
@@ -169,7 +169,7 @@ pub fn calculate_battle_xp_gain(
         .exp_to_levels(recipient.exp) as u32;
 
     let basewinningxp: f64 = ((victim_base_exp * victim_level) / 5_u32) as f64
-        * (1.0 / s)
+        * ((1.0 / s) as f64)
         * ((2 * victim_level + 10) / victim_level + recipient_level + 10).pow(5 / 2) as f64
         + 1.0_f64;
 

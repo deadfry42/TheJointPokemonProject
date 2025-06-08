@@ -5,9 +5,9 @@ use crate::{
 
 use super::{
     constants::{
-        abilities::*, enums::*, items::*, levels::*, location::GameLocation, natures::*,
-        pokemon::*, typing::*,
+        abilities::*, enums::*, items::*, location::GameLocation, natures::*, pokemon::*, typing::*,
     },
+    levels::*,
     moves::MoveData,
     trainer::*,
 };

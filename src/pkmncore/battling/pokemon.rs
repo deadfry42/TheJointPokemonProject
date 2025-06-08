@@ -1,9 +1,9 @@
 use crate::pkmncore::constants::abilities::*;
 use crate::pkmncore::constants::enums::*;
 use crate::pkmncore::constants::items::*;
-use crate::pkmncore::constants::levels::*;
 use crate::pkmncore::constants::natures::*;
 use crate::pkmncore::constants::pokemon::*;
+use crate::pkmncore::levels::*;
 use crate::pkmncore::moves::*;
 use crate::pkmncore::pokemon::*;
 use crate::pkmncore::trainer::*;
