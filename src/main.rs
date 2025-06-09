@@ -11,6 +11,7 @@ use crate::pkmncore::constants::items::*;
 use crate::pkmncore::constants::moves::MoveType;
 
 use crate::pkmncore::boxes::pc::*;
+use crate::pkmncore::pokedex::Pokedex;
 use crate::pkmncore::rng::*;
 use crate::pkmncore::trainer::*;
 
@@ -29,7 +30,8 @@ const GAME_VERSION: &str = "v0.0-beta";
 
 lazy_static! {
     pub static ref GAME_DATA: Mutex<GameData> = Mutex::new(GameData {
-        loaded_locales: LoadedLocales::new()
+        loaded_locales: LoadedLocales::new(),
+        dex: Pokedex::create_regional_dex(),
     });
 }
 
