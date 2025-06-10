@@ -20,6 +20,7 @@ pub enum MovePriority {
     Bracket_5 = -5,
     Bracket_6 = -6,
     Bracket_7 = -7,
+    Weather = -100,
 }
 
 impl MovePriority {
@@ -46,6 +47,7 @@ impl MovePriority {
             -5 => MovePriority::Bracket_5,
             -6 => MovePriority::Bracket_6,
             -7 => MovePriority::Bracket_7,
+            -100 => MovePriority::Weather,
             _ => MovePriority::Neutral,
         }
     }

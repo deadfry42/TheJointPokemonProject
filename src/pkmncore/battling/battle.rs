@@ -1,4 +1,8 @@
-use crate::pkmncore::{constants::enums::Weather, trainer::OTInformation};
+use crate::pkmncore::{
+    constants::{enums::Weather, moves::MoveType},
+    moves::*,
+    trainer::OTInformation,
+};
 use std::any::Any;
 
 use super::pokemon::*;
@@ -11,6 +15,7 @@ pub trait BattleBase {
     fn process_turn(&self);
     fn get_player_side(&self) -> &BattleSide;
     fn get_opposing_side(&self) -> &BattleSide;
+    fn calculate_move_targets(&self, user: usize, data: &MoveData) -> CalculatedMoveTargets;
 }
 
 #[allow(dead_code)]
@@ -28,6 +33,8 @@ pub struct BattleSide {
     pub trainer_b: Option<Box<dyn BattleTrainerType>>,
     pub party: [Option<BattlePokemon>; 6],
 }
+
+pub struct CalculatedMoveTargets {}
 
 #[allow(dead_code)]
 impl BattleSide {
@@ -147,5 +154,14 @@ impl BattleBase for Battle {
     }
     fn process_turn(&self) {
         //stub
+    }
+    fn calculate_move_targets(&self, _: usize, data: &MoveData) -> CalculatedMoveTargets {
+        //stub
+        // let mut targets: Vec<usize> = vec![];
+        match data.base.get_base().move_range {
+            _ => {}
+        }
+
+        CalculatedMoveTargets {}
     }
 }
