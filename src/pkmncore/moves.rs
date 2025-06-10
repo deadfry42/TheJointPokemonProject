@@ -1,10 +1,10 @@
-use super::constants::{enums::*, moves::*, typing::*};
+use super::constants::{moves::*, typing::*};
+use crate::utils::strings::*;
 use crate::{i18ncore::keys::TranslationKey, pkmncore::battling::priority::*};
 
 #[allow(dead_code)]
 pub struct MoveBase {
-    pub name: TranslationKey,
-    pub desc: TranslationKey,
+    pub translation_path: MoveTranslation,
     pub move_type: Type,
     pub move_range: MoveRange,
     pub move_category: MoveCategory,
@@ -12,6 +12,24 @@ pub struct MoveBase {
     pub move_accuracy: Option<f32>,
     pub move_priority: MovePriority,
     pub move_pp: i8,
+}
+
+pub struct MoveTranslation {
+    pub path: &'static str,
+}
+
+impl MoveTranslation {
+    pub fn new(path: &'static str) -> MoveTranslation {
+        MoveTranslation { path: path }
+    }
+
+    pub fn get_name(&self) -> TranslationKey {
+        TranslationKey::new(concatenate_strings(self.path, "name"))
+    }
+
+    pub fn get_description(&self) -> TranslationKey {
+        TranslationKey::new(concatenate_strings(self.path, "desc"))
+    }
 }
 
 #[allow(dead_code)]

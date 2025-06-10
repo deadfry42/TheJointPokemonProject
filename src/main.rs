@@ -120,13 +120,23 @@ fn main() {
             let move_data = item.1.as_ref().unwrap();
             println!(
                 "   {} : {}/{}",
-                move_data.base.get_base().name.convert_to_string(),
+                move_data
+                    .base
+                    .get_base()
+                    .translation_path
+                    .get_name()
+                    .convert_to_string(),
                 move_data.pp,
                 move_data.get_max_pp()
             );
             println!(
                 "      --> {}",
-                move_data.base.get_base().desc.convert_to_string()
+                move_data
+                    .base
+                    .get_base()
+                    .translation_path
+                    .get_description()
+                    .convert_to_string()
             )
         } else {
             println!("   -");
