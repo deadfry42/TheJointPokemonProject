@@ -8,19 +8,6 @@ pub trait MoveType {
 }
 
 #[allow(dead_code)]
-pub enum MoveRange {
-    Normal,     //The move affects a selected adjacent target.
-    ManyOthers, //Affects all adjacent opponents, but not allies
-}
-
-#[allow(dead_code)]
-pub enum MoveCategory {
-    Physical,
-    Special,
-    Status,
-}
-
-#[allow(dead_code)]
 #[derive(PartialEq, Clone, Copy)]
 pub enum Move {
     Tackle,
