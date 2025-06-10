@@ -108,29 +108,6 @@ impl fmt::Display for BattleConditions {
 }
 
 #[allow(dead_code)]
-pub enum MoveCategory {
-    Physical,
-    Special,
-    Status,
-}
-
-impl fmt::Display for MoveCategory {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        match self {
-            MoveCategory::Physical => write!(f, "Physical"),
-            MoveCategory::Special => write!(f, "Special"),
-            MoveCategory::Status => write!(f, "Status"),
-        }
-    }
-}
-
-#[allow(dead_code)]
-pub enum MoveRange {
-    Normal,     //The move affects a selected adjacent target.
-    ManyOthers, //Affects all adjacent opponents, but not allies
-}
-
-#[allow(dead_code)]
 pub enum Weather {
     Sunlight,
     Rain,
