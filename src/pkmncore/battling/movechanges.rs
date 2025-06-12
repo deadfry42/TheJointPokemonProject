@@ -10,8 +10,8 @@ pub trait TargettedMoveChange {
 }
 
 pub struct TargettedMoveDamageChange {
-    targets: Vec<usize>,
-    damage: u32,
+    pub targets: Vec<usize>,
+    pub damage: u32,
 }
 
 impl MoveChange for TargettedMoveDamageChange {}
@@ -22,14 +22,14 @@ impl TargettedMoveChange for TargettedMoveDamageChange {
 }
 
 pub struct MoveWeatherChange {
-    weather: Weather,
+    pub weather: Weather,
 }
 
 impl MoveChange for MoveWeatherChange {}
 
 pub struct TargettedMoveStatusChange {
-    targets: Vec<usize>,
-    status: StatusCondition,
+    pub targets: Vec<usize>,
+    pub status: StatusCondition,
 }
 
 impl MoveChange for TargettedMoveStatusChange {}
@@ -40,9 +40,9 @@ impl TargettedMoveChange for TargettedMoveStatusChange {
 }
 
 pub struct TargettedMoveStatChange {
-    targets: Vec<usize>,
-    stat: Stat,
-    stage_change: i8,
+    pub targets: Vec<usize>,
+    pub stat: Stat,
+    pub stage_change: i8,
 }
 
 impl MoveChange for TargettedMoveStatChange {}
