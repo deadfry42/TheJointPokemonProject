@@ -1,12 +1,13 @@
 use super::typing::*;
 use crate::pkmncore::battling::battle::Battle;
+use crate::pkmncore::battling::movechanges::MoveChange;
 use crate::pkmncore::battling::priority::*;
 use crate::pkmncore::moves::*;
 
 #[allow(dead_code)]
 pub trait MoveType {
     fn get_base(&self) -> MoveBase;
-    fn use_move(&self, battle: &Battle, user: usize) -> Option<Vec<usize>>; // temporary, replace with move events
+    fn use_move(&self, battle: &Battle, user: usize) -> Option<Vec<Box<dyn MoveChange>>>; // temporary, replace with move events
 }
 
 #[allow(dead_code)]
@@ -42,7 +43,7 @@ impl MoveType for Move {
         }
     }
 
-    fn use_move(&self, battle: &Battle, user: usize) -> Option<Vec<usize>> {
+    fn use_move(&self, battle: &Battle, user: usize) -> Option<Vec<Box<dyn MoveChange>>> {
         None
     }
 }

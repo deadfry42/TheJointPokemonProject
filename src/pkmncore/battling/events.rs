@@ -1,8 +1,8 @@
 use super::battle::*;
 use super::priority::*;
+use crate::pkmncore::battling::movechanges::BattleMoveData;
 use crate::pkmncore::constants::enums::Weather;
 use crate::pkmncore::constants::moves::*;
-use crate::pkmncore::moves::*;
 
 pub struct BattleTurn<'a> {
     pub events: Vec<&'a dyn BattleEvent>,
@@ -37,13 +37,17 @@ impl BattleEvent for BattleWeatherEvent {
 
 pub struct BattleMoveEvent<'a> {
     // Move announcing, animation, then effects
-    pub move_used: &'a MoveData,
+    pub battle_move_data: BattleMoveData<'a>,
     pub trainer: &'a dyn BattleTrainerType,
 }
 
 impl<'a> BattleEvent for BattleMoveEvent<'a> {
     fn get_priority(&self) -> MovePriority {
-        self.move_used.base.get_base().move_priority
+        self.battle_move_data
+            .move_used
+            .base
+            .get_base()
+            .move_priority
     }
     fn run(&self, battle: &Battle) {}
 }
