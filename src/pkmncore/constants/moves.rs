@@ -35,7 +35,7 @@ impl MoveType for Move {
     fn get_base(&self) -> MoveBase {
         match self {
             Move::Tackle => MoveBase {
-                translation_path: MoveTranslation::new("move/tackle"),
+                translation_path: MoveTranslation::new("move/tackle/"),
                 move_category: MoveCategory::Physical,
                 move_range: MoveRange::Normal,
                 move_type: Type::Normal,
@@ -45,7 +45,7 @@ impl MoveType for Move {
                 move_pp: 35,
             },
             Move::Growl => MoveBase {
-                translation_path: MoveTranslation::new("move/growl"),
+                translation_path: MoveTranslation::new("move/growl/"),
                 move_category: MoveCategory::Status,
                 move_range: MoveRange::ManyOthers,
                 move_type: Type::Normal,
