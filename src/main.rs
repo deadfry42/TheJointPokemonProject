@@ -15,6 +15,7 @@ use crate::pkmncore::pokedex::Pokedex;
 use crate::pkmncore::rng::*;
 use crate::pkmncore::trainer::*;
 
+use crate::sdlcore::window::run_window;
 use crate::utils::logger::Logger;
 use crate::utils::*;
 
@@ -23,6 +24,7 @@ extern crate lazy_static;
 pub mod assetcore;
 pub mod i18ncore;
 pub mod pkmncore;
+pub mod sdlcore;
 pub mod utils;
 
 #[allow(dead_code)]
@@ -48,6 +50,8 @@ fn main() {
     }
 
     load_localisation();
+
+    run_window();
 
     get_game_data()
         .unwrap()
