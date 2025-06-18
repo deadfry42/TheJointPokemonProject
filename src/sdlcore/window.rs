@@ -1,4 +1,5 @@
 extern crate sdl2;
+extern crate sdl2_sys;
 
 use crate::sdlcore::window::sdl2::image::LoadTexture;
 use sdl2::Sdl;
@@ -51,8 +52,6 @@ pub fn run_window() {
                 _ => {}
             }
         }
-
-        // The rest of the game loop goes here...
 
         canvas.copy(&texture, None, None).unwrap();
         canvas.present();

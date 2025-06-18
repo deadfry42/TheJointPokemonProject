@@ -16,6 +16,7 @@
 ##### (note: this has only really been tested on unix-based operating systems. for NT-based (windows), you're on your own.)
 1. Requirements
    - [Rust (Rustup)](https://rustup.rs/)
+   - [SDL2](https://wiki.libsdl.org/SDL2/Installation) (install with your package manager if possible)
 2. Compilation
    - If you have [just](https://github.com/casey/just) installed, run `just build`
    - otherwise, run `cargo build --release`
