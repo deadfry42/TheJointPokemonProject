@@ -16,7 +16,7 @@ jobs:
           sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
       - name: Check just works
         run: just
-      - name: Build ${{runner.os}}
+      - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
           cargo test
   build:
@@ -37,7 +37,7 @@ jobs:
       - name: Create build folder
         run: |
           mkdir builds
-          mkdir builds/${{runner.os}}
+          mkdir builds/${{runner.os}}-${{runner.arch}}
 
       - name: "Install required dependencies (linux)"
         if: runner.os == 'Linux'
@@ -50,15 +50,15 @@ jobs:
         run: |
           vcpkg install sdl2 sdl2-image
 
-      - name: Build ${{runner.os}}
+      - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
           cargo clean
           just build
-          cp target/release/tjpp builds/${{runner.os}}
-          cp -r assets builds/${{runner.os}}
-      - name: Upload ${{runner.os}}
+          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
         uses: actions/upload-artifact@v4
         with:
-          name: tjpp-${{runner.os}}
+          name: tjpp-${{runner.os}}-${{runner.arch}}
           path: |
-            builds/${{runner.os}}
+            builds/${{runner.os}}-${{runner.arch}}
