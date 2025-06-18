@@ -21,7 +21,7 @@ jobs:
       - name: Create build folder
         run: |
           mkdir builds
-          mkdir builds/${RUNNER_OS}
+          mkdir builds/${{RUNNER_OS}}
 
       - name: Install required dependencies
         run: |
@@ -39,15 +39,15 @@ jobs:
           fi
         shell: bash
 
-      - name: Build ${RUNNER_OS}
+      - name: Build ${{RUNNER_OS}}
         run: |
           cargo clean
           just build
-          cp target/release/tjpp builds/${RUNNER_OS}
-          cp -r assets builds/${RUNNER_OS}
-      - name: Upload ${RUNNER_OS}
+          cp target/release/tjpp builds/${{RUNNER_OS}}
+          cp -r assets builds/${{RUNNER_OS}}
+      - name: Upload ${{RUNNER_OS}}
         uses: actions/upload-artifact@v4
         with:
-          name: tjpp-${RUNNER_OS}
+          name: tjpp-${{RUNNER_OS}}
           path: |
-            builds/${RUNNER_OS}
+            builds/${{RUNNER_OS}}
