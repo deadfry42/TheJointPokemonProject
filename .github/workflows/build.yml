@@ -14,6 +14,10 @@ jobs:
           just-version: 1.40.0
       - uses: actions/checkout@v4
 
+      - name: Install required dependencies
+        run: |
+          sudo apt install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+
       - name: Check just works
         run: just
 
@@ -35,6 +39,10 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
+
+      - name: Install required dependencies
+        run: |
+          sudo apt install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
       - name: Check just works
         run: just
