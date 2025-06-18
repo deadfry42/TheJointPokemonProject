@@ -1,12 +1,6 @@
 # TheJointPokemonProject
 - A fan-made pokemon fangame, made by a small group of people.
-- Written in Rust, aimed to compile for:
-  - x86_64-pc-windows-gnu
-  - aarch64-pc-windows-msvc
-  - x86_64-unknown-linux-gnu
-  - aarch64-unknown-linux-gnu
-  - x86_64-apple-darwin
-  - aarch64-apple-darwin
+- Written in Rust, using rust-sdl2. (🚀🚀🚀 memory safe 🚀🚀🚀)
 
 > [!WARNING]
 > I am learning Rust alongside the development of this project.
@@ -18,6 +12,7 @@
    - [Rust (Rustup)](https://rustup.rs/)
    - [SDL2](https://wiki.libsdl.org/SDL2/Installation) (install with your package manager if possible)
 2. Compilation
+   - Make sure you have all dependencies installed.
    - If you have [just](https://github.com/casey/just) installed, run `just build`
    - otherwise, run `cargo build --release`
 3. Running
@@ -26,6 +21,8 @@
 
 ## cross compilation instructions
 ##### (note: this has not been properly tested.)
+> [!WARNING]
+> Compiling __REQUIRES__ SDL2 to be present. This may make Cross Compiling difficult.
 1. Requirements
    - [just](https://github.com/casey/just)
    - [Rust](https://rustup.rs/) (Rustup)
@@ -34,6 +31,7 @@
 2. Compilation
    - Make sure Cross.rs is installed, you can do this by running `just install_cross`
    - Make sure podman is setup, on macos `just install_cross` automatically sets up podman for you.
+   - TODO: Figure out how to install >=SDL2-2.0.36 on Cross container
    - Run the respective just recipe for each platform
      - x86_64-pc-windows-gnu -> `just windows`
      - aarch64-pc-windows-msvc -> `just windows_aarch64`¹ ²
