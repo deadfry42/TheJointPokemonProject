@@ -30,7 +30,7 @@
    - [just](https://github.com/casey/just)
    - [Rust](https://rustup.rs/) (Rustup)
    - [Cross.rs](https://github.com/cross-rs/cross) (cargo pkg)
-   - [Podman](https://podman.io/) (which includes qemu)
+   - [Podman](https://podman.io/) (which requires qemu)
 2. Compilation
    - Make sure Cross.rs is installed, you can do this by running `just install_cross`
    - Make sure podman is setup, on macos `just install_cross` automatically sets up podman for you.

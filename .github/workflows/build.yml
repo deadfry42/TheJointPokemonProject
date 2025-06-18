@@ -63,11 +63,30 @@ jobs:
       # this is because macos has licensing issues, and aarch64 windows doesn't have a gnu toolchain (msvc has licensing issues too)
       # i think i'll have to manually build these targets, but i can only do macos aarch64, which should be fine
       # linux x86_64
+
+      # Building natively doesn't properly represent if it can be compiled on other systems easily
+      # instead i consider compiling through cross.rs to be better
+      # still an option here if you'd like it
+
+      # - name: Build linux x86_64
+      #   run: |
+      #     cargo clean
+      #     just build
+      #     cp target/release/tjpp builds/linux-x86_64
+      #     cp -r assets builds/linux-x86_64
+      # - name: Upload linux x86_64
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: tjpp-linux-x86_64
+      #     path: |
+      #       builds/linux-x86_64
+
+      # linux x86_64
       - name: Build linux x86_64
         run: |
           cargo clean
-          just build
-          cp target/release/tjpp builds/linux-x86_64
+          just linux
+          cp target/x86_64-unknown-linux-gnu/release/tjpp builds/linux-x86_64
           cp -r assets builds/linux-x86_64
       - name: Upload linux x86_64
         uses: actions/upload-artifact@v4
