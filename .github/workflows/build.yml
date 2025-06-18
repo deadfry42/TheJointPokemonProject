@@ -16,7 +16,8 @@ jobs:
 
       - name: Install required dependencies
         run: |
-          sudo apt install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
       - name: Check just works
         run: just
@@ -42,7 +43,8 @@ jobs:
 
       - name: Install required dependencies
         run: |
-          sudo apt install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
       - name: Check just works
         run: just
