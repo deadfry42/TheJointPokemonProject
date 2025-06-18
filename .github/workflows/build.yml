@@ -21,33 +21,28 @@ jobs:
       - name: Create build folder
         run: |
           mkdir builds
-          mkdir builds/${{RUNNER_OS}}
+          mkdir builds/${{runner.os}}
 
-      - name: Install required dependencies
+      - name: "Install required dependencies (linux)"
+        if: runner.os == 'Linux'
         run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
-      - name: Install
+      - name: "Install required dependencies (windows)"
+        if: runner.os == 'Windows'
         run: |
-          if [ "$RUNNER_OS" == "Linux" ]; then
-               sudo apt-get update
-               sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
-          elif [ "$RUNNER_OS" == "Windows" ]; then
-               vcpkg install sdl2 sdl2-image
-          else
-               echo "$RUNNER_OS not supported"
-               exit 1
-          fi
-        shell: bash
+          vcpkg install sdl2 sdl2-image
 
-      - name: Build ${{RUNNER_OS}}
+      - name: Build ${{runner.os}}
         run: |
           cargo clean
           just build
-          cp target/release/tjpp builds/${{RUNNER_OS}}
-          cp -r assets builds/${{RUNNER_OS}}
-      - name: Upload ${{RUNNER_OS}}
+          cp target/release/tjpp builds/${{runner.os}}
+          cp -r assets builds/${{runner.os}}
+      - name: Upload ${{runner.os}}
         uses: actions/upload-artifact@v4
         with:
-          name: tjpp-${{RUNNER_OS}}
+          name: tjpp-${{runner.os}}
           path: |
-            builds/${{RUNNER_OS}}
+            builds/${{runner.os}}
