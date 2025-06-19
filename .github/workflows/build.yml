@@ -115,8 +115,8 @@ jobs:
         run: |
           cargo clean
           just build
-          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
-          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+          copy target\release\tjpp builds\${{runner.os}}-${{runner.arch}}
+          copy assets builds\${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
         uses: actions/upload-artifact@v4
         with:
