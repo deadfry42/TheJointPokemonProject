@@ -115,7 +115,47 @@ jobs:
         run: |
           cargo clean
           just build
-          copy target\release\tjpp builds\${{runner.os}}-${{runner.arch}}
+          copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
+          copy assets builds\${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-${{runner.os}}-${{runner.arch}}
+          path: |
+            builds/${{runner.os}}-${{runner.arch}}
+
+  build-windows-aarch64:
+    runs-on: windows-11-arm
+    steps:
+      # windows arm doesn't have a just release
+      # - uses: extractions/setup-just@v2
+      #   with:
+      #     just-version: 1.40.0
+
+      - uses: actions/checkout@v4
+
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: "Install required dependencies"
+        run: |
+          choco install pkgconfiglite nasm
+
+      - uses: libsdl-org/setup-sdl@main
+        name: "Install SDL2"
+        id: sdl
+        with:
+          install-linux-dependencies: true
+          version: 2-latest
+          version-sdl-image: 2-latest
+
+      - name: Build ${{runner.os}}-${{runner.arch}}
+        run: |
+          cargo clean
+          cargo build --release # just build
+          copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
           copy assets builds\${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
         uses: actions/upload-artifact@v4
