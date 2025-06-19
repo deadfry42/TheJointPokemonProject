@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  test:
+  test_linux:
     runs-on: ubuntu-latest
     steps:
       - uses: extractions/setup-just@v2
@@ -18,7 +18,7 @@ jobs:
         run: just
       - name: Run clippy
         run: cargo clippy
-      - name: Build ${{runner.os}}-${{runner.arch}}
+      - name: Test ${{runner.os}}-${{runner.arch}}
         run: |
           cargo test
 
@@ -89,6 +89,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: "Install required dependencies"
         run: |
+          choco install pkgconfiglite # pkg-config
           vcpkg install sdl2 sdl2-image
       - name: Create build folder
         run: |
