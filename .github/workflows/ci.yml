@@ -108,7 +108,7 @@ jobs:
         id: sdl
         with:
           install-linux-dependencies: true
-          version: 2-latest
+          version-sdl2-compat: 2-latest
           version-sdl-image: 2-latest
 
       - name: Build ${{runner.os}}-${{runner.arch}}
@@ -142,13 +142,14 @@ jobs:
       - name: "Install required dependencies"
         run: |
           choco install pkgconfiglite nasm rustup.install
+          rustup update
 
       - uses: libsdl-org/setup-sdl@main
         name: "Install SDL2"
         id: sdl
         with:
           install-linux-dependencies: true
-          version: 2-latest
+          version-sdl2-compat: 2-latest
           version-sdl-image: 2-latest
 
       - name: Build ${{runner.os}}-${{runner.arch}}
