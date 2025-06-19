@@ -50,13 +50,15 @@ jobs:
         if: runner.os == 'Macos' && runner.arch == 'X64'
         run: |
           brew install sdl2 sdl2_image
-          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+          echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
+          bash
 
       - name: "Install required dependencies (macos - aarch64)"
         if: runner.os == 'Macos' && runner.arch == 'ARM64'
         run: |
           brew install sdl2 sdl2_image
-          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+          echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
+          bash
           sudo chown root:wheel /opt/homebrew/bin/brew
           brew unlink sdl2 && brew link sdl2
           brew unlink sdl2_image && brew link sdl2_image
