@@ -49,7 +49,7 @@ jobs:
       - name: "Install required dependencies (macos)"
         if: runner.os == 'Macos'
         run: |
-          brew install sdl2
+          brew install sdl2 sdl2_image
           export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
 
       - name: "Install required dependencies (windows)"
