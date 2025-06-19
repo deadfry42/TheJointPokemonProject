@@ -142,6 +142,8 @@ jobs:
       - name: "Install required dependencies"
         run: |
           choco install pkgconfiglite nasm rustup.install
+          rustup.install
+          rustup toolchain install stable-aarch64-pc-windows-msvc
           rustup update
 
       - uses: libsdl-org/setup-sdl@main
