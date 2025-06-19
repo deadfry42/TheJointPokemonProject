@@ -116,7 +116,7 @@ jobs:
           cargo clean
           just build
           copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
-          copy assets builds\${{runner.os}}-${{runner.arch}}
+          xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
         uses: actions/upload-artifact@v4
         with:
@@ -156,7 +156,7 @@ jobs:
           cargo clean
           cargo build --release # just build
           copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
-          copy assets builds\${{runner.os}}-${{runner.arch}}
+          xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
         uses: actions/upload-artifact@v4
         with:
