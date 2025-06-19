@@ -1,21 +1,21 @@
 extern crate sdl2;
 extern crate sdl2_sys;
 
-use crate::sdlcore::window::sdl2::image::LoadTexture;
-use sdl2::Sdl;
+// use crate::sdlcore::window::sdl2::image::LoadTexture;
+// use sdl2::Sdl;
 use sdl2::event::Event;
-use sdl2::image::InitFlag;
+// use sdl2::image::InitFlag;
 use sdl2::keyboard::Keycode;
 use sdl2::pixels::Color;
-use sdl2_sys::SDL_WindowFlags;
-use std::path::Path;
+// use sdl2_sys::SDL_WindowFlags;
+// use std::path::Path;
 use std::time::Duration;
 
 pub fn run_window() {
     let sdl_context = sdl2::init().unwrap();
     let video_subsystem = sdl_context.video().unwrap();
 
-    let img_context = sdl2::image::init(InitFlag::PNG | InitFlag::JPG).unwrap();
+    // let img_context = sdl2::image::init(InitFlag::PNG | InitFlag::JPG).unwrap();
 
     let window = video_subsystem
         .window("TJPP", 800, 600)
@@ -28,10 +28,10 @@ pub fn run_window() {
 
     let mut canvas = window.into_canvas().build().unwrap();
 
-    let texture_creator = canvas.texture_creator();
-    let texture = texture_creator
-        .load_texture(Path::new("./assets/textures/amazing_player.png"))
-        .unwrap();
+    // let texture_creator = canvas.texture_creator();
+    // let texture = texture_creator
+    //     .load_texture(Path::new("./assets/textures/amazing_player.png"))
+    //     .unwrap();
 
     canvas.set_draw_color(Color::RGB(0, 255, 255));
     canvas.clear();
@@ -53,7 +53,7 @@ pub fn run_window() {
             }
         }
 
-        canvas.copy(&texture, None, None).unwrap();
+        // canvas.copy(&texture, None, None).unwrap();
         canvas.present();
         ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 144));
     }
