@@ -12,6 +12,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: "Install required dependencies"
         run: |
+          sudo apt-get update
           sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
       - name: Check just works
         run: just
@@ -28,13 +29,16 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
-      - name: "Install required dependencies"
-        run: |
-          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+
       - name: Create build folder
         run: |
           mkdir builds
           mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
@@ -55,14 +59,18 @@ jobs:
       - uses: extractions/setup-just@v2
         with:
           just-version: 1.40.0
+
       - uses: actions/checkout@v4
-      - name: "Install required dependencies"
-        run: |
-          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+
       - name: Create build folder
         run: |
           mkdir builds
           mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
@@ -83,7 +91,17 @@ jobs:
       - uses: extractions/setup-just@v2
         with:
           just-version: 1.40.0
+
       - uses: actions/checkout@v4
+
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: "Install required dependencies"
+        run: |
+          choco install pkgconfiglite nasm
 
       - uses: libsdl-org/setup-sdl@main
         name: "Install SDL2"
@@ -92,14 +110,6 @@ jobs:
           install-linux-dependencies: true
           version: 2-latest
           version-sdl-image: 2-latest
-
-      - name: "Install other required dependencies"
-        run: |
-          choco install pkgconfiglite # pkg-config
-      - name: Create build folder
-        run: |
-          mkdir builds
-          mkdir builds/${{runner.os}}-${{runner.arch}}
 
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
