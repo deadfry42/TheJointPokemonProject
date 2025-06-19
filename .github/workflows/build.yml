@@ -51,7 +51,7 @@ jobs:
         run: |
           brew install sdl2 sdl2_image
           export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
-          sudo chown root:wheel $(whereis brew)
+          sudo chown root:wheel /opt/homebrew/bin/brew
           brew unlink sdl2 && brew link sdl2
           brew unlink sdl2_image && brew link sdl2_image
 
