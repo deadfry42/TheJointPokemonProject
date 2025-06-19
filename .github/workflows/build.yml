@@ -46,8 +46,14 @@ jobs:
           sudo apt-get update
           sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
 
-      - name: "Install required dependencies (macos)"
-        if: runner.os == 'Macos'
+      - name: "Install required dependencies (macos - x86_64)"
+        if: runner.os == 'Macos' && runner.arch == 'X64'
+        run: |
+          brew install sdl2 sdl2_image
+          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+
+      - name: "Install required dependencies (macos - aarch64)"
+        if: runner.os == 'Macos' && runner.arch == 'ARM64'
         run: |
           brew install sdl2 sdl2_image
           export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
