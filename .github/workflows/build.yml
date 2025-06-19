@@ -87,10 +87,25 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
+
+      - name: Cache SDL2
+        id: sdl2-cached-winx64
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-sdl2
+        with:
+          path: C:\SDL2-*
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ env.SDL_VERSION }}
+
+      - if: ${{ steps.sdl2-cached-winx64.outputs.cache-hit != 'true' }}
+        name: Download SDL2 (if it isn't cached)
+        run: |
+          Invoke-WebRequest "https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-VC.zip" -OutFile C:\SDL.zip
+          Expand-Archive C:\SDL.zip -DestinationPath C:\
+
       - name: "Install required dependencies"
         run: |
           choco install pkgconfiglite # pkg-config
-          vcpkg install sdl2 sdl2-image
       - name: Create build folder
         run: |
           mkdir builds
