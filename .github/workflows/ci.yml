@@ -141,7 +141,7 @@ jobs:
 
       - name: "Install required dependencies"
         run: |
-          choco install pkgconfiglite nasm
+          choco install pkgconfiglite nasm rustup.install
 
       - uses: libsdl-org/setup-sdl@main
         name: "Install SDL2"
