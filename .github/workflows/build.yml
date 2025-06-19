@@ -149,6 +149,8 @@ jobs:
         run: |
           brew install sdl2 sdl2_image
           export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+          sudo chown root:wheel /usr/local/bin/brew
+          brew unlink sdl2 && brew link sdl2
       - name: Create build folder
         run: |
           mkdir builds
@@ -157,7 +159,7 @@ jobs:
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
           cargo clean
-          just build
+          LIBRARY_PATH="$LIBRARY_PATH:/usr/local/lib" just build
           cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
           cp -r assets builds/${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
