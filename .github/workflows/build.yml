@@ -23,8 +23,14 @@ jobs:
     strategy:
       matrix:
         BUILD_TARGET: [release]
-        # os: [windows-latest, windows-11-arm]
-        os: [ubuntu-24.04, ubuntu-24.04-arm, macos-13, macos-latest]
+        os: [
+            windows-latest,
+            windows-11-arm,
+            ubuntu-24.04,
+            ubuntu-24.04-arm,
+            macos-13,
+            # macos-latest,
+          ]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: extractions/setup-just@v2
