@@ -94,8 +94,6 @@ jobs:
           just-version: 1.40.0
       - uses: actions/checkout@v4
 
-      §
-
       - name: "Install required dependencies"
         run: |
           choco install pkgconfiglite # pkg-config
