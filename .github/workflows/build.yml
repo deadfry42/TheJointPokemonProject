@@ -16,75 +16,32 @@ jobs:
           sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
       - name: Check just works
         run: just
+      - name: Run clippy
+        run: cargo clippy
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
           cargo test
-  build:
-    strategy:
-      matrix:
-        BUILD_TARGET: [release]
-        os: [
-            windows-latest,
-            # windows-11-arm,
-            # ubuntu-24.04,
-            ubuntu-24.04-arm,
-            macos-13,
-            # macos-latest,
-          ]
-    runs-on: ${{ matrix.os }}
+
+  build_linux:
+    runs-on: ubuntu-latest
     steps:
       - uses: extractions/setup-just@v2
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
-
-      - name: Check just works
-        run: just
-
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
       - name: Create build folder
         run: |
           mkdir builds
           mkdir builds/${{runner.os}}-${{runner.arch}}
 
-      # - name: "Install required dependencies (linux)"
-      #   if: runner.os == 'Linux'
-      #   run: |
-      #     sudo apt-get update
-      #     sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
-
-      # - name: "Install required dependencies (macos - x86_64)"
-      #   if: runner.os == 'Macos' && runner.arch == 'X64'
-      #   run: |
-      #     brew install sdl2 sdl2_image
-      #     echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
-      #     bash
-
-      # - name: "Install required dependencies (macos - aarch64)"
-      #   if: runner.os == 'Macos' && runner.arch == 'ARM64'
-      #   run: |
-      #     brew install sdl2 sdl2_image
-      #     echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
-      #     bash
-      #     sudo chown root:wheel /opt/homebrew/bin/brew
-      #     brew unlink sdl2 && brew link sdl2
-      #     brew unlink sdl2_image && brew link sdl2_image
-
-      # - name: "Install required dependencies (windows)"
-      #   if: runner.os == 'Windows'
-      #   run: |
-      #     vcpkg install sdl2 sdl2-image
-      #     # below is environment values that rust-sdl2 tells me to set :)
-      #     SET PATH=%PATH%;C:\Users\runner\dev\vcpkg\installed\x64-windows\bin
-      #     SET INCLUDE=%INCLUDE%;C:\Users\runner\dev\vcpkg\installed\x64-windows\include
-      #     SET LIB=%LIB%;C:\Users\runner\dev\vcpkg\installed\x64-windows\lib
-
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
           cargo clean
-          cargo install cargo-vcpkg
-          cargo vcpkg -v build
-          cargo build --release
-          # just build
+          just build
           cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
           cp -r assets builds/${{runner.os}}-${{runner.arch}}
       - name: Upload ${{runner.os}}-${{runner.arch}}
@@ -93,3 +50,198 @@ jobs:
           name: tjpp-${{runner.os}}-${{runner.arch}}
           path: |
             builds/${{runner.os}}-${{runner.arch}}
+
+  build_linux_aarch64:
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - uses: extractions/setup-just@v2
+        with:
+          just-version: 1.40.0
+      - uses: actions/checkout@v4
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: Build ${{runner.os}}-${{runner.arch}}
+        run: |
+          cargo clean
+          just build
+          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-${{runner.os}}-${{runner.arch}}
+          path: |
+            builds/${{runner.os}}-${{runner.arch}}
+
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: extractions/setup-just@v2
+        with:
+          just-version: 1.40.0
+      - uses: actions/checkout@v4
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: Build ${{runner.os}}-${{runner.arch}}
+        run: |
+          cargo clean
+          just build
+          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-${{runner.os}}-${{runner.arch}}
+          path: |
+            builds/${{runner.os}}-${{runner.arch}}
+
+  build-macos:
+    runs-on: macos-13
+    steps:
+      - uses: extractions/setup-just@v2
+        with:
+          just-version: 1.40.0
+      - uses: actions/checkout@v4
+      - name: "Install required dependencies"
+        run: |
+          brew install sdl2 sdl2_image
+          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: Build ${{runner.os}}-${{runner.arch}}
+        run: |
+          cargo clean
+          just build
+          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-${{runner.os}}-${{runner.arch}}
+          path: |
+            builds/${{runner.os}}-${{runner.arch}}
+
+  build-macos-aarch64:
+    runs-on: macos-latest
+    steps:
+      - uses: extractions/setup-just@v2
+        with:
+          just-version: 1.40.0
+      - uses: actions/checkout@v4
+      - name: "Install required dependencies"
+        run: |
+          brew install sdl2 sdl2_image
+          export LIBRARY_PATH="$LIBRARY_PATH:$(brew --prefix)/lib"
+      - name: Create build folder
+        run: |
+          mkdir builds
+          mkdir builds/${{runner.os}}-${{runner.arch}}
+
+      - name: Build ${{runner.os}}-${{runner.arch}}
+        run: |
+          cargo clean
+          just build
+          cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+          cp -r assets builds/${{runner.os}}-${{runner.arch}}
+      - name: Upload ${{runner.os}}-${{runner.arch}}
+        uses: actions/upload-artifact@v4
+        with:
+          name: tjpp-${{runner.os}}-${{runner.arch}}
+          path: |
+            builds/${{runner.os}}-${{runner.arch}}
+
+  # build:
+  #   strategy:
+  #     matrix:
+  #       BUILD_TARGET: [release]
+  #       os: [
+  #           windows-latest,
+  #           # windows-11-arm,
+  #           # ubuntu-24.04,
+  #           # ubuntu-24.04-arm,
+  #           # macos-13,
+  #           # macos-latest,
+  #         ]
+  #   runs-on: ${{ matrix.os }}
+  #   steps:
+  #     - uses: extractions/setup-just@v2
+  #       with:
+  #         just-version: 1.40.0
+  #     - uses: actions/checkout@v4
+
+  #     - name: Check just works
+  #       run: just
+
+  #     - name: Create build folder
+  #       run: |
+  #         mkdir builds
+  #         mkdir builds/${{runner.os}}-${{runner.arch}}
+
+  #     - name: "Install required dependencies (linux)"
+  #       if: runner.os == 'Linux'
+  #       run: |
+  #         sudo apt-get update
+  #         sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
+
+  #     - name: "Install required dependencies (macos - x86_64)"
+  #       if: runner.os == 'Macos' && runner.arch == 'X64'
+  #       run: |
+  #         brew install sdl2 sdl2_image
+  #         echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
+  #         bash
+
+  #     - name: "Install required dependencies (macos - aarch64)"
+  #       if: runner.os == 'Macos' && runner.arch == 'ARM64'
+  #       run: |
+  #         brew install sdl2 sdl2_image
+  #         echo "export LIBRARY_PATH=\"$LIBRARY_PATH:$(brew --prefix)/lib\"" >> ~/.bash_profile
+  #         bash
+  #         sudo chown root:wheel /opt/homebrew/bin/brew
+  #         brew unlink sdl2 && brew link sdl2
+  #         brew unlink sdl2_image && brew link sdl2_image
+
+  #     - name: "Install required dependencies (windows)"
+  #       if: runner.os == 'Windows'
+  #       run: |
+  #         # https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-VC.zip
+  #         powershell -c "Invoke-WebRequest -Uri 'https://github.com/libsdl-org/SDL/releases/download/release-2.32.8/SDL2-devel-2.32.8-VC.zip' -OutFile 'c:\temp\file.zip'"
+  #         tar -xf c:\temp\file.zip
+  #         cd c:\temp\file\
+  #         dir
+  #         copy SDL2-2.0.x\lib\x64\ C:\Program Files\Rust\lib\rustlib\x86_64-pc-windows-msvc\lib
+
+  #         # vcpkg install sdl2 sdl2-image
+  #         # # below is environment values that rust-sdl2 tells me to set :)
+  #         # SET PATH=%PATH%;C:\Users\runner\dev\vcpkg\installed\x64-windows\bin
+  #         # SET INCLUDE=%INCLUDE%;C:\Users\runner\dev\vcpkg\installed\x64-windows\include
+  #         # SET LIB=%LIB%;C:\Users\runner\dev\vcpkg\installed\x64-windows\lib
+
+  #     - name: Build ${{runner.os}}-${{runner.arch}}
+  #       run: |
+  #         cargo clean
+  #         just build
+  #         cp target/release/tjpp builds/${{runner.os}}-${{runner.arch}}
+  #         cp -r assets builds/${{runner.os}}-${{runner.arch}}
+  #     - name: Upload ${{runner.os}}-${{runner.arch}}
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: tjpp-${{runner.os}}-${{runner.arch}}
+  #         path: |
+  #           builds/${{runner.os}}-${{runner.arch}}
