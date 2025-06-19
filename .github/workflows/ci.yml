@@ -108,8 +108,8 @@ jobs:
         id: sdl
         with:
           install-linux-dependencies: true
-          version-sdl2-compat: 2-latest
-          version-sdl-image: 2-latest
+          version: 2-any
+          version-sdl-image: 2-any
 
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
@@ -149,8 +149,8 @@ jobs:
         id: sdl
         with:
           install-linux-dependencies: true
-          version-sdl2-compat: 2-latest
-          version-sdl-image: 2-latest
+          version: 2-any
+          version-sdl-image: 2-any
 
       - name: Build ${{runner.os}}-${{runner.arch}}
         run: |
