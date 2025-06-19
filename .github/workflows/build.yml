@@ -10,13 +10,10 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
-      - uses: libsdl-org/setup-sdl@main
-        name: "Install SDL2"
-        id: sdl
-        with:
-          install-linux-dependencies: true
-          version: 2-latest
-          version-sdl-image: 2-latest
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
       - name: Check just works
         run: just
       - name: Run clippy
@@ -32,12 +29,10 @@ jobs:
         with:
           just-version: 1.40.0
       - uses: actions/checkout@v4
-      - uses: libsdl-org/setup-sdl@main
-        name: "Install SDL2"
-        id: sdl
-        with:
-          install-linux-dependencies: true
-          version: 2-latest
+      - name: "Install required dependencies"
+        run: |
+          sudo apt-get update
+          sudo apt-get install libjpeg-dev libwebp-dev libtiff5-dev libsdl2-image-dev libsdl2-image-2.0-0 -y
           version-sdl-image: 2-latest
       - name: Create build folder
         run: |
@@ -94,7 +89,15 @@ jobs:
           just-version: 1.40.0
       - uses: actions/checkout@v4
 
-      - name: "Install required dependencies"
+      - uses: libsdl-org/setup-sdl@main
+        name: "Install SDL2"
+        id: sdl
+        with:
+          install-linux-dependencies: true
+          version: 2-latest
+          version-sdl-image: 2-latest
+
+      - name: "Install other required dependencies"
         run: |
           choco install pkgconfiglite # pkg-config
       - name: Create build folder
