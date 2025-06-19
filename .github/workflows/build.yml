@@ -3,7 +3,7 @@ name: Build
 on: push
 
 jobs:
-  test-linux:
+  cargo-test-linux:
     runs-on: ubuntu-latest
     steps:
       - uses: extractions/setup-just@v2
