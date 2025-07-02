@@ -2,6 +2,11 @@ name: CI
 
 on: push
 
+# TODO:
+# Readd Windows x86_64 build
+# Readd Windows aarch64 build (if possible)
+# statically link sdl2 on linux
+
 jobs:
   cargo-test-linux:
     runs-on: ubuntu-latest
@@ -85,98 +90,98 @@ jobs:
           path: |
             builds/${{runner.os}}-${{runner.arch}}
 
-  build-windows:
-    runs-on: windows-latest
-    steps:
-      - uses: extractions/setup-just@v2
-        with:
-          just-version: 1.40.0
+  # build-windows:
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: extractions/setup-just@v2
+  #       with:
+  #         just-version: 1.40.0
 
-      - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v4
 
-      - name: Create build folder
-        run: |
-          mkdir builds
-          mkdir builds/${{runner.os}}-${{runner.arch}}
+  #     - name: Create build folder
+  #       run: |
+  #         mkdir builds
+  #         mkdir builds/${{runner.os}}-${{runner.arch}}
 
-      - uses: dtolnay/rust-toolchain@stable
-        name: "Install Rust"
+  #     - uses: dtolnay/rust-toolchain@stable
+  #       name: "Install Rust"
 
-      - name: "Install required dependencies"
-        run: |
-          choco install pkgconfiglite nasm
+  #     - name: "Install required dependencies"
+  #       run: |
+  #         choco install pkgconfiglite nasm
 
-      - uses: libsdl-org/setup-sdl@main
-        name: "Install SDL2"
-        id: sdl
-        with:
-          install-linux-dependencies: true
-          version: 2-any
-          version-sdl-image: 2-any
+  #     - uses: libsdl-org/setup-sdl@main
+  #       name: "Install SDL2"
+  #       id: sdl
+  #       with:
+  #         install-linux-dependencies: true
+  #         version: 2-any
+  #         version-sdl-image: 2-any
 
-      - name: Build ${{runner.os}}-${{runner.arch}}
-        run: |
-          SET PATH=%PATH%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\bin
-          SET INCLUDE=%INCLUDE%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\include
-          SET LIB=%LIB%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\lib
-          cargo clean
-          just build
-          copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
-          xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
-      - name: Upload ${{runner.os}}-${{runner.arch}}
-        uses: actions/upload-artifact@v4
-        with:
-          name: tjpp-${{runner.os}}-${{runner.arch}}
-          path: |
-            builds/${{runner.os}}-${{runner.arch}}
+  #     - name: Build ${{runner.os}}-${{runner.arch}}
+  #       run: |
+  #         SET PATH=%PATH%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\bin
+  #         SET INCLUDE=%INCLUDE%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\include
+  #         SET LIB=%LIB%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\lib
+  #         cargo clean
+  #         just build
+  #         copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
+  #         xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
+  #     - name: Upload ${{runner.os}}-${{runner.arch}}
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: tjpp-${{runner.os}}-${{runner.arch}}
+  #         path: |
+  #           builds/${{runner.os}}-${{runner.arch}}
 
-  build-windows-aarch64:
-    runs-on: windows-11-arm
-    steps:
-      # windows arm doesn't have a just release
-      # - uses: extractions/setup-just@v2
-      #   with:
-      #     just-version: 1.40.0
+  # build-windows-aarch64:
+  #   runs-on: windows-11-arm
+  #   steps:
+  #     # windows arm doesn't have a just release
+  #     # - uses: extractions/setup-just@v2
+  #     #   with:
+  #     #     just-version: 1.40.0
 
-      - uses: actions/checkout@v4
+  #     - uses: actions/checkout@v4
 
-      - name: Create build folder
-        run: |
-          mkdir builds
-          mkdir builds/${{runner.os}}-${{runner.arch}}
+  #     - name: Create build folder
+  #       run: |
+  #         mkdir builds
+  #         mkdir builds/${{runner.os}}-${{runner.arch}}
 
-      - uses: dtolnay/rust-toolchain@stable
-        name: "Install Rust"
+  #     - uses: dtolnay/rust-toolchain@stable
+  #       name: "Install Rust"
 
-      - name: "Install required dependencies"
-        run: |
-          choco install pkgconfiglite nasm
-          rustup toolchain install stable-aarch64-pc-windows-msvc
-          rustup update
+  #     - name: "Install required dependencies"
+  #       run: |
+  #         choco install pkgconfiglite nasm
+  #         rustup toolchain install stable-aarch64-pc-windows-msvc
+  #         rustup update
 
-      - uses: libsdl-org/setup-sdl@main
-        name: "Install SDL2"
-        id: sdl
-        with:
-          install-linux-dependencies: true
-          version: 2-any
-          version-sdl-image: 2-any
+  #     - uses: libsdl-org/setup-sdl@main
+  #       name: "Install SDL2"
+  #       id: sdl
+  #       with:
+  #         install-linux-dependencies: true
+  #         version: 2-any
+  #         version-sdl-image: 2-any
 
-      - name: Build ${{runner.os}}-${{runner.arch}}
-        run: |
-          SET PATH=%PATH%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\bin
-          SET INCLUDE=%INCLUDE%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\include
-          SET LIB=%LIB%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\lib
-          cargo clean
-          cargo build --release # just build
-          copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
-          xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
-      - name: Upload ${{runner.os}}-${{runner.arch}}
-        uses: actions/upload-artifact@v4
-        with:
-          name: tjpp-${{runner.os}}-${{runner.arch}}
-          path: |
-            builds/${{runner.os}}-${{runner.arch}}
+  #     - name: Build ${{runner.os}}-${{runner.arch}}
+  #       run: |
+  #         SET PATH=%PATH%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\bin
+  #         SET INCLUDE=%INCLUDE%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\include
+  #         SET LIB=%LIB%;C:\Users\runneradmin\dev\vcpkg\installed\x64-windows\lib
+  #         cargo clean
+  #         cargo build --release # just build
+  #         copy target\release\tjpp.exe builds\${{runner.os}}-${{runner.arch}}
+  #         xcopy /s /e /h /i assets builds\${{runner.os}}-${{runner.arch}}
+  #     - name: Upload ${{runner.os}}-${{runner.arch}}
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: tjpp-${{runner.os}}-${{runner.arch}}
+  #         path: |
+  #           builds/${{runner.os}}-${{runner.arch}}
 
   build-macos:
     runs-on: macos-13
