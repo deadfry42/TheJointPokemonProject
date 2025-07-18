@@ -7,7 +7,7 @@ pub struct GameData {
     pub loaded_locales: LoadedLocales,
     pub dex: Pokedex,
 
-    // pub player: Option<Player>,
+    pub player: Option<Player>,
 }
 
 impl GameData {}

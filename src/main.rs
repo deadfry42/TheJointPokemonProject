@@ -25,7 +25,7 @@ lazy_static! {
     pub static ref GAME_DATA: Mutex<GameData> = Mutex::new(GameData {
         loaded_locales: LoadedLocales::new(),
         dex: Pokedex::create_regional_dex(),
-        // player: None,
+        player: None,
     });
 }
 

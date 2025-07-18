@@ -287,7 +287,7 @@ impl PokemonType for Pokemon {
     }
 
     fn get_evolution_level(&self) -> Option<i8> {
-        let evo_opt: Option<Box<dyn Evolution>> = Pokemon::get_base(self).evolution;
+        let evo_opt: Option<Box<dyn Evolution + Send>> = Pokemon::get_base(self).evolution;
         if evo_opt.is_none() {
             None
         } else {

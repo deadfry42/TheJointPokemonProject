@@ -30,8 +30,8 @@ pub struct PokemonBase {
     pub ev_yield: EVs,
     pub held_items: Option<Vec<PokemonHeldItem>>,
     pub tm_moves: Vec<Move>,
-    pub learned_moves: Vec<Box<dyn LearntMove>>,
-    pub evolution: Option<Box<dyn Evolution>>,
+    pub learned_moves: Vec<Box<dyn LearntMove + Send>>,
+    pub evolution: Option<Box<dyn Evolution + Send>>,
 }
 
 pub struct PokemonTranslation {
