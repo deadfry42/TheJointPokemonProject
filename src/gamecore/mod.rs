@@ -1,4 +1,2 @@
-// the game
-
-pub mod load;
-pub mod play;
+pub mod content;
+pub mod engine;

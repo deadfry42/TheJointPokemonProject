@@ -1,9 +1,8 @@
 use native_dialog::{DialogBuilder, MessageLevel};
 
 use crate::{
-    GAME_TITLE,
+    GAME_LOCALES, GAME_TITLE,
     assetcore::assets::assets_available,
-    get_game_data,
     i18ncore::parsing::load_localisation,
     utils::{logger::Logger, strings::concatenate_strings},
 };
@@ -11,9 +10,9 @@ use crate::{
 pub fn try_load() {
     Logger::debug_log_literal("Loading locale..");
     load_localisation();
-    get_game_data()
+    GAME_LOCALES
+        .lock()
         .unwrap()
-        .loaded_locales
         .set_selected_locale("en_lolcat");
 }
 

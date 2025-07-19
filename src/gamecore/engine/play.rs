@@ -1,11 +1,15 @@
+use std::ops::Deref;
 use std::time::{Duration, Instant};
 
 use native_dialog::{DialogBuilder, MessageLevel};
+use sdl2::rect::Rect;
+use sdl2::render::Texture;
 use sdl2::{event::Event, image::LoadTexture, keyboard::Keycode, pixels::Color};
 
+use crate::gamecore::content::camera::Camera;
 use crate::{
     GAME_TITLE, GAME_VERBOSITY,
-    gamecore::load::{can_run, try_load},
+    gamecore::engine::load::{can_run, try_load},
     pkmncore::{
         boxes::pc::PC,
         constants::{enums::*, items::*, moves::*, pokemon::*},
@@ -45,6 +49,11 @@ pub fn play() {
 
         let mut game_window = game_window_builder.unwrap();
 
+        let water_texture: Texture = game_window
+            .texture_creator
+            .load_texture("assets/textures/images/water_test.png")
+            .unwrap();
+
         game_window
             .renderer
             .canvas
@@ -55,10 +64,6 @@ pub fn play() {
         let mut frame = 0;
         'running: loop {
             frame = (frame + 1) % 255;
-            game_window
-                .renderer
-                .canvas
-                .set_draw_color(Color::RGB(frame, 0, 0));
             game_window.renderer.canvas.clear();
             for event in event_pump.poll_iter() {
                 match event {
@@ -71,6 +76,19 @@ pub fn play() {
                 }
             }
 
+            Camera::set_x(1 + Camera::get_x());
+            Camera::set_y(1 + Camera::get_y());
+
+            game_window.renderer.render(
+                &water_texture,
+                Some(Rect::new(1, 1, 32, 32)),
+                Some(Rect::new(
+                    100 + Camera::get_x() as i32,
+                    100 + Camera::get_y() as i32,
+                    64,
+                    64,
+                )),
+            );
             game_window.renderer.canvas.present();
             ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 144));
         }
