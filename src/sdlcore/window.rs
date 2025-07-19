@@ -32,25 +32,19 @@ impl GameWindow {
         let video_subsystem: VideoSubsystem = sdl_context.video()?;
         let audio_subsystem: AudioSubsystem = sdl_context.audio()?;
 
-        let window: Result<Window, WindowBuildError> = video_subsystem
+        let window: Window = video_subsystem
             .window("TJPP", 1280, 720)
             .vulkan()
             .allow_highdpi()
             .position_centered()
-            .build();
+            .build()
+            .map_err(|e| e.to_string())?;
 
-        if window.is_err() {
-            return Err(String::from("Failed to build window!"));
-        }
+        let canvas: Canvas<Window> = CanvasBuilder::new(window)
+            .accelerated()
+            .build()
+            .map_err(|e| e.to_string())?;
 
-        let canvas_builder: Result<Canvas<Window>, IntegerOrSdlError> =
-            CanvasBuilder::new(window.unwrap()).accelerated().build();
-
-        if canvas_builder.is_err() {
-            return Err(String::from("Failed to build canvas!"));
-        }
-
-        let canvas = canvas_builder.unwrap();
         let texture_creator: TextureCreator<WindowContext> = canvas.texture_creator();
 
         let game_renderer = GameRenderer::new(canvas);

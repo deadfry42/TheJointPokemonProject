@@ -1,7 +1,7 @@
 use std::time::{Duration, Instant};
 
 use native_dialog::{DialogBuilder, MessageLevel};
-use sdl2::{event::Event, keyboard::Keycode, pixels::Color};
+use sdl2::{event::Event, image::LoadTexture, keyboard::Keycode, pixels::Color};
 
 use crate::{
     GAME_TITLE, GAME_VERBOSITY,
@@ -71,7 +71,6 @@ pub fn play() {
                 }
             }
 
-            // canvas.copy(&texture, None, None).unwrap();
             game_window.renderer.canvas.present();
             ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 144));
         }
