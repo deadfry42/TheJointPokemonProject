@@ -78,7 +78,7 @@ pub fn play() {
             // camera.x += 1;
             // camera.y += 1;
 
-            game_window.renderer.render(
+            game_window.renderer.draw(
                 &water_texture,
                 Some(Rect::new(1 + ((frame / 20) % 4) * 34, 1, 32, 32)),
                 Some(Rect::new(

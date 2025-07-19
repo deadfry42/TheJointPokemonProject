@@ -28,6 +28,25 @@ pub struct Player {
     pub money: i64,
 }
 
+impl Player {
+    pub fn new(id: u16, sid: u16, lang: Language, gender: Gender, name: &'static str) -> Player {
+        Player {
+            trainer: Trainer {
+                info: OTInformation {
+                    id: id,
+                    sid: sid,
+                    lang: lang,
+                    gender: gender,
+                    name: name,
+                },
+            },
+            pc: PC::new_dummy(),
+            money: 0,
+            party: [None, None, None, None, None, None],
+        }
+    }
+}
+
 #[allow(dead_code)]
 pub struct Trainer {
     pub info: OTInformation,

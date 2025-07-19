@@ -11,7 +11,7 @@ impl GameRenderer {
         GameRenderer { canvas: canvas }
     }
 
-    pub fn render(
+    pub fn draw(
         &mut self,
         texture: &Texture,
         spritemap_location: Option<Rect>,
