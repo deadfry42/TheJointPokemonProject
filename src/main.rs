@@ -4,7 +4,6 @@ use crate::gamecore::content::camera::Camera;
 use crate::gamecore::engine::play::play;
 use crate::i18ncore::loaded::LoadedLocales;
 
-use crate::pkmncore::pokedex::Pokedex;
 use crate::utils::logger::Logger;
 
 pub mod assetcore;

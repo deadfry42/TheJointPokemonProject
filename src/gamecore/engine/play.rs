@@ -62,6 +62,7 @@ pub fn play() {
         let mut event_pump = game_window.sdl_context.event_pump().unwrap();
         let mut frame = 0;
         'running: loop {
+            let mut camera = GAME_CAMERA.lock().unwrap();
             frame = (frame + 1) % 255;
             game_window.renderer.canvas.clear();
             for event in event_pump.poll_iter() {
@@ -74,15 +75,12 @@ pub fn play() {
                     _ => {}
                 }
             }
-
-            let mut camera = GAME_CAMERA.lock().unwrap();
-
-            camera.x += 1;
-            camera.y += 1;
+            // camera.x += 1;
+            // camera.y += 1;
 
             game_window.renderer.render(
                 &water_texture,
-                Some(Rect::new(1, 1, 32, 32)),
+                Some(Rect::new(1 + ((frame / 20) % 4) * 34, 1, 32, 32)),
                 Some(Rect::new(
                     100 + camera.x as i32,
                     100 + camera.y as i32,
