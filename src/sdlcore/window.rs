@@ -2,7 +2,6 @@ extern crate sdl2;
 extern crate sdl2_sys;
 
 use sdl2::AudioSubsystem;
-use sdl2::IntegerOrSdlError;
 use sdl2::Sdl;
 use sdl2::VideoSubsystem;
 use sdl2::image::{InitFlag, Sdl2ImageContext};
@@ -10,7 +9,6 @@ use sdl2::render::Canvas;
 use sdl2::render::CanvasBuilder;
 use sdl2::render::TextureCreator;
 use sdl2::video::Window;
-use sdl2::video::WindowBuildError;
 use sdl2::video::WindowContext;
 
 use crate::sdlcore::renderer::GameRenderer;

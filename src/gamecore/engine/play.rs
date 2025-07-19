@@ -1,4 +1,3 @@
-use std::ops::Deref;
 use std::time::{Duration, Instant};
 
 use native_dialog::{DialogBuilder, MessageLevel};
@@ -6,7 +5,7 @@ use sdl2::rect::Rect;
 use sdl2::render::Texture;
 use sdl2::{event::Event, image::LoadTexture, keyboard::Keycode, pixels::Color};
 
-use crate::gamecore::content::camera::Camera;
+use crate::GAME_CAMERA;
 use crate::{
     GAME_TITLE, GAME_VERBOSITY,
     gamecore::engine::load::{can_run, try_load},
@@ -76,15 +75,17 @@ pub fn play() {
                 }
             }
 
-            Camera::set_x(1 + Camera::get_x());
-            Camera::set_y(1 + Camera::get_y());
+            let mut camera = GAME_CAMERA.lock().unwrap();
+
+            camera.x += 1;
+            camera.y += 1;
 
             game_window.renderer.render(
                 &water_texture,
                 Some(Rect::new(1, 1, 32, 32)),
                 Some(Rect::new(
-                    100 + Camera::get_x() as i32,
-                    100 + Camera::get_y() as i32,
+                    100 + camera.x as i32,
+                    100 + camera.y as i32,
                     64,
                     64,
                 )),
