@@ -1,11 +1,15 @@
 use native_dialog::{DialogBuilder, MessageLevel};
 
 use crate::{
-    GAME_TITLE, assetcore::assets::assets_available, get_game_data,
-    i18ncore::parsing::load_localisation, utils::strings::concatenate_strings,
+    GAME_TITLE,
+    assetcore::assets::assets_available,
+    get_game_data,
+    i18ncore::parsing::load_localisation,
+    utils::{logger::Logger, strings::concatenate_strings},
 };
 
 pub fn try_load() {
+    Logger::debug_log_literal("Loading locale..");
     load_localisation();
     get_game_data()
         .unwrap()
@@ -23,6 +27,7 @@ pub fn can_run() -> bool {
 }
 
 pub fn display_asset_error() {
+    Logger::warn_literal("Displaying asset error.");
     DialogBuilder::message()
         .set_level(MessageLevel::Error)
         .set_title(concatenate_strings(GAME_TITLE, " Error"))

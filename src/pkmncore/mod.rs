@@ -1,3 +1,5 @@
+// the underlying pokemon engine
+
 pub mod battling;
 pub mod boxes;
 pub mod constants;

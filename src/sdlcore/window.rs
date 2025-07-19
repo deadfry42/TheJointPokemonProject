@@ -1,56 +1,75 @@
 extern crate sdl2;
 extern crate sdl2_sys;
 
-use crate::sdlcore::window::sdl2::image::LoadTexture;
-use sdl2::event::Event;
-use sdl2::keyboard::Keycode;
-use sdl2::pixels::Color;
-use std::path::Path;
-use std::time::Duration;
+use sdl2::AudioSubsystem;
+use sdl2::IntegerOrSdlError;
+use sdl2::Sdl;
+use sdl2::VideoSubsystem;
+use sdl2::image::{InitFlag, Sdl2ImageContext};
+use sdl2::render::Canvas;
+use sdl2::render::CanvasBuilder;
+use sdl2::render::TextureCreator;
+use sdl2::video::Window;
+use sdl2::video::WindowBuildError;
+use sdl2::video::WindowContext;
 
-pub fn run_window() {
-    let sdl_context = sdl2::init().unwrap();
-    let video_subsystem = sdl_context.video().unwrap();
+use crate::sdlcore::renderer::GameRenderer;
 
-    // let img_context = sdl2::image::init(InitFlag::PNG | InitFlag::JPG).unwrap();
+pub struct GameWindow {
+    pub sdl_context: Sdl,
+    pub img_context: Sdl2ImageContext,
+    pub video_subsystem: VideoSubsystem,
+    pub audio_subsystem: AudioSubsystem,
+    pub texture_creator: TextureCreator<WindowContext>,
+    pub renderer: GameRenderer,
+}
 
-    let window = video_subsystem
-        .window("TJPP", 1280, 720)
-        .vulkan()
-        .allow_highdpi()
-        .position_centered()
-        .build()
-        .unwrap();
+#[allow(dead_code)]
+impl GameWindow {
+    pub fn new() -> Result<GameWindow, String> {
+        let sdl_context: Sdl = sdl2::init()?;
+        let img_context: Sdl2ImageContext = sdl2::image::init(InitFlag::PNG | InitFlag::JPG)?;
+        let video_subsystem: VideoSubsystem = sdl_context.video()?;
+        let audio_subsystem: AudioSubsystem = sdl_context.audio()?;
 
-    let mut canvas = window.into_canvas().build().unwrap();
+        let window: Result<Window, WindowBuildError> = video_subsystem
+            .window("TJPP", 1280, 720)
+            .vulkan()
+            .allow_highdpi()
+            .position_centered()
+            .build();
 
-    // let texture_creator = canvas.texture_creator();
-    // let texture = texture_creator
-    //     .load_texture(Path::new("./assets/textures/amazing_player.png"))
-    //     .unwrap();
-
-    canvas.set_draw_color(Color::RGB(0, 0, 0));
-    canvas.clear();
-    canvas.present();
-    let mut event_pump = sdl_context.event_pump().unwrap();
-    let mut frame = 0;
-    'running: loop {
-        frame = (frame + 1) % 255;
-        canvas.set_draw_color(Color::RGB(0, 0, 0));
-        canvas.clear();
-        for event in event_pump.poll_iter() {
-            match event {
-                Event::Quit { .. }
-                | Event::KeyDown {
-                    keycode: Some(Keycode::Escape),
-                    ..
-                } => break 'running,
-                _ => {}
-            }
+        if window.is_err() {
+            return Err(String::from("Failed to build window!"));
         }
 
-        // canvas.copy(&texture, None, None).unwrap();
-        canvas.present();
-        ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 144));
+        let canvas_builder: Result<Canvas<Window>, IntegerOrSdlError> =
+            CanvasBuilder::new(window.unwrap()).accelerated().build();
+
+        if canvas_builder.is_err() {
+            return Err(String::from("Failed to build canvas!"));
+        }
+
+        let canvas = canvas_builder.unwrap();
+        let texture_creator: TextureCreator<WindowContext> = canvas.texture_creator();
+
+        let game_renderer = GameRenderer::new(canvas);
+
+        Ok(GameWindow {
+            sdl_context: sdl_context,
+            img_context: img_context,
+            video_subsystem: video_subsystem,
+            audio_subsystem: audio_subsystem,
+            texture_creator: texture_creator,
+            renderer: game_renderer,
+        })
+    }
+
+    pub fn get_window(&self) -> &Window {
+        self.renderer.canvas.window()
+    }
+
+    pub fn get_window_mut(&mut self) -> &Window {
+        self.renderer.canvas.window_mut()
     }
 }

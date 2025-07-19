@@ -1,4 +1,10 @@
+use std::time::{Duration, Instant};
+
+use native_dialog::{DialogBuilder, MessageLevel};
+use sdl2::{event::Event, keyboard::Keycode, pixels::Color};
+
 use crate::{
+    GAME_TITLE, GAME_VERBOSITY,
     gamecore::load::{can_run, try_load},
     pkmncore::{
         boxes::pc::PC,
@@ -6,18 +12,84 @@ use crate::{
         rng::*,
         trainer::*,
     },
-    run_window,
-    utils::hex,
+    sdlcore::window::GameWindow,
+    utils::{hex, logger::Logger, strings::concatenate_strings},
 };
 
 pub fn play() {
+    Logger::debug_log_literal("Checking if game can be ran..");
     if can_run() {
+        Logger::debug_log_literal("Game successfully passed pre-run checks.");
         try_load();
-        run_window();
+        // TODO:
+        // figure out if rust-sdl2 has a way to detect if sdl2 crashes the game
+        // cuz a display output isnt available
+        // and then show an error
+
+        let builder_timer = Instant::now();
+
+        let game_window_builder: Result<GameWindow, String> = GameWindow::new();
+
+        if game_window_builder.is_err() {
+            display_window_error();
+            return;
+        }
+
+        if GAME_VERBOSITY {
+            let elapsed_time = builder_timer.elapsed();
+            Logger::log(format!(
+                "Successfully built game window (took {}ms)",
+                elapsed_time.as_millis()
+            ));
+        }
+
+        let mut game_window = game_window_builder.unwrap();
+
+        game_window
+            .renderer
+            .canvas
+            .set_draw_color(Color::RGB(0, 0, 0));
+        game_window.renderer.canvas.clear();
+        game_window.renderer.canvas.present();
+        let mut event_pump = game_window.sdl_context.event_pump().unwrap();
+        let mut frame = 0;
+        'running: loop {
+            frame = (frame + 1) % 255;
+            game_window
+                .renderer
+                .canvas
+                .set_draw_color(Color::RGB(frame, 0, 0));
+            game_window.renderer.canvas.clear();
+            for event in event_pump.poll_iter() {
+                match event {
+                    Event::Quit { .. }
+                    | Event::KeyDown {
+                        keycode: Some(Keycode::Escape),
+                        ..
+                    } => break 'running,
+                    _ => {}
+                }
+            }
+
+            // canvas.copy(&texture, None, None).unwrap();
+            game_window.renderer.canvas.present();
+            ::std::thread::sleep(Duration::new(0, 1_000_000_000u32 / 144));
+        }
     }
 }
 
-pub fn test() {
+pub fn display_window_error() {
+    Logger::warn_literal("Displaying window error.");
+    DialogBuilder::message()
+        .set_level(MessageLevel::Error)
+        .set_title(concatenate_strings(GAME_TITLE, " Error"))
+        .set_text("The game encountered an error initialising the window!\nThe game may be build incorrectly, or SDL may be encountering an error!\nCheck stdout for more information.")
+        .alert()
+        .show()
+        .unwrap();
+}
+
+pub fn test_pkmn_engine() {
     let plr = Player {
         trainer: Trainer {
             info: OTInformation {

@@ -6,7 +6,7 @@ use crate::gamecore::play::play;
 use crate::i18ncore::loaded::LoadedLocales;
 
 use crate::pkmncore::pokedex::Pokedex;
-use crate::sdlcore::window::run_window;
+use crate::utils::logger::Logger;
 
 extern crate lazy_static;
 
@@ -20,6 +20,7 @@ pub mod utils;
 #[allow(dead_code)]
 pub const GAME_VERSION: &str = "v0.0-beta";
 pub const GAME_TITLE: &str = "TJPP";
+pub const GAME_VERBOSITY: bool = true;
 
 lazy_static! {
     pub static ref GAME_DATA: Mutex<GameData> = Mutex::new(GameData {
@@ -35,5 +36,6 @@ pub fn get_game_data() -> Option<std::sync::MutexGuard<'static, GameData>> {
 }
 
 fn main() {
+    Logger::log(format!("Starting {}, {}!", GAME_TITLE, GAME_VERSION));
     play();
 }
