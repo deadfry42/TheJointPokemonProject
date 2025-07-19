@@ -1,8 +1,14 @@
 use crate::i18ncore::{
     localisation::*,
     sections::{
-        abilities::*, enums::*, items::*, locations::LocationLocale, moves::*, natures::*,
+        abilities::*,
+        enums::*,
+        items::*,
+        locations::LocationLocale,
+        moves::*,
+        natures::*,
         pokemon::*,
+        ribbons::{RibbonLocale, RibbonLocaleContainer},
     },
 };
 
@@ -157,5 +163,13 @@ pub const LOCALISATION: Locale = Locale {
 
     location: LocationLocale {
         mystery_zone: "Mystery Zone",
+    },
+
+    ribbons: RibbonLocaleContainer {
+        champion: RibbonLocale {
+            name: "Champion Ribbon",
+            desc: "Test",
+            title: "Victorious",
+        },
     },
 };

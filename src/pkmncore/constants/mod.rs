@@ -5,4 +5,5 @@ pub mod location;
 pub mod moves;
 pub mod natures;
 pub mod pokemon;
+pub mod ribbons;
 pub mod typing;

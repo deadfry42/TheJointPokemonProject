@@ -8,6 +8,7 @@ use crate::i18ncore::sections::{
     moves::MoveLocaleContainer,
     natures::NatureLocale,
     pokemon::PokemonLocaleContainer,
+    ribbons::RibbonLocaleContainer,
 };
 
 #[derive(Clone, Copy)]
@@ -19,6 +20,7 @@ pub struct Locale {
     pub pokemon: PokemonLocaleContainer,
     pub ability: AbilityLocaleContainer,
     pub item: ItemLocaleContainer,
+    pub ribbons: RibbonLocaleContainer,
     pub other_langs: OtherLanguageLocale,
     pub location: LocationLocale,
     pub nature: NatureLocale,
@@ -42,6 +44,7 @@ impl Locale {
             "stat" => Box::new(&self.stat),
             "type" => Box::new(&self.types),
             "other_langs" => Box::new(&self.other_langs),
+            "ribbons" => Box::new(&self.ribbons),
             _ => Box::new(&self.pokemon),
         }
     }

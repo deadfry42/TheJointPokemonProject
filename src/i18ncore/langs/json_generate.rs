@@ -11,6 +11,7 @@ use crate::{
             moves::{MoveLocale, MoveLocaleContainer},
             natures::NatureLocale,
             pokemon::{PokemonLocale, PokemonLocaleContainer},
+            ribbons::{RibbonLocale, RibbonLocaleContainer},
         },
     },
     utils::logger::Logger,
@@ -303,6 +304,20 @@ pub fn parse_json_files() -> Result<Vec<Locale>> {
                     desc: v["item"]["connection_wire"]["desc"]
                         .as_str()
                         .unwrap_or(en_GB::LOCALISATION.item.connection_wire.desc),
+                },
+            },
+
+            ribbons: RibbonLocaleContainer {
+                champion: RibbonLocale {
+                    name: v["ribbons"]["champion"]["name"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.ribbons.champion.name),
+                    desc: v["ribbons"]["champion"]["desc"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.ribbons.champion.desc),
+                    title: v["ribbons"]["champion"]["title"]
+                        .as_str()
+                        .unwrap_or(en_GB::LOCALISATION.ribbons.champion.title),
                 },
             },
 
